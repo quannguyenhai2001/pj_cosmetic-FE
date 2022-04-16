@@ -127,7 +127,8 @@ const SignUpUserScreen = () => {
                                         component={InputField}
                                         label="Email"
                                         type="email"
-
+                                    // errorEmail={errorEmail}
+                                    // changeErrorEmail={changeErrorEmail}
                                     />
 
                                     <Field

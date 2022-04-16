@@ -7,8 +7,17 @@ export const fetchAsyncSignUp = createAsyncThunk(
     "user/fetchAsyncSignUp",
     async (arg, { rejectWithValue }) => {
         try {
-            const response = await CallApiByBody("auth/sign-up.php", "post", arg)
-            return response.data
+            // const response = await CallApiByBody("auth/sign-up.php", "post", arg)
+            // return response.data
+            const response = await fetch('https://cometicv1.000webhostapp.com/api/auth/sign-up.php', {
+                headers: {
+                    'Content-Type': 'application/json'
+                    // 'Content-Type': 'application/x-www-form-urlencoded',
+                },
+
+                body: JSON.stringify(arg) // body data type must match "Content-Type" header
+            });
+            return response.json();
         } catch (error) {
             return rejectWithValue(error.response.data)
         }
