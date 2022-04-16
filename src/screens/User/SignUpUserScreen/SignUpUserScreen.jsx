@@ -73,7 +73,6 @@ const SignUpUserScreen = () => {
         const displayName = `${values.firstName} ${values.lastName}`
         const userData = {
             displayName,
-            userType: 'user',
             ...objValues
         }
         dispatch(fetchAsyncSignUp(userData)).unwrap().then(() => {
