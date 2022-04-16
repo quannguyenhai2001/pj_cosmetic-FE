@@ -54,7 +54,7 @@ const userSlice = createSlice({
             console.log("create user")
         },
         [fetchAsyncSignUp.rejected]: (state, action) => {
-            console.log("email already exist")
+            console.log(action.payload)
         },
         [fetchAsyncSignIn.fulfilled]: (state, action) => {
             state.userDetail = action.payload.user
