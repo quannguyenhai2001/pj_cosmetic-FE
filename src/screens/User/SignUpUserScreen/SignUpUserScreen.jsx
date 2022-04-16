@@ -23,7 +23,6 @@ const SignUpUserScreen = () => {
 
     const handleShowPassword = () => {
         setShowPassword(!showPassword)
-        console.log("click")
     }
 
     const initialValues = {

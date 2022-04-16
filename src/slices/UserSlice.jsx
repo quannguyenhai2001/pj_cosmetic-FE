@@ -10,6 +10,7 @@ export const fetchAsyncSignUp = createAsyncThunk(
             // const response = await CallApiByBody("auth/sign-up.php", "post", arg)
             // return response.data
             const response = await fetch('https://cometicv1.000webhostapp.com/api/auth/sign-up.php', {
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                     // 'Content-Type': 'application/x-www-form-urlencoded',
