@@ -20,7 +20,6 @@ function App() {
     const MainCategories = listCategories(childCategories, fatherCategories)
     dispatch(setMainCategories(MainCategories))
   }, [childCategories, fatherCategories, dispatch])
-  console.log(state)
   useEffect(() => {
     dispatch(fetchAsyncGetChildCategories())
     dispatch(fetchAsyncGetFatherCategories())

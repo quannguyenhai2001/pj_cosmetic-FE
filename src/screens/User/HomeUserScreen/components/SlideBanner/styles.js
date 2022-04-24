@@ -5,12 +5,16 @@ export default makeStyles((theme) => ({
         width: '100%',
         height: '60rem'
     },
-    swiperSlideImg: {
-        display: 'block',
+    swiperSlide: {
         width: '100%',
         height: '100%',
-        objectFit: 'cover',
     },
+    swiperSlideImg: {
+        width: '100%',
+        height: '100%',
+        objectFit: 'fill',
+    },
+
     buttonPrev: {
         position: 'absolute',
         top: '50%',

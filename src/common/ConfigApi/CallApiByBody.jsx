@@ -1,5 +1,6 @@
 import axios from "axios";
-const url = "https://cometicv1.000webhostapp.com/api"
+// const url = "https://cometicv1.000webhostapp.com/api"
+const url = "http://localhost/api"
 axios.interceptors.request.use((req) => {
     if (localStorage.getItem('token')) {
         req.headers.Authorization = `Bearer ${localStorage.getItem('token')}`

@@ -15,7 +15,6 @@ export const fetchAsyncSignUp = createAsyncThunk(
                     'Content-Type': 'application/json'
                     // 'Content-Type': 'application/x-www-form-urlencoded',
                 },
-
                 body: JSON.stringify(arg) // body data type must match "Content-Type" header
             });
             return response.json();
@@ -24,6 +23,7 @@ export const fetchAsyncSignUp = createAsyncThunk(
         }
     }
 );
+
 export const fetchAsyncSignIn = createAsyncThunk(
     "user/fetchAsyncSignIn",
     async (arg, { rejectWithValue }) => {

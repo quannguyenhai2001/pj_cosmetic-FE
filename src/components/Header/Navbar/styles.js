@@ -12,7 +12,7 @@ export default makeStyles((theme) => ({
     },
     rootToolBar: {
         '&.MuiToolbar-root': {
-            height: '75px',
+            height: '60px',
         }
     },
     rootListItem: {
@@ -28,10 +28,9 @@ export default makeStyles((theme) => ({
     searchInput: {
         [`& fieldset`]: {
             borderRadius: '50px',
-
         },
         [`& input`]: {
-            height: '10px',
+            height: '6px',
         },
         flex: "1",
     },

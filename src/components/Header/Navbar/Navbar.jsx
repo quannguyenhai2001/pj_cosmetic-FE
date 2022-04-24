@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import Slide from '@mui/material/Slide';
 import { styled } from '@mui/material/styles';
-import { Badge, Divider, IconButton, TextField, Tooltip, tooltipClasses, Typography } from '@mui/material';
+import { Badge, Divider, Drawer, IconButton, ListItemIcon, ListItemText, TextField, Tooltip, tooltipClasses, Typography } from '@mui/material';
 import ContactMailOutlinedIcon from '@mui/icons-material/ContactMailOutlined';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingBasketOutlinedIcon from '@mui/icons-material/ShoppingBasketOutlined';
@@ -17,12 +17,16 @@ import Avatar from '@mui/material/Avatar';
 import { deepOrange } from '@mui/material/colors';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail';
 import PeopleIcon from '@mui/icons-material/People';
 import StoreIcon from '@mui/icons-material/Store';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { deleteUserDetail } from 'slices/UserSlice';
-//Customized components
+
+
+//hide and show navbar
 function HideOnScroll(props) {
     const { children, window } = props;
     const trigger = useScrollTrigger({
@@ -35,6 +39,8 @@ function HideOnScroll(props) {
         </Slide>
     );
 }
+
+//box
 const CustomTooltip = styled(({ className, ...props }) => (
     <Tooltip {...props} classes={{ popper: className }} />
 ))(({ theme }) => ({
@@ -45,13 +51,53 @@ const CustomTooltip = styled(({ className, ...props }) => (
         border: '1px solid #dadde9',
     },
 }));
-//End of customized components
 
 export default function NavBar(props) {
     const dispatch = useDispatch();
     const user = useSelector(state => state.user.userDetail);
+    const listProductInCart = useSelector(state => state.user.listProductInCart);
     const classes = useStyles();
 
+    //drawer cart
+    const [state, setState] = React.useState(false);
+
+    const toggleDrawer = (open) => (event) => {
+        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+            return;
+        }
+
+        setState(open);
+    };
+    const list = () => (
+        <Box
+            sx={{ width: 400 }}
+            role="presentation"
+            onClick={toggleDrawer(false)}
+            onKeyDown={toggleDrawer(false)}
+        >
+            <List>
+                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+                    <ListItem button key={text}>
+                        <ListItemIcon>
+                            {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                        </ListItemIcon>
+                        <ListItemText primary={text} />
+                    </ListItem>
+                ))}
+            </List>
+            <Divider />
+            <List>
+                {['All mail', 'Trash', 'Spam'].map((text, index) => (
+                    <ListItem button key={text}>
+                        <ListItemIcon>
+                            {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                        </ListItemIcon>
+                        <ListItemText primary={text} />
+                    </ListItem>
+                ))}
+            </List>
+        </Box>
+    );
     //log out
     const logOutHandle = () => {
         dispatch(deleteUserDetail());
@@ -87,6 +133,7 @@ export default function NavBar(props) {
 
                     {user ?
                         (<>
+                            {/* Store & Services */}
                             <CustomTooltip
                                 title={
                                     <>
@@ -108,6 +155,7 @@ export default function NavBar(props) {
                                 </Box>
                             </CustomTooltip>
 
+                            {/* Community */}
                             <CustomTooltip
                                 title={
                                     <>
@@ -129,12 +177,14 @@ export default function NavBar(props) {
                                 </Box>
                             </CustomTooltip>
 
+                            {/* line */}
                             <Divider sx={{
                                 height: "30px",
                                 marginTop: "23px",
                                 marginLeft: "11px"
                             }} orientation="vertical" variant="middle" flexItem />
 
+                            {/* Profile */}
                             <CustomTooltip
                                 title={
                                     <>
@@ -167,6 +217,7 @@ export default function NavBar(props) {
                                 </Box>
                             </CustomTooltip>
 
+                            {/* like */}
                             <IconButton component={Link} to="/like"
                                 size="medium"
                                 sx={{ "&:hover": { color: "blue" }, margin: "0 0 0 4rem" }}
@@ -176,13 +227,20 @@ export default function NavBar(props) {
                                 </Badge>
                             </IconButton>
 
-                            <IconButton component={Link} to="/cart"
+                            {/* cart */}
+                            <IconButton
                                 size="medium"
-
                                 sx={{ "&:hover": { color: "blue" }, margin: "0 3rem 0 0" }}
                             >
                                 <Badge badgeContent={2} color="primary">
-                                    <ShoppingBasketOutlinedIcon />
+                                    <ShoppingBasketOutlinedIcon onClick={toggleDrawer(true)} />
+                                    <Drawer
+                                        anchor={'right'}
+                                        open={state}
+                                        onClose={toggleDrawer(false)}
+                                    >
+                                        {list()}
+                                    </Drawer>
                                 </Badge>
                             </IconButton>
                         </>) :

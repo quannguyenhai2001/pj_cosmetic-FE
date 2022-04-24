@@ -1,11 +1,12 @@
 import React, { useRef } from 'react';
-import Images from 'constants/images';
+
 import { Swiper, SwiperSlide } from 'swiper/react';
 import useStyles from './styles'
+import Images from 'assets/img/imgBanner';
 // import required modules
 import { Navigation, Autoplay, Pagination, EffectCreative } from 'swiper'
-
 // Import Swiper styles
+
 import 'swiper/css';
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -39,7 +40,7 @@ const SlideBanner = () => {
                 dynamicBullets: true,
             }}
             modules={[Autoplay, EffectCreative, Navigation, Pagination]}
-            onSlideChange={() => console.log('slide change')}
+            // onSlideChange={() => { }}
             onInit={(swiper) => {
                 swiper.params.navigation.prevEl = prevRef.current;
                 swiper.params.navigation.nextEl = nextRef.current;
@@ -58,14 +59,14 @@ const SlideBanner = () => {
                 </IconButton>
             </div>
             <SwiperSlide>
-                <div style={{ position: "relative" }}>
+                <div style={{ position: "relative" }} className={classes.swiperSlide}>
                     <img className={classes.swiperSlideImg} src={Images.bg1} alt="game" />
-                    <button style={{ position: "absolute" }}>sdsd</button>
+                    {/* <button style={{ position: "absolute" }}>sdsd</button> */}
                 </div>
             </SwiperSlide>
-            <SwiperSlide><div><img className={classes.swiperSlideImg} src={Images.bg1} alt="game"></img></div></SwiperSlide>
-            <SwiperSlide><div><img className={classes.swiperSlideImg} src={Images.bg1} alt="game"></img></div></SwiperSlide>
-            <SwiperSlide><div><img className={classes.swiperSlideImg} src={Images.bg1} alt="game"></img></div></SwiperSlide>
+            <SwiperSlide><div className={classes.swiperSlide}> <img className={classes.swiperSlideImg} src={Images.bg1} alt="product"></img></div></SwiperSlide>
+            <SwiperSlide><div className={classes.swiperSlide}><img className={classes.swiperSlideImg} src={Images.bg1} alt="product"></img></div></SwiperSlide>
+            <SwiperSlide><div className={classes.swiperSlide}><img className={classes.swiperSlideImg} src={Images.bg1} alt="product"></img></div></SwiperSlide>
         </Swiper >
     );
 };

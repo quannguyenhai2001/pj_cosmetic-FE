@@ -77,7 +77,7 @@ const RouteConfigs = [
         isScreenAdmin: false,
     },
     {
-        path: "/user/products/:id",
+        path: "/products/detail/:id",
         element: ProductDetailScreen,
         isPrivate: false,
         layout: DefaultLayout,

@@ -4,12 +4,11 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import React from 'react';
-import Images from 'constants/images';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import useStyles from './styles'
-
+import { productImages } from 'assets/img/imgProductDetail';
 // import required modules
-import { Navigation, Pagination } from 'swiper'
+import { Navigation } from 'swiper'
 
 // Import Swiper styles
 import 'swiper/css';
@@ -38,22 +37,22 @@ function TabPanel(props) {
                     modules={[Navigation]}
                 >
                     <SwiperSlide >
-                        <img className={classes.swiperSlideImg} src={Images.bg1} alt="game" />
+                        <img className={classes.swiperSlideImg} src={productImages[0]} alt="game" />
                     </SwiperSlide>
                     <SwiperSlide >
-                        <img className={classes.swiperSlideImg} src={Images.bg1} alt="game"></img>
+                        <img className={classes.swiperSlideImg} src={productImages[0]} alt="game"></img>
                     </SwiperSlide>
                     <SwiperSlide >
-                        <img className={classes.swiperSlideImg} src={Images.bg1} alt="game"></img>
+                        <img className={classes.swiperSlideImg} src={productImages[0]} alt="game"></img>
                     </SwiperSlide>
                     <SwiperSlide >
-                        <img className={classes.swiperSlideImg} src={Images.bg1} alt="game"></img>
+                        <img className={classes.swiperSlideImg} src={productImages[0]} alt="game"></img>
                     </SwiperSlide>
                     <SwiperSlide >
-                        <img className={classes.swiperSlideImg} src={Images.bg1} alt="game"></img>
+                        <img className={classes.swiperSlideImg} src={productImages[0]} alt="game"></img>
                     </SwiperSlide>
                     <SwiperSlide >
-                        <img className={classes.swiperSlideImg} src={Images.bg1} alt="game"></img>
+                        <img className={classes.swiperSlideImg} src={productImages[0]} alt="game"></img>
                     </SwiperSlide>
                 </Swiper >
             )}
