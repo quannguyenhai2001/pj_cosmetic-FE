@@ -144,8 +144,8 @@ const productSlice = createSlice({
         },
         //get list product in cart
         [fetchAsyncGetListProductInCart.fulfilled]: (state, action) => {
-            state.listProductInCart = JSON.parse(action.payload.listProduct)
-            console.log(JSON.parse(action.payload.listProduct))
+            state.listProductInCart = JSON.parse(action.payload)
+            console.log(JSON.parse(action.payload))
         },
         [fetchAsyncGetListProductInCart.rejected]: (state, action) => {
             console.log(action.payload)

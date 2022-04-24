@@ -2,8 +2,8 @@ import { makeStyles } from '@mui/styles';
 
 // & a để slect cha đến con như kiểu trog bootrap
 // &:hover để hover vào thì hiện ra
-// & $secondaryCategories để slect con, tức là select cái class trong make style bên dưới(xem trong categories)
-//&.MuiAccordion-root:before kiểu css trược tiếp những cái class của mui nên phải ghi liền
+// & $secondaryCategories để slect con, tức là select cái class trong make style bên dưới(xem trong nav), bên dưới phải có class đó thì mới css kiểu này đc
+//& .MuiAccordion-root:before kiểu css trược tiếp những cái class của mui nên phải ghi liền
 //MuiPaper-root-MuiAccordion-root thì ghi đề paper đc luôn k cần phải accordion
 export default makeStyles((theme) => ({
     rootPaper: {

@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import Slide from '@mui/material/Slide';
 import { styled } from '@mui/material/styles';
-import { Badge, Divider, Drawer, IconButton, ListItemIcon, ListItemText, TextField, Tooltip, tooltipClasses, Typography } from '@mui/material';
+import { Badge, Button, CardMedia, Divider, Drawer, Grid, IconButton, ListItemText, TextField, Tooltip, tooltipClasses, Typography } from '@mui/material';
 import ContactMailOutlinedIcon from '@mui/icons-material/ContactMailOutlined';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingBasketOutlinedIcon from '@mui/icons-material/ShoppingBasketOutlined';
@@ -17,15 +17,17 @@ import Avatar from '@mui/material/Avatar';
 import { deepOrange } from '@mui/material/colors';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import PeopleIcon from '@mui/icons-material/People';
 import StoreIcon from '@mui/icons-material/Store';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { deleteUserDetail } from 'slices/UserSlice';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import { productImages } from 'assets/img/imgProductDetail';
 
-
+import RemoveIcon from '@mui/icons-material/Remove';
+import AddIcon from '@mui/icons-material/Add';
 //hide and show navbar
 function HideOnScroll(props) {
     const { children, window } = props;
@@ -55,12 +57,11 @@ const CustomTooltip = styled(({ className, ...props }) => (
 export default function NavBar(props) {
     const dispatch = useDispatch();
     const user = useSelector(state => state.user.userDetail);
-    const listProductInCart = useSelector(state => state.user.listProductInCart);
+    const listProductInCart = useSelector(state => state.product.listProductInCart);
     const classes = useStyles();
 
     //drawer cart
     const [state, setState] = React.useState(false);
-
     const toggleDrawer = (open) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
@@ -68,34 +69,44 @@ export default function NavBar(props) {
 
         setState(open);
     };
-    const list = () => (
-        <Box
-            sx={{ width: 400 }}
-            role="presentation"
-            onClick={toggleDrawer(false)}
-            onKeyDown={toggleDrawer(false)}
-        >
-            <List>
-                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>
-                            {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                        </ListItemIcon>
-                        <ListItemText primary={text} />
-                    </ListItem>
-                ))}
-            </List>
-            <Divider />
-            <List>
-                {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>
-                            {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                        </ListItemIcon>
-                        <ListItemText primary={text} />
-                    </ListItem>
-                ))}
-            </List>
+    const handleClick = () => {
+        console.log("click")
+    }
+    const RenderlistProductInCart = () => (
+        <Box className={classes.cartBox}>
+            {listProductInCart.length > 0 ?
+                (listProductInCart.map((item, index) => (
+                    <Card className={classes.cartCard} key={index}>
+                        <Grid container spacing={1}>
+                            <Grid item xs={3}>
+                                <CardMedia
+                                    component="img"
+                                    sx={{ width: '100%', height: '100%' }}
+                                    image={productImages[0]}
+                                    alt="Live from space album cover"
+                                />
+                            </Grid>
+                            <Grid item xs={9}>
+                                <CardContent>
+                                    <Typography gutterBottom>
+                                        {item.product.productsName}
+                                    </Typography>
+                                    <Typography variant="body2" color="textSecondary" component="span" sx={{ marginRight: '2rem' }}>
+                                        Price: ${item.product.price}
+                                    </Typography>
+                                    <Typography variant="body2" color="textSecondary" component="span">
+                                        Sale: {item.product.promotion * 100}%
+                                    </Typography>
+                                </CardContent>
+                                <Button variant="outlined" startIcon={<RemoveIcon onClick={handleClick} />} endIcon={<AddIcon onClick={handleClick} />}>
+                                    {item.quantity}
+                                </Button>
+                            </Grid>
+                        </Grid>
+                    </Card>
+                )))
+                : null
+            }
         </Box>
     );
     //log out
@@ -232,14 +243,17 @@ export default function NavBar(props) {
                                 size="medium"
                                 sx={{ "&:hover": { color: "blue" }, margin: "0 3rem 0 0" }}
                             >
-                                <Badge badgeContent={2} color="primary">
+                                <Badge badgeContent={listProductInCart.length > 0 ? listProductInCart.length : null} color="primary">
                                     <ShoppingBasketOutlinedIcon onClick={toggleDrawer(true)} />
-                                    <Drawer
+                                    <Drawer className={classes.cartDrawer}
                                         anchor={'right'}
                                         open={state}
                                         onClose={toggleDrawer(false)}
                                     >
-                                        {list()}
+                                        {RenderlistProductInCart()}
+                                        <div className={classes.cartDivButton}>
+                                            <Button component={Link} to={'/payment'} className={classes.cartButtonOrder} fullWidth variant="contained">ORDER</Button>
+                                        </div>
                                     </Drawer>
                                 </Badge>
                             </IconButton>

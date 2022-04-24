@@ -84,7 +84,7 @@ const RouteConfigs = [
         isScreenAdmin: false,
     },
     {
-        path: "/cart",
+        path: "/payment",
         element: CartUserScreen,
         isPrivate: true,
         layout: DefaultLayout,

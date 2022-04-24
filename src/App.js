@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import listCategories from 'utils/listCategories';
 import { fetchAsyncGetUser } from 'slices/UserSlice';
-import { setMainCategories } from 'slices/ProductSlice';
+import { fetchAsyncGetListProductInCart, setMainCategories } from 'slices/ProductSlice';
 import { fetchAsyncGetChildCategories, fetchAsyncGetFatherCategories } from 'slices/ProductSlice'
 //set user, token local
 //check token and remove token if expired
@@ -14,7 +14,6 @@ import { fetchAsyncGetChildCategories, fetchAsyncGetFatherCategories } from 'sli
 function App() {
   const dispatch = useDispatch()
   const childCategories = useSelector(state => state.product.childCategoties)
-  const state = useSelector(state => state.user.userDetail)
   const fatherCategories = useSelector(state => state.product.fatherCategories)
   React.useEffect(() => {
     const MainCategories = listCategories(childCategories, fatherCategories)
@@ -26,6 +25,7 @@ function App() {
     const token = localStorage.getItem('token')
     if (token) {
       dispatch(fetchAsyncGetUser())
+      dispatch(fetchAsyncGetListProductInCart())
     }
   }, [dispatch])
 
