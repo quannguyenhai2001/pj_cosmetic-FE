@@ -9,7 +9,7 @@ import { fetchAsyncGetListProductInCart, setMainCategories } from 'slices/Produc
 import { fetchAsyncGetChildCategories, fetchAsyncGetFatherCategories } from 'slices/ProductSlice'
 //set user, token local
 //check token and remove token if expired
-//keep login if token is valid, nếu local k còn token reload lại sẽ mất
+//keep login if token is valid, if the local has no tokens, reloading will be lost
 
 function App() {
   const dispatch = useDispatch()

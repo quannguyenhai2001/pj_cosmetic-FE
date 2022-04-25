@@ -3,7 +3,7 @@ import { productImages } from 'assets/img/imgProductDetail';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { fetchAsyncGetDetailProduct, fetchAsyncGetListProductInCart } from 'slices/ProductSlice';
+import { fetchAsyncAddProductToCart, fetchAsyncGetDetailProduct, fetchAsyncGetListProductInCart } from 'slices/ProductSlice';
 import ProductImagesSlider from './components/product-images-slider';
 
 const ProductDetailScreen = () => {
@@ -15,9 +15,12 @@ const ProductDetailScreen = () => {
         dispatch(fetchAsyncGetDetailProduct({ id }));
     }, [dispatch, id]);
 
-    const handleGetProduct = () => {
-        dispatch(fetchAsyncGetListProductInCart());
-
+    const handleAddProduct = () => {
+        dispatch(fetchAsyncAddProductToCart({ id })).unwrap().then(() => {
+            dispatch(fetchAsyncGetListProductInCart());
+        }).catch(err => {
+            console.log(err);
+        })
     }
 
     return (
@@ -33,7 +36,7 @@ const ProductDetailScreen = () => {
                     <Typography>{detailProduct.price}</Typography>
                     <Typography>{detailProduct.manufacturersName}</Typography>
                     <Typography>{detailProduct.promotion}</Typography>
-                    <Button variant="contained" onClick={handleGetProduct}>Add to cart</Button>
+                    <Button variant="contained" onClick={handleAddProduct}>Add to cart</Button>
                 </Grid>
             </Grid>
             <Typography>tag</Typography>

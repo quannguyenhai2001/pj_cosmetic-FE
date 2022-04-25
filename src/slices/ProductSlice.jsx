@@ -74,6 +74,17 @@ export const fetchAsyncGetListProductInCart = createAsyncThunk(
         }
     }
 );
+export const fetchAsyncAddProductToCart = createAsyncThunk(
+    "product/fetchAsyncAddProductToCart",
+    async (arg, { rejectWithValue }) => {
+        try {
+            const response = await CallApiByBody("cart/add-product.php", "put", arg)
+            return response.data
+        } catch (error) {
+            return rejectWithValue(error.response.data)
+        }
+    }
+);
 
 
 
@@ -150,7 +161,13 @@ const productSlice = createSlice({
         [fetchAsyncGetListProductInCart.rejected]: (state, action) => {
             console.log(action.payload)
         },
-
+        //add product to cart
+        [fetchAsyncAddProductToCart.fulfilled]: (state, action) => {
+            console.log(action.payload)
+        },
+        [fetchAsyncAddProductToCart.rejected]: (state, action) => {
+            console.log(action.payload)
+        },
     }
 })
 const { reducer, actions } = productSlice
