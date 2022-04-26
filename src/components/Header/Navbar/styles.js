@@ -1,6 +1,7 @@
 import { makeStyles } from '@mui/styles';
 
 export default makeStyles((theme) => ({
+
     rootAppBarTop: {
         '&.MuiPaper-root': {
             backgroundColor: '#fff',
@@ -65,6 +66,4 @@ export default makeStyles((theme) => ({
     cartCard: {
         display: 'grid'
     },
-
-
 }));

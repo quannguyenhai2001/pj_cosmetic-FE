@@ -1,4 +1,4 @@
-import { Container, Grid, Typography } from '@mui/material';
+import { Box, Container, Grid, Typography } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -15,6 +15,7 @@ const ProductsScreen = () => {
     //get title category
     const mainCategories = useSelector(state => state.product.mainCategories);
     const [titleCategory, setTitleCategory] = React.useState({});
+
     useEffect(() => {
         mainCategories.forEach(category => {
             category.listChildCategories.forEach(childCategory => {
@@ -38,21 +39,24 @@ const ProductsScreen = () => {
 
     return (
         <Container maxWidth="xl" className={classes.screen}>
-            <Typography sx={{ marginBottom: '1rem' }}>
-                {Object.keys(titleCategory).length > 0 ?
-                    (<>
-                        {titleCategory.fatherCategory.name} &gt; {titleCategory.childCategory.name}
-                    </>)
-                    : ''}
-            </Typography>
             <Grid container spacing={2}>
                 <Grid item xs={2}>
+                    <Typography sx={{ marginBottom: '1rem' }}>
+                        {Object.keys(titleCategory).length > 0 ?
+                            (<>
+                                {titleCategory.fatherCategory.name} &gt; {titleCategory.childCategory.name}
+                            </>)
+                            : ''}
+                    </Typography>
                     <Filter />
                 </Grid>
                 <Grid item xs={10}>
                     <Products />
                 </Grid>
             </Grid>
+            <Box>
+                <Typography>Product related</Typography>
+            </Box>
         </Container >
 
     );

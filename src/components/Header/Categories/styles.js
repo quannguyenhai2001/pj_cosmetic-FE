@@ -19,7 +19,6 @@ export default makeStyles((theme) => ({
         justifyContent: 'space-between',
     },
     primaryCategories: {
-
         '&:hover': {
             '& $secondaryCategories': {
                 display: 'block',
@@ -37,6 +36,16 @@ export default makeStyles((theme) => ({
         top: '100%',
         width: '100%',
         padding: 20,
-    },
+        borderBottom: '1px solid gray',
+        '&:after': {
+            content: '""',
+            position: 'absolute',
+            left: '0',
+            top: '-15px',
+            width: '1400px',
+            height: '30px',
+            borderTop: '10px solid transparent',
+        },
+    }
 
 }));

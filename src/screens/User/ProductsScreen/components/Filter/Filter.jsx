@@ -21,7 +21,7 @@ const Filter = () => {
     const listManu = useSelector(state => state.product.listManufacturers);
 
     //filter price
-    const [valuePrice, setValuePrice] = React.useState([200, 400]);
+    const [valuePrice, setValuePrice] = React.useState([0, 100]);
     const handleChangePrice = (event, newValue) => {
         setValuePrice(newValue);
     };
@@ -29,15 +29,28 @@ const Filter = () => {
     //filter manu
     const [checkedManu, setCheckedManu] = React.useState(false);
     const [valueIndex, setValueIndex] = React.useState('');
+    const [valueIdManu, setValueIdManu] = React.useState('');
     const handleChangeCheckedManu = (event) => {
-        setCheckedManu(event.target.checked);
-
+        setCheckedManu(event.target.checked)
+        if (!event.target.checked) {
+            setValueIdManu('')
+        }
     }
+    React.useEffect(() => {
 
+        return () => {
+            console.log('unmount');
+        }
+    }, []);
+    const handleClickCheckBox = (arg) => {
+        setValueIndex(arg.index);
+        setValueIdManu(arg.item.id);
+    }
     //filter sale
     const [checkedSale, setCheckedSale] = React.useState(true);
     const handleChangeCheckedSale = (event) => {
         setCheckedSale(event.target.checked);
+
     };
 
     return (
@@ -59,7 +72,7 @@ const Filter = () => {
                             return (
                                 <FormControlLabel key={index} control={<Checkbox checked={valueIndex === index ? checkedManu : false}
                                     onChange={handleChangeCheckedManu}
-                                    onClick={() => { setValueIndex(index) }}
+                                    onClick={() => { handleClickCheckBox({ index, item }) }}
                                     inputProps={{ 'aria-label': 'controlled' }} />} label={item.name} />
                             )
                         })}
@@ -78,14 +91,18 @@ const Filter = () => {
                 </AccordionSummary>
                 <AccordionDetails className={classes.rootAccordionDetails}>
                     <Box sx={{ width: 'interhit' }}>
-                        <Slider
-                            max={1000}
-                            value={valuePrice}
-                            onChange={handleChangePrice}
-                            valueLabelDisplay="auto"
-                            getAriaValueText={valuetext}
-                        />
-                        <Typography>Price {valuePrice[0]} to {valuePrice[1]}</Typography>
+                        <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                            <Slider
+                                sx={{ width: '80%' }}
+                                max={300}
+                                value={valuePrice}
+                                onChange={handleChangePrice}
+                                valueLabelDisplay="auto"
+                                getAriaValueText={valuetext}
+                            />
+                        </Box>
+
+                        <Typography>Price ${valuePrice[0]} to ${valuePrice[1]}</Typography>
                     </Box>
                 </AccordionDetails>
             </Accordion>

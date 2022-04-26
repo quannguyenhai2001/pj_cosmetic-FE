@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import Slide from '@mui/material/Slide';
 import { styled } from '@mui/material/styles';
-import { Badge, Button, CardMedia, Divider, Drawer, Grid, IconButton, ListItemText, TextField, Tooltip, tooltipClasses, Typography } from '@mui/material';
+import { Badge, Button, CardMedia, Container, Divider, Drawer, Grid, IconButton, TextField, Tooltip, tooltipClasses, Typography } from '@mui/material';
 import ContactMailOutlinedIcon from '@mui/icons-material/ContactMailOutlined';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingBasketOutlinedIcon from '@mui/icons-material/ShoppingBasketOutlined';
@@ -15,7 +15,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import Avatar from '@mui/material/Avatar';
 import { deepOrange } from '@mui/material/colors';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import PeopleIcon from '@mui/icons-material/People';
 import StoreIcon from '@mui/icons-material/Store';
@@ -42,6 +42,40 @@ function HideOnScroll(props) {
     );
 }
 
+//create circle avatar
+function stringToColor(string) {
+    let hash = 0;
+    let i;
+
+    /* eslint-disable no-bitwise */
+    for (i = 0; i < string.length; i += 1) {
+        hash = string.charCodeAt(i) + ((hash << 5) - hash);
+    }
+
+    let color = '#';
+
+    for (i = 0; i < 3; i += 1) {
+        const value = (hash >> (i * 8)) & 0xff;
+        color += `00${value.toString(16)}`.slice(-2);
+    }
+    /* eslint-enable no-bitwise */
+
+    return color;
+}
+
+function stringAvatar(name) {
+    return {
+        sx: {
+            bgcolor: stringToColor(name),
+            width: '30px',
+            height: '30px',
+        },
+        children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+    };
+}
+
+
+
 //box
 const CustomTooltip = styled(({ className, ...props }) => (
     <Tooltip {...props} classes={{ popper: className }} />
@@ -56,6 +90,7 @@ const CustomTooltip = styled(({ className, ...props }) => (
 
 export default function NavBar(props) {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const user = useSelector(state => state.user.userDetail);
     const listProductInCart = useSelector(state => state.product.listProductInCart);
     const classes = useStyles();
@@ -69,6 +104,27 @@ export default function NavBar(props) {
 
         setState(open);
     };
+
+
+    //search
+    const [searchValue, setSearchValue] = React.useState('');
+    const handleChangeSearch = (event) => {
+        setSearchValue(event.target.value);
+
+    };
+    const handleKeyDownSearch = (event) => {
+        if (event.keyCode === 13) {
+            if (searchValue !== '') {
+                navigate('/search?value=' + searchValue);
+            }
+            else {
+                navigate('/');
+            }
+        }
+    };
+
+
+    //list product in cart
     const handleClick = () => {
         console.log("click")
     }
@@ -115,10 +171,11 @@ export default function NavBar(props) {
     }
 
     return (
-        <HideOnScroll {...props}>
-            <AppBar className={classes.rootAppBarTop} elevation={0}>
-                <Toolbar className={classes.rootToolBar}>
-                    {/* <Card sx={{ maxWidth: 300 }}>
+        <Container maxWidth="xl">
+            <HideOnScroll {...props}>
+                <AppBar className={classes.rootAppBarTop} elevation={0}>
+                    <Toolbar className={classes.rootToolBar}>
+                        {/* <Card sx={{ maxWidth: 300 }}>
                             <CardMedia
                                 component="img"
                                 height="20"
@@ -127,145 +184,29 @@ export default function NavBar(props) {
                             />
                         </Card> */}
 
-                    <Box component={Link} to="/" sx={{ width: "15rem", height: "3rem", margin: " 0 3rem" }}>
-                        <img style={{ width: "100%", height: "100%" }} src="https://www.sephora.com/img/ufe/logo.svg" alt="green iguana" />
-                    </Box>
+                        <Box component={Link} to="/" sx={{ width: "15rem", height: "3rem", marginRight: 4 }}>
+                            <img style={{ width: "100%", height: "100%" }} src="https://www.sephora.com/img/ufe/logo.svg" alt="green iguana" />
+                        </Box>
 
-                    <TextField
-                        className={classes.searchInput}
-                        InputProps={{
-                            endAdornment: (
-                                <IconButton>
-                                    <SearchOutlinedIcon />
-                                </IconButton>
-                            )
-                        }}
-                    />
-
-                    {user ?
-                        (<>
-                            {/* Store & Services */}
-                            <CustomTooltip
-                                title={
-                                    <>
-                                        <Typography color="inherit">Other</Typography>
-
-                                    </>
-                                }
-                            >
-                                <Box sx={{ display: "flex", alignItems: "center", margin: "0 0 0 10rem", "&:hover": { color: "blue", cursor: "pointer" } }}>
-                                    <IconButton
-                                        size="medium"
-                                        sx={{ "&:hover": { color: "blue" } }}
-                                    >
-                                        <Badge badgeContent={2} color="primary">
-                                            <ContactMailOutlinedIcon />
-                                        </Badge>
+                        <TextField onChange={handleChangeSearch} onKeyDown={handleKeyDownSearch}
+                            className={classes.searchInput}
+                            InputProps={{
+                                endAdornment: (
+                                    <IconButton>
+                                        <SearchOutlinedIcon />
                                     </IconButton>
-                                    <Typography>Store & Services</Typography>
-                                </Box>
-                            </CustomTooltip>
+                                )
+                            }}
+                        />
 
-                            {/* Community */}
-                            <CustomTooltip
-                                title={
-                                    <>
-                                        <Typography color="inherit">Other</Typography>
-
-                                    </>
-                                }
-                            >
-                                <Box sx={{ display: "flex", alignItems: "center", margin: "0 2rem 0 2rem", "&:hover": { color: "blue", cursor: "pointer" } }}>
-                                    <IconButton
-                                        size="medium"
-                                        sx={{ "&:hover": { color: "blue" } }}
-                                    >
-                                        <Badge badgeContent={2} color="primary">
-                                            <ContactMailOutlinedIcon />
-                                        </Badge>
-                                    </IconButton>
-                                    <Typography>Community</Typography>
-                                </Box>
-                            </CustomTooltip>
-
-                            {/* line */}
-                            <Divider sx={{
-                                height: "30px",
-                                marginTop: "23px",
-                                marginLeft: "11px"
-                            }} orientation="vertical" variant="middle" flexItem />
-
-                            {/* Profile */}
-                            <CustomTooltip
-                                title={
-                                    <>
-                                        <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-                                            <ListItem className={classes.rootListItem}>
-                                                <Box sx={{ marginRight: 1 }}>
-                                                    <AccountCircleIcon />
-                                                </Box>
-                                                <Typography component={Link} to={`/user/${user.id}`}>
-                                                    Profile
-                                                </Typography>
-                                            </ListItem>
-                                            <Divider />
-                                            <ListItem className={classes.rootListItem} onClick={logOutHandle}>
-                                                <Box sx={{ marginRight: 1 }}>
-                                                    <LogoutIcon />
-                                                </Box>
-                                                <Typography>
-                                                    Log out
-                                                </Typography>
-                                            </ListItem>
-
-                                        </List>
-                                    </>
-                                }
-                            >
-                                <Box sx={{ display: "flex", alignItems: "center", margin: "0 2rem 0 2rem", "&:hover": { color: "blue", cursor: "pointer" } }}>
-                                    <Avatar sx={{ bgcolor: deepOrange[500], height: "3rem", width: "3rem" }}>N</Avatar>
-                                    <Typography sx={{ position: "relative" }}>{user.displayName}</Typography>
-                                </Box>
-                            </CustomTooltip>
-
-                            {/* like */}
-                            <IconButton component={Link} to="/like"
-                                size="medium"
-                                sx={{ "&:hover": { color: "blue" }, margin: "0 0 0 4rem" }}
-                            >
-                                <Badge badgeContent={2} color="primary">
-                                    <FavoriteBorderIcon />
-                                </Badge>
-                            </IconButton>
-
-                            {/* cart */}
-                            <IconButton
-                                size="medium"
-                                sx={{ "&:hover": { color: "blue" }, margin: "0 3rem 0 0" }}
-                            >
-                                <Badge badgeContent={listProductInCart.length > 0 ? listProductInCart.length : null} color="primary">
-                                    <ShoppingBasketOutlinedIcon onClick={toggleDrawer(true)} />
-                                    <Drawer className={classes.cartDrawer}
-                                        anchor={'right'}
-                                        open={state}
-                                        onClose={toggleDrawer(false)}
-                                    >
-                                        {RenderlistProductInCart()}
-                                        <div className={classes.cartDivButton}>
-                                            <Button component={Link} to={'/payment'} className={classes.cartButtonOrder} fullWidth variant="contained">ORDER</Button>
-                                        </div>
-                                    </Drawer>
-                                </Badge>
-                            </IconButton>
-                        </>) :
-                        (
-                            <>
+                        {user ?
+                            (<>
+                                {/* Store & Services */}
                                 <CustomTooltip
                                     title={
                                         <>
-                                            <Typography color="inherit">
-                                                You are not logged in!
-                                            </Typography>
+                                            <Typography color="inherit">Other</Typography>
+
                                         </>
                                     }
                                 >
@@ -274,64 +215,181 @@ export default function NavBar(props) {
                                             size="medium"
                                             sx={{ "&:hover": { color: "blue" } }}
                                         >
-                                            <StoreIcon />
+                                            <Badge badgeContent={2} color="primary">
+                                                <ContactMailOutlinedIcon />
+                                            </Badge>
                                         </IconButton>
                                         <Typography>Store & Services</Typography>
                                     </Box>
                                 </CustomTooltip>
 
+                                {/* Community */}
                                 <CustomTooltip
                                     title={
                                         <>
-                                            <Typography color="inherit">
-                                                You are not logged in!
-                                            </Typography>
+                                            <Typography color="inherit">Other</Typography>
+
                                         </>
                                     }
                                 >
-
                                     <Box sx={{ display: "flex", alignItems: "center", margin: "0 2rem 0 2rem", "&:hover": { color: "blue", cursor: "pointer" } }}>
                                         <IconButton
                                             size="medium"
                                             sx={{ "&:hover": { color: "blue" } }}
                                         >
-                                            <PeopleIcon />
+                                            <Badge badgeContent={2} color="primary">
+                                                <ContactMailOutlinedIcon />
+                                            </Badge>
                                         </IconButton>
                                         <Typography>Community</Typography>
                                     </Box>
                                 </CustomTooltip>
 
+                                {/* line */}
                                 <Divider sx={{
                                     height: "30px",
                                     marginTop: "23px",
                                     marginLeft: "11px"
                                 }} orientation="vertical" variant="middle" flexItem />
 
-                                <Box sx={{ display: "flex", alignItems: "center", margin: "0 2rem 0 2rem", "&:hover": { color: "blue", cursor: "pointer" } }}>
-                                    <Typography component={Link} to="/sign-in">Sign In</Typography>
-                                </Box>
+                                {/* Profile */}
+                                <CustomTooltip
+                                    title={
+                                        <>
+                                            <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                                                <ListItem className={classes.rootListItem}>
+                                                    <Box sx={{ marginRight: 1 }}>
+                                                        <AccountCircleIcon />
+                                                    </Box>
+                                                    <Typography component={Link} to={`/user/${user.id}`}>
+                                                        Profile
+                                                    </Typography>
+                                                </ListItem>
+                                                <Divider />
+                                                <ListItem className={classes.rootListItem} onClick={logOutHandle}>
+                                                    <Box sx={{ marginRight: 1 }}>
+                                                        <LogoutIcon />
+                                                    </Box>
+                                                    <Typography>
+                                                        Log out
+                                                    </Typography>
+                                                </ListItem>
 
-                                <IconButton component={Link} to="/sign-in"
+                                            </List>
+                                        </>
+                                    }
+                                >
+                                    <Box sx={{ display: "flex", alignItems: "center", margin: "0 2rem 0 2rem", "&:hover": { color: "blue", cursor: "pointer" } }}>
+                                        <Avatar {...stringAvatar(user.displayName)} />
+                                        <Typography sx={{ position: "relative", marginLeft: 1 }}>{user.displayName}</Typography>
+                                    </Box>
+                                </CustomTooltip>
+
+                                {/* like */}
+                                <IconButton component={Link} to="/like"
                                     size="medium"
-                                    aria-label="Like"
                                     sx={{ "&:hover": { color: "blue" }, margin: "0 0 0 4rem" }}
                                 >
-                                    <FavoriteBorderIcon />
+                                    <Badge badgeContent={2} color="primary">
+                                        <FavoriteBorderIcon />
+                                    </Badge>
                                 </IconButton>
 
-                                <IconButton component={Link} to="/sign-in"
+                                {/* cart */}
+                                <IconButton
                                     size="medium"
-                                    aria-label="Like"
-                                    sx={{ "&:hover": { color: "blue" }, margin: "0 3rem 0 0" }}
+                                    sx={{ "&:hover": { color: "blue" }, margin: "0 0 0 1rem" }}
                                 >
-
-                                    <ShoppingBasketOutlinedIcon />
-
+                                    <Badge badgeContent={listProductInCart.length > 0 ? listProductInCart.length : null} color="primary">
+                                        <ShoppingBasketOutlinedIcon onClick={toggleDrawer(true)} />
+                                        <Drawer className={classes.cartDrawer}
+                                            anchor={'right'}
+                                            open={state}
+                                            onClose={toggleDrawer(false)}
+                                        >
+                                            {RenderlistProductInCart()}
+                                            <div className={classes.cartDivButton} onClick={toggleDrawer(false)}>
+                                                <Button component={Link} to={`/user/${user.id}/payment`} className={classes.cartButtonOrder} fullWidth variant="contained">ORDER</Button>
+                                            </div>
+                                        </Drawer>
+                                    </Badge>
                                 </IconButton>
-                            </>
-                        )}
-                </Toolbar>
-            </AppBar>
-        </HideOnScroll>
+                            </>) :
+                            (
+                                <>
+                                    <CustomTooltip
+                                        title={
+                                            <>
+                                                <Typography color="inherit">
+                                                    You are not logged in!
+                                                </Typography>
+                                            </>
+                                        }
+                                    >
+                                        <Box sx={{ display: "flex", alignItems: "center", margin: "0 0 0 10rem", "&:hover": { color: "blue", cursor: "pointer" } }}>
+                                            <IconButton
+                                                size="medium"
+                                                sx={{ "&:hover": { color: "blue" } }}
+                                            >
+                                                <StoreIcon />
+                                            </IconButton>
+                                            <Typography>Store & Services</Typography>
+                                        </Box>
+                                    </CustomTooltip>
+
+                                    <CustomTooltip
+                                        title={
+                                            <>
+                                                <Typography color="inherit">
+                                                    You are not logged in!
+                                                </Typography>
+                                            </>
+                                        }
+                                    >
+
+                                        <Box sx={{ display: "flex", alignItems: "center", margin: "0 2rem 0 2rem", "&:hover": { color: "blue", cursor: "pointer" } }}>
+                                            <IconButton
+                                                size="medium"
+                                                sx={{ "&:hover": { color: "blue" } }}
+                                            >
+                                                <PeopleIcon />
+                                            </IconButton>
+                                            <Typography>Community</Typography>
+                                        </Box>
+                                    </CustomTooltip>
+
+                                    <Divider sx={{
+                                        height: "30px",
+                                        marginTop: "23px",
+                                        marginLeft: "11px"
+                                    }} orientation="vertical" variant="middle" flexItem />
+
+                                    <Box sx={{ display: "flex", alignItems: "center", margin: "0 2rem 0 2rem", "&:hover": { color: "blue", cursor: "pointer" } }}>
+                                        <Typography component={Link} to="/sign-in">Sign In</Typography>
+                                    </Box>
+
+                                    <IconButton component={Link} to="/sign-in"
+                                        size="medium"
+                                        aria-label="Like"
+                                        sx={{ "&:hover": { color: "blue" }, margin: "0 0 0 4rem" }}
+                                    >
+                                        <FavoriteBorderIcon />
+                                    </IconButton>
+
+                                    <IconButton component={Link} to="/sign-in"
+                                        size="medium"
+                                        aria-label="Like"
+                                        sx={{ "&:hover": { color: "blue" }, margin: "0 0 0 1rem" }}
+                                    >
+
+                                        <ShoppingBasketOutlinedIcon />
+
+                                    </IconButton>
+                                </>
+                            )}
+                    </Toolbar>
+                </AppBar>
+            </HideOnScroll>
+        </Container>
     );
 }

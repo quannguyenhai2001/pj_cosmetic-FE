@@ -31,7 +31,7 @@ function TabPanel(props) {
             {value === index && (
                 <Swiper
                     className={classes.swiper}
-                    slidesPerView={4}
+                    slidesPerView={5}
                     spaceBetween={20}
                     navigation={true}
                     modules={[Navigation]}
@@ -78,7 +78,7 @@ export default function TagsProduct() {
 
         <Box sx={{ width: '100%', margin: '5rem 0' }}>
             <Box>
-                <Typography variant="h3" gutterBottom sx={{ textAlign: 'center' }}>
+                <Typography variant="h4" gutterBottom sx={{ textAlign: 'center' }}>
                     Just Dropped
                 </Typography>
             </Box>

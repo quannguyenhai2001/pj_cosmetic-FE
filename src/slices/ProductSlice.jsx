@@ -62,7 +62,6 @@ export const fetchAsyncGetDetailProduct = createAsyncThunk(
 );
 
 //cart
-
 export const fetchAsyncGetListProductInCart = createAsyncThunk(
     "product/fetchAsyncGetListProductInCart",
     async (arg, { rejectWithValue }) => {
@@ -86,25 +85,42 @@ export const fetchAsyncAddProductToCart = createAsyncThunk(
     }
 );
 
-
+//search
+export const fetchAsyncSearchProducts = createAsyncThunk(
+    "product/fetchAsyncSearchProducts",
+    async (arg, { rejectWithValue }) => {
+        try {
+            const response = await CallApiByParams("products/search-product-by-key.php", "get", arg)
+            return response.data
+        } catch (error) {
+            return rejectWithValue(error.response.data)
+        }
+    }
+);
 
 const productSlice = createSlice({
     name: 'product',
     initialState: {
-        //screem nav
+        //header > cate
         childCategoties: [],
         fatherCategories: [],
         mainCategories: [],
 
-        //screen list products
+        //header > nav
+        //cart
+        listProductInCart: [],
+        //search
+        searchListProducts: [],
+
+        //screen products
         listProducts: [],
         listManufacturers: [],
 
         //screen detail product
         detailProduct: [],
 
-        //cart
-        listProductInCart: []
+
+
     },
     reducers: {
         setMainCategories: (state, action) => {
@@ -112,6 +128,9 @@ const productSlice = createSlice({
         },
         deleteListProducts: (state, action) => {
             state.listProducts = []
+        },
+        deleteSearchListProducts: (state, action) => {
+            state.searchListProducts = []
         }
     },
     extraReducers: {
@@ -156,7 +175,7 @@ const productSlice = createSlice({
         //get list product in cart
         [fetchAsyncGetListProductInCart.fulfilled]: (state, action) => {
             state.listProductInCart = JSON.parse(action.payload)
-            console.log(JSON.parse(action.payload))
+            // console.log(JSON.parse(action.payload))
         },
         [fetchAsyncGetListProductInCart.rejected]: (state, action) => {
             console.log(action.payload)
@@ -168,9 +187,17 @@ const productSlice = createSlice({
         [fetchAsyncAddProductToCart.rejected]: (state, action) => {
             console.log(action.payload)
         },
+        //search product
+        [fetchAsyncSearchProducts.fulfilled]: (state, action) => {
+            state.searchListProducts = action.payload
+            console.log(action.payload)
+        },
+        [fetchAsyncSearchProducts.rejected]: (state, action) => {
+            state.searchListProducts = []
+        },
     }
 })
 const { reducer, actions } = productSlice
-export const { setMainCategories, deleteListProducts } = actions
+export const { setMainCategories, deleteListProducts, deleteSearchListProducts } = actions
 export default reducer
 

@@ -10,16 +10,16 @@ import {
 } from "react-router-dom";
 import HomeAdminScreen from "screens/Admin/HomeAdminScreen/HomeAdminScreen";
 import SignInAdminScreen from "screens/Admin/SignInAdminScreen/SignInAdminScreen";
-import BillUserScreen from "screens/User/BillUserScreen/BillUserScreen";
-import CartUserScreen from "screens/User/CartUserScreen/CartUserScreen";
 import ChangeInforUserScreen from "screens/User/ChangeInforUserScreen/ChangeInforUserScreen";
 import HomeUserScreen from "screens/User/HomeUserScreen/HomeUserScreen";
 import InforUserScreen from "screens/User/InforUserScreen/InforUserScreen";
 import ProductDetailScreen from "screens/User/ProductDetailScreen/ProductDetailScreen";
 import ProductsScreen from "screens/User/ProductsScreen/ProductsScreen";
+import PaymentScreen from "screens/User/PaymentScreen/PaymentScreen";
 import SignInUserScreen from "screens/User/SignInUserScreen/SignInUserScreen";
 import SignUpUserScreen from "screens/User/SignUpUserScreen/SignUpUserScreen";
 import TestScreen from "screens/User/TestScreen/TestScreen";
+import SearchScreen from "screens/User/SearchScreen/SearchScreen";
 
 
 
@@ -69,6 +69,7 @@ const RouteConfigs = [
         layout: ProfileLayout,
         isScreenAdmin: false,
     },
+    //list product by child cate
     {
         path: "/products/:categoryId",
         element: ProductsScreen,
@@ -76,6 +77,7 @@ const RouteConfigs = [
         layout: DefaultLayout,
         isScreenAdmin: false,
     },
+    //detail product
     {
         path: "/products/detail/:id",
         element: ProductDetailScreen,
@@ -83,21 +85,31 @@ const RouteConfigs = [
         layout: DefaultLayout,
         isScreenAdmin: false,
     },
+    //payment
     {
-        path: "/payment",
-        element: CartUserScreen,
+        path: "/user/:id/payment",
+        element: PaymentScreen,
         isPrivate: true,
         layout: DefaultLayout,
         isScreenAdmin: false,
 
     },
+    //search
     {
-        path: "/bill",
-        element: BillUserScreen,
-        isPrivate: true,
+        path: "/search",
+        element: SearchScreen,
+        isPrivate: false,
         layout: DefaultLayout,
         isScreenAdmin: false,
+
     },
+    // {
+    //     path: "/bill",
+    //     element: BillUserScreen,
+    //     isPrivate: true,
+    //     layout: DefaultLayout,
+    //     isScreenAdmin: false,
+    // },
 
     //admin
     {
