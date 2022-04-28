@@ -7,7 +7,6 @@ export default makeStyles((theme) => ({
         color: 'white',
         position: 'relative',
         fontSize: '1.4285714285714286rem',
-        cursor: 'pointer',
         '& a': {
             color: 'black',
             textDecoration: 'none',
@@ -19,6 +18,7 @@ export default makeStyles((theme) => ({
         justifyContent: 'space-between',
     },
     primaryCategories: {
+        cursor: 'pointer',
         '&:hover': {
             '& $secondaryCategories': {
                 display: 'block',

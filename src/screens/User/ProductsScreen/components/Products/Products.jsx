@@ -35,12 +35,14 @@ export default function Products() {
                                     <Typography className={classes.sale} color="text.secondary">
                                         Sale: {product.promotion * 100}%
                                     </Typography>
-                                    <CardMedia
+                                    {/* image */}
+                                    <CardMedia className={classes.rootCardMedia}
                                         component="img"
                                         height="250"
                                         image="http://localhost/api/upload/products/product.png"
                                         alt="green iguana"
                                     />
+                                    {/* content */}
                                     <CardContent>
                                         <Typography gutterBottom noWrap sx={{ fontWeight: 650 }} component="div">
                                             {product.manufacturersName}

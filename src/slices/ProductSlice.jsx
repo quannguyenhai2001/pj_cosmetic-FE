@@ -84,6 +84,17 @@ export const fetchAsyncAddProductToCart = createAsyncThunk(
         }
     }
 );
+export const fetchAsyncDecreaseQuantityProduct = createAsyncThunk(
+    "product/fetchAsyncDecreaseQuantityProduct",
+    async (arg, { rejectWithValue }) => {
+        try {
+            const response = await CallApiByBody("cart/decrease-quantity-product.php", "put", arg)
+            return response.data
+        } catch (error) {
+            return rejectWithValue(error.response.data)
+        }
+    }
+);
 
 //search
 export const fetchAsyncSearchProducts = createAsyncThunk(
@@ -91,6 +102,19 @@ export const fetchAsyncSearchProducts = createAsyncThunk(
     async (arg, { rejectWithValue }) => {
         try {
             const response = await CallApiByParams("products/search-product-by-key.php", "get", arg)
+            return response.data
+        } catch (error) {
+            return rejectWithValue(error.response.data)
+        }
+    }
+);
+
+//filter
+export const fetchAsyncFilterProduct = createAsyncThunk(
+    "product/fetchAsyncFilterProduct",
+    async (arg, { rejectWithValue }) => {
+        try {
+            const response = await CallApiByParams("products/filter-product.php", "get", arg)
             return response.data
         } catch (error) {
             return rejectWithValue(error.response.data)
@@ -180,6 +204,14 @@ const productSlice = createSlice({
         [fetchAsyncGetListProductInCart.rejected]: (state, action) => {
             console.log(action.payload)
         },
+        //decrease quantity product
+        [fetchAsyncDecreaseQuantityProduct.fulfilled]: (state, action) => {
+            // state.listProductInCart = JSON.parse(action.payload)
+            console.log(action.payload)
+        },
+        [fetchAsyncDecreaseQuantityProduct.rejected]: (state, action) => {
+            console.log(action.payload)
+        },
         //add product to cart
         [fetchAsyncAddProductToCart.fulfilled]: (state, action) => {
             console.log(action.payload)
@@ -194,6 +226,14 @@ const productSlice = createSlice({
         },
         [fetchAsyncSearchProducts.rejected]: (state, action) => {
             state.searchListProducts = []
+        },
+        //filter product
+        [fetchAsyncFilterProduct.fulfilled]: (state, action) => {
+            state.listProducts = action.payload
+            console.log(action.payload)
+        },
+        [fetchAsyncFilterProduct.rejected]: (state, action) => {
+            console.log(action.payload)
         },
     }
 })

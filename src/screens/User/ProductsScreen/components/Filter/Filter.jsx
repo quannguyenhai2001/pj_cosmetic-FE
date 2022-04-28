@@ -10,7 +10,9 @@ import Slider from '@mui/material/Slider';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAsyncFilterProduct } from 'slices/ProductSlice';
+import { useParams } from 'react-router-dom';
 
 //price
 function valuetext(value) {
@@ -19,9 +21,10 @@ function valuetext(value) {
 const Filter = () => {
     const classes = useStyles();
     const listManu = useSelector(state => state.product.listManufacturers);
-
+    const dispatch = useDispatch();
+    const params = useParams();
     //filter price
-    const [valuePrice, setValuePrice] = React.useState([0, 100]);
+    const [valuePrice, setValuePrice] = React.useState([0, 300]);
     const handleChangePrice = (event, newValue) => {
         setValuePrice(newValue);
     };
@@ -35,27 +38,55 @@ const Filter = () => {
         if (!event.target.checked) {
             setValueIdManu('')
         }
-    }
-    React.useEffect(() => {
 
-        return () => {
-            console.log('unmount');
-        }
-    }, []);
+    }
+
     const handleClickCheckBox = (arg) => {
         setValueIndex(arg.index);
         setValueIdManu(arg.item.id);
     }
+
     //filter sale
-    const [checkedSale, setCheckedSale] = React.useState(true);
+    const [checkedSale, setCheckedSale] = React.useState(false);
     const handleChangeCheckedSale = (event) => {
         setCheckedSale(event.target.checked);
 
     };
 
+    console.log(checkedSale)
+    React.useEffect(() => {
+        if (valueIdManu && !checkedSale) {
+            dispatch(fetchAsyncFilterProduct(
+                {
+                    cate_Id: params.categoryId,
+                    manu_Id: valueIdManu,
+
+                }))
+        }
+        else if (valueIdManu && checkedSale) {
+            dispatch(fetchAsyncFilterProduct(
+                {
+                    cate_Id: params.categoryId,
+                    manu_Id: valueIdManu,
+                    promotion: true,
+
+                }))
+        }
+        else {
+            dispatch(fetchAsyncFilterProduct(
+                {
+                    cate_Id: params.categoryId,
+
+
+                }))
+        }
+        // return () => {
+        //     console.log('unmount filter');
+        // }
+    }, [valueIdManu, checkedSale, dispatch, params.categoryId]);
     return (
         <Box>
-            <Typography>Filter</Typography>
+            <Typography variant="h6">Filter</Typography>
 
             {/* filter manu */}
             <Accordion className={classes.rootPaper}>
@@ -64,7 +95,7 @@ const Filter = () => {
                     aria-controls="panel1a-content"
                     id="panel1a-header"
                 >
-                    <Typography>Nhà Cung Cấp</Typography>
+                    <Typography>Manufacturers</Typography>
                 </AccordionSummary>
                 <AccordionDetails className={classes.rootAccordionDetails}>
                     <FormGroup>

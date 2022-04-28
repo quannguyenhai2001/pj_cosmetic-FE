@@ -14,6 +14,10 @@ import InboxIcon from '@mui/icons-material/Inbox';
 import DraftsIcon from '@mui/icons-material/Drafts';
 import { Avatar, Grid, Typography } from '@mui/material';
 import BuildIcon from '@mui/icons-material/Build';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import InventoryIcon from '@mui/icons-material/Inventory';
+import LockResetIcon from '@mui/icons-material/LockReset';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import useStyles from './styles';
 //create circle avatar
 function stringToColor(string) {
@@ -53,7 +57,7 @@ const ProfileLayout = (props) => {
     const { id, displayName, avatar } = useSelector(state => state.user.userDetail)
 
     //select list item
-    const [selectedIndex, setSelectedIndex] = React.useState(1);
+    const [selectedIndex, setSelectedIndex] = React.useState(0);
 
     const handleListItemClick = (event, index) => {
         setSelectedIndex(index);
@@ -63,7 +67,7 @@ const ProfileLayout = (props) => {
     return (
         <Box>
             <Header />
-            <Box sx={{ padding: '0 5rem', minHeight: '90vh', bgcolor: 'rgb(245,245,245)' }}>
+            <Box sx={{ padding: '2rem 5rem', minHeight: '90vh', bgcolor: 'rgb(245,245,245)' }}>
                 <Box sx={{ display: 'flex', padding: '2rem 0' }}>
                     <Avatar {...stringAvatar(displayName)} />
                     <Box sx={{ marginLeft: '1rem' }}>
@@ -84,19 +88,19 @@ const ProfileLayout = (props) => {
                                             selected={selectedIndex === 0}
                                             onClick={(event) => handleListItemClick(event, 0)}
                                         >
-                                            <ListItemIcon>
-                                                <InboxIcon />
+                                            <ListItemIcon className={classes.rootListIcon}>
+                                                <AccountCircleIcon />
                                             </ListItemIcon>
                                             <ListItemText primary="User Information" />
                                         </ListItemButton>
                                     </ListItem>
-                                    <ListItem disablePadding component={Link} to={`/user/${id}/change-infor`}>
+                                    <ListItem disablePadding component={Link} to={`/user/${id}/change-password`}>
                                         <ListItemButton
                                             selected={selectedIndex === 1}
                                             onClick={(event) => handleListItemClick(event, 1)}
                                         >
-                                            <ListItemIcon>
-                                                <DraftsIcon />
+                                            <ListItemIcon className={classes.rootListIcon}>
+                                                <LockResetIcon />
                                             </ListItemIcon>
                                             <ListItemText primary="Change password" />
                                         </ListItemButton>
@@ -106,15 +110,24 @@ const ProfileLayout = (props) => {
                             <Divider />
                             <nav aria-label="secondary mailbox folders">
                                 <List className={classes.rootList}>
-                                    <ListItem disablePadding>
+                                    <ListItem disablePadding component={Link} to={`/user/${id}/order`}>
                                         <ListItemButton selected={selectedIndex === 2}
                                             onClick={(event) => handleListItemClick(event, 2)}>
-                                            <ListItemText primary="Setting" />
+                                            <ListItemIcon className={classes.rootListIcon}>
+                                                <InventoryIcon />
+                                            </ListItemIcon>
+                                            <ListItemText primary="Order" />
                                         </ListItemButton>
-                                    </ListItem>
-                                    <ListItem disablePadding>
-                                        <ListItemButton component="a" href="#simple-list">
-                                            <ListItemText primary="Delte User" />
+                                    </ListItem >
+                                    <ListItem disablePadding component={Link} to={`/user/${id}/delete-account`}>
+                                        <ListItemButton
+                                            selected={selectedIndex === 3}
+                                            onClick={(event) => handleListItemClick(event, 3)}
+                                        >
+                                            <ListItemIcon className={classes.rootListIcon}>
+                                                <DeleteForeverIcon />
+                                            </ListItemIcon>
+                                            <ListItemText primary="Delete account" />
                                         </ListItemButton>
                                     </ListItem>
                                 </List>

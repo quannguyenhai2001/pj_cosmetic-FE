@@ -5,6 +5,12 @@ export default makeStyles((theme) => ({
         '&.MuiList-root': {
             padding: '0px',
         }
-    }
+    },
+    rootListIcon: {
+        '&.MuiListItemIcon-root': {
+            minWidth: '0px',
+            paddingRight: '10px',
+        }
+    },
 
 }));

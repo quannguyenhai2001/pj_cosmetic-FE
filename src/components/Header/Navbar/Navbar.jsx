@@ -14,7 +14,6 @@ import ShoppingBasketOutlinedIcon from '@mui/icons-material/ShoppingBasketOutlin
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import Avatar from '@mui/material/Avatar';
-import { deepOrange } from '@mui/material/colors';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import PeopleIcon from '@mui/icons-material/People';
@@ -28,6 +27,7 @@ import { productImages } from 'assets/img/imgProductDetail';
 
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
+import { fetchAsyncDecreaseQuantityProduct } from 'slices/ProductSlice';
 //hide and show navbar
 function HideOnScroll(props) {
     const { children, window } = props;
@@ -78,13 +78,15 @@ function stringAvatar(name) {
 
 //box
 const CustomTooltip = styled(({ className, ...props }) => (
-    <Tooltip {...props} classes={{ popper: className }} />
+    <Tooltip arrow={true} {...props} classes={{ popper: className }} />
 ))(({ theme }) => ({
     [`& .${tooltipClasses.tooltip}`]: {
         backgroundColor: theme.palette.common.white,
         color: 'rgba(0, 0, 0, 0.87)',
         maxWidth: 220,
         border: '1px solid #dadde9',
+        position: 'relative',
+        top: '-10px',
     },
 }));
 
@@ -125,8 +127,11 @@ export default function NavBar(props) {
 
 
     //list product in cart
-    const handleClick = () => {
-        console.log("click")
+    const handleClickIncrease = () => {
+        console.log('fsfs')
+    }
+    const handleClickDecrease = (e) => {
+        dispatch(fetchAsyncDecreaseQuantityProduct({ id: e }))
     }
     const RenderlistProductInCart = () => (
         <Box className={classes.cartBox}>
@@ -154,7 +159,7 @@ export default function NavBar(props) {
                                         Sale: {item.product.promotion * 100}%
                                     </Typography>
                                 </CardContent>
-                                <Button variant="outlined" startIcon={<RemoveIcon onClick={handleClick} />} endIcon={<AddIcon onClick={handleClick} />}>
+                                <Button variant="outlined" startIcon={<RemoveIcon onClick={() => handleClickDecrease(item.id)} />} endIcon={<AddIcon onClick={handleClickIncrease} />}>
                                     {item.quantity}
                                 </Button>
                             </Grid>

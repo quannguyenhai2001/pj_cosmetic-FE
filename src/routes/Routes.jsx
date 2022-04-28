@@ -10,7 +10,6 @@ import {
 } from "react-router-dom";
 import HomeAdminScreen from "screens/Admin/HomeAdminScreen/HomeAdminScreen";
 import SignInAdminScreen from "screens/Admin/SignInAdminScreen/SignInAdminScreen";
-import ChangeInforUserScreen from "screens/User/ChangeInforUserScreen/ChangeInforUserScreen";
 import HomeUserScreen from "screens/User/HomeUserScreen/HomeUserScreen";
 import InforUserScreen from "screens/User/InforUserScreen/InforUserScreen";
 import ProductDetailScreen from "screens/User/ProductDetailScreen/ProductDetailScreen";
@@ -20,6 +19,9 @@ import SignInUserScreen from "screens/User/SignInUserScreen/SignInUserScreen";
 import SignUpUserScreen from "screens/User/SignUpUserScreen/SignUpUserScreen";
 import TestScreen from "screens/User/TestScreen/TestScreen";
 import SearchScreen from "screens/User/SearchScreen/SearchScreen";
+import ChangePasswordScreen from "screens/User/ChangePasswordScreen/ChangePasswordScreen";
+import OrderUserScreen from "screens/User/OrderUserScreen/OrderUserScreen";
+import DeleteAccountUserScreen from "screens/User/DeleteAccountUserScreen/DeleteAccountUserScreen";
 
 
 
@@ -63,12 +65,27 @@ const RouteConfigs = [
         isScreenAdmin: false,
     },
     {
-        path: "/user/:id/change-infor",
-        element: ChangeInforUserScreen,
+        path: "/user/:id/change-password",
+        element: ChangePasswordScreen,
         isPrivate: true,
         layout: ProfileLayout,
         isScreenAdmin: false,
     },
+    {
+        path: "/user/:id/order",
+        element: OrderUserScreen,
+        isPrivate: true,
+        layout: ProfileLayout,
+        isScreenAdmin: false,
+    },
+    {
+        path: "/user/:id/delete-account",
+        element: DeleteAccountUserScreen,
+        isPrivate: true,
+        layout: ProfileLayout,
+        isScreenAdmin: false,
+    },
+
     //list product by child cate
     {
         path: "/products/:categoryId",
