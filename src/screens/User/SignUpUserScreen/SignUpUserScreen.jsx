@@ -15,10 +15,10 @@ const SignUpUserScreen = () => {
     const navigate = useNavigate()
     const classes = useStyles()
     const [showPassword, setShowPassword] = useState(false)
-    const [errorEmail, setErrorEmail] = useState('')
+    const [error, setError] = useState('')
 
-    const changeErrorEmail = (e) => {
-        setErrorEmail('')
+    const changeError = (e) => {
+        setError('')
     }
 
     const handleShowPassword = () => {
@@ -77,7 +77,7 @@ const SignUpUserScreen = () => {
         dispatch(fetchAsyncSignUp(userData)).unwrap().then(() => {
             navigate('/sign-in')
         }).catch(err => {
-            setErrorEmail(err.message)
+            setError(err)
         })
     }
 
@@ -126,8 +126,8 @@ const SignUpUserScreen = () => {
                                         component={InputField}
                                         label="Email"
                                         type="email"
-                                    // errorEmail={errorEmail}
-                                    // changeErrorEmail={changeErrorEmail}
+                                        error={error}
+                                        changeError={changeError}
                                     />
 
                                     <Field

@@ -36,34 +36,4 @@ export default makeStyles((theme) => ({
         },
         flex: "1",
     },
-
-    //cart
-    // cartDrawer: {
-
-    //     '& .MuiPaper-root': {
-    //         height: '90%',
-
-    //     }
-    // },
-    cartDivButton: {
-        position: "fixed",
-        bottom: 0,
-        right: 17,
-        textAlign: "center",
-        zIndex: "3000",
-        width: '40rem',
-        '& $cartButtonOrder': {
-            height: 50,
-        }
-
-    },
-    cartButtonOrder: {
-
-    },
-    cartBox: {
-        width: '40rem',
-    },
-    cartCard: {
-        display: 'grid'
-    },
 }));

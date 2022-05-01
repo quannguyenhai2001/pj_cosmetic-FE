@@ -94,48 +94,49 @@ const FormChangePassword = () => {
                 // const { values, errors, touched, isSubmitting } = formikProps
                 // console.log({ touched, errors })
                 return (
-                    <Form className={classes.form}>
-                        <Box sx={{ width: 400, margin: '6rem 0 1rem 12rem' }}>
+                    // <Form className={classes.form}>
+                    //     <Box sx={{ width: 400, margin: '6rem 0 1rem 12rem' }}>
 
-                            <Grid container spacing={2}>
-                                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                                    <Typography sx={{ width: '20rem', }}>Old password</Typography>
-                                    <Field
-                                        name="password"
-                                        component={InputField}
-                                        label="Password"
-                                        type={showPassword ? "text" : "password"} handleShowPassword={handleShowPassword}
-                                    />
-                                </Box>
-                                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                                    <Typography sx={{ width: '20rem', }}>New password</Typography>
-                                    <Field
-                                        name="password"
-                                        component={InputField}
-                                        label="Password"
-                                        type={showPassword ? "text" : "password"} handleShowPassword={handleShowPassword}
-                                    />
-                                </Box>
-                                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                                    <Typography sx={{ width: '20rem', }}>Confirm password</Typography>
-                                    <Field
-                                        name="confirmPassword"
-                                        component={InputField}
-                                        label="Comfirm Password"
-                                        type={showPassword ? "text" : "password"} handleShowPassword={handleShowPassword}
-                                    />
-                                </Box>
+                    //         <Grid container spacing={2}>
+                    //             <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    //                 <Typography sx={{ width: '20rem', }}>Old password</Typography>
+                    //                 <Field
+                    //                     name="password"
+                    //                     component={InputField}
+                    //                     label="Password"
+                    //                     type={showPassword ? "text" : "password"} handleShowPassword={handleShowPassword}
+                    //                 />
+                    //             </Box>
+                    //             <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    //                 <Typography sx={{ width: '20rem', }}>New password</Typography>
+                    //                 <Field
+                    //                     name="password"
+                    //                     component={InputField}
+                    //                     label="Password"
+                    //                     type={showPassword ? "text" : "password"} handleShowPassword={handleShowPassword}
+                    //                 />
+                    //             </Box>
+                    //             <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    //                 <Typography sx={{ width: '20rem', }}>Confirm password</Typography>
+                    //                 <Field
+                    //                     name="confirmPassword"
+                    //                     component={InputField}
+                    //                     label="Comfirm Password"
+                    //                     type={showPassword ? "text" : "password"} handleShowPassword={handleShowPassword}
+                    //                 />
+                    //             </Box>
 
-                            </Grid>
-                        </Box>
-                        <Button type="submit" variant="contained" color="primary" className={classes.submit}>
-                            Change
-                        </Button>
-
-
+                    //         </Grid>
+                    //     </Box>
+                    //     <Button type="submit" variant="contained" color="primary" className={classes.submit}>
+                    //         Change
+                    //     </Button>
 
 
-                    </Form>
+
+
+                    // </Form>
+                    <></>
                 )
             }}
         </Formik >

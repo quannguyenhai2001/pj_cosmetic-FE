@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import Slide from '@mui/material/Slide';
 import { styled } from '@mui/material/styles';
-import { Badge, Button, CardMedia, Container, Divider, Drawer, Grid, IconButton, TextField, Tooltip, tooltipClasses, Typography } from '@mui/material';
+import { Badge, Container, Divider, IconButton, TextField, Tooltip, tooltipClasses, Typography } from '@mui/material';
 import ContactMailOutlinedIcon from '@mui/icons-material/ContactMailOutlined';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingBasketOutlinedIcon from '@mui/icons-material/ShoppingBasketOutlined';
@@ -21,13 +21,8 @@ import StoreIcon from '@mui/icons-material/Store';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { deleteUserDetail } from 'slices/UserSlice';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import { productImages } from 'assets/img/imgProductDetail';
+import Cart from './components/Cart/Cart';
 
-import RemoveIcon from '@mui/icons-material/Remove';
-import AddIcon from '@mui/icons-material/Add';
-import { fetchAsyncDecreaseQuantityProduct } from 'slices/ProductSlice';
 //hide and show navbar
 function HideOnScroll(props) {
     const { children, window } = props;
@@ -94,19 +89,13 @@ export default function NavBar(props) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const user = useSelector(state => state.user.userDetail);
-    const listProductInCart = useSelector(state => state.product.listProductInCart);
     const classes = useStyles();
 
-    //drawer cart
-    const [state, setState] = React.useState(false);
-    const toggleDrawer = (open) => (event) => {
-        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-            return;
-        }
 
-        setState(open);
-    };
-
+    //log out
+    const logOutHandle = () => {
+        dispatch(deleteUserDetail());
+    }
 
     //search
     const [searchValue, setSearchValue] = React.useState('');
@@ -125,70 +114,11 @@ export default function NavBar(props) {
         }
     };
 
-
-    //list product in cart
-    const handleClickIncrease = () => {
-        console.log('fsfs')
-    }
-    const handleClickDecrease = (e) => {
-        dispatch(fetchAsyncDecreaseQuantityProduct({ id: e }))
-    }
-    const RenderlistProductInCart = () => (
-        <Box className={classes.cartBox}>
-            {listProductInCart.length > 0 ?
-                (listProductInCart.map((item, index) => (
-                    <Card className={classes.cartCard} key={index}>
-                        <Grid container spacing={1}>
-                            <Grid item xs={3}>
-                                <CardMedia
-                                    component="img"
-                                    sx={{ width: '100%', height: '100%' }}
-                                    image={productImages[0]}
-                                    alt="Live from space album cover"
-                                />
-                            </Grid>
-                            <Grid item xs={9}>
-                                <CardContent>
-                                    <Typography gutterBottom>
-                                        {item.product.productsName}
-                                    </Typography>
-                                    <Typography variant="body2" color="textSecondary" component="span" sx={{ marginRight: '2rem' }}>
-                                        Price: ${item.product.price}
-                                    </Typography>
-                                    <Typography variant="body2" color="textSecondary" component="span">
-                                        Sale: {item.product.promotion * 100}%
-                                    </Typography>
-                                </CardContent>
-                                <Button variant="outlined" startIcon={<RemoveIcon onClick={() => handleClickDecrease(item.id)} />} endIcon={<AddIcon onClick={handleClickIncrease} />}>
-                                    {item.quantity}
-                                </Button>
-                            </Grid>
-                        </Grid>
-                    </Card>
-                )))
-                : null
-            }
-        </Box>
-    );
-    //log out
-    const logOutHandle = () => {
-        dispatch(deleteUserDetail());
-    }
-
     return (
         <Container maxWidth="xl">
             <HideOnScroll {...props}>
                 <AppBar className={classes.rootAppBarTop} elevation={0}>
                     <Toolbar className={classes.rootToolBar}>
-                        {/* <Card sx={{ maxWidth: 300 }}>
-                            <CardMedia
-                                component="img"
-                                height="20"
-                                image="https://www.sephora.com/img/ufe/logo.svg"
-                                alt="green iguana"
-                            />
-                        </Card> */}
-
                         <Box component={Link} to="/" sx={{ width: "15rem", height: "3rem", marginRight: 4 }}>
                             <img style={{ width: "100%", height: "100%" }} src="https://www.sephora.com/img/ufe/logo.svg" alt="green iguana" />
                         </Box>
@@ -301,24 +231,7 @@ export default function NavBar(props) {
                                 </IconButton>
 
                                 {/* cart */}
-                                <IconButton
-                                    size="medium"
-                                    sx={{ "&:hover": { color: "blue" }, margin: "0 0 0 1rem" }}
-                                >
-                                    <Badge badgeContent={listProductInCart.length > 0 ? listProductInCart.length : null} color="primary">
-                                        <ShoppingBasketOutlinedIcon onClick={toggleDrawer(true)} />
-                                        <Drawer className={classes.cartDrawer}
-                                            anchor={'right'}
-                                            open={state}
-                                            onClose={toggleDrawer(false)}
-                                        >
-                                            {RenderlistProductInCart()}
-                                            <div className={classes.cartDivButton} onClick={toggleDrawer(false)}>
-                                                <Button component={Link} to={`/user/${user.id}/payment`} className={classes.cartButtonOrder} fullWidth variant="contained">ORDER</Button>
-                                            </div>
-                                        </Drawer>
-                                    </Badge>
-                                </IconButton>
+                                <Cart />
                             </>) :
                             (
                                 <>

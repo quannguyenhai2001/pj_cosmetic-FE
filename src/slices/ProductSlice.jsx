@@ -1,31 +1,7 @@
 import CallApiByBody from "common/ConfigApi/CallApiByBody";
 import CallApiByParams from "common/ConfigApi/CallApiByParams";
-
-
 const { createSlice, createAsyncThunk } = require("@reduxjs/toolkit");
 
-export const fetchAsyncGetChildCategories = createAsyncThunk(
-    "product/fetchAsyncGetChildCategories",
-    async (arg, { rejectWithValue }) => {
-        try {
-            const response = await CallApiByBody("categories/get-all-child-categories.php", "get", null)
-            return response.data
-        } catch (error) {
-            return rejectWithValue(error.response.data)
-        }
-    }
-);
-export const fetchAsyncGetFatherCategories = createAsyncThunk(
-    "product/fetchAsyncGetFatherCategories",
-    async (arg, { rejectWithValue }) => {
-        try {
-            const response = await CallApiByBody("categories/get-all-father-categories.php", "get", null)
-            return response.data
-        } catch (error) {
-            return rejectWithValue(error.response.data)
-        }
-    }
-);
 export const fetchAsyncGetManu = createAsyncThunk(
     "product/fetchAsyncGetManu",
     async (arg, { rejectWithValue }) => {
@@ -66,7 +42,7 @@ export const fetchAsyncGetListProductInCart = createAsyncThunk(
     "product/fetchAsyncGetListProductInCart",
     async (arg, { rejectWithValue }) => {
         try {
-            const response = await CallApiByParams("cart/get-list-product.php", "get", null)
+            const response = await CallApiByBody("cart/get-list-product.php", "get", null)
             return response.data
         } catch (error) {
             return rejectWithValue(error.response.data)
@@ -126,14 +102,12 @@ const productSlice = createSlice({
     name: 'product',
     initialState: {
         //header > cate
-        childCategoties: [],
-        fatherCategories: [],
-        mainCategories: [],
+        listCategories: [],
 
-        //header > nav
-        //cart
+        //header > nav > cart
         listProductInCart: [],
-        //search
+
+        //header > nav > search
         searchListProducts: [],
 
         //screen products
@@ -147,8 +121,8 @@ const productSlice = createSlice({
 
     },
     reducers: {
-        setMainCategories: (state, action) => {
-            state.mainCategories = action.payload
+        setListCategories: (state, action) => {
+            state.listCategories = action.payload
         },
         deleteListProducts: (state, action) => {
             state.listProducts = []
@@ -158,20 +132,6 @@ const productSlice = createSlice({
         }
     },
     extraReducers: {
-        //get child categories
-        [fetchAsyncGetChildCategories.fulfilled]: (state, action) => {
-            state.childCategoties = action.payload
-        },
-        [fetchAsyncGetChildCategories.rejected]: (state, action) => {
-            console.log("don't get child categories")
-        },
-        //get father categories
-        [fetchAsyncGetFatherCategories.fulfilled]: (state, action) => {
-            state.fatherCategories = action.payload
-        },
-        [fetchAsyncGetFatherCategories.rejected]: (state, action) => {
-            console.log("don't get father categories")
-        },
         //get list manu
         [fetchAsyncGetManu.fulfilled]: (state, action) => {
             state.listManufacturers = action.payload
@@ -198,7 +158,7 @@ const productSlice = createSlice({
         },
         //get list product in cart
         [fetchAsyncGetListProductInCart.fulfilled]: (state, action) => {
-            state.listProductInCart = JSON.parse(action.payload)
+            state.listProductInCart = JSON.parse(action.payload.data)
             // console.log(JSON.parse(action.payload))
         },
         [fetchAsyncGetListProductInCart.rejected]: (state, action) => {
@@ -238,6 +198,6 @@ const productSlice = createSlice({
     }
 })
 const { reducer, actions } = productSlice
-export const { setMainCategories, deleteListProducts, deleteSearchListProducts } = actions
+export const { setListCategories, deleteListProducts, deleteSearchListProducts } = actions
 export default reducer
 

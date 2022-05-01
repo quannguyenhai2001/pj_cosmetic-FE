@@ -13,18 +13,18 @@ const ProductsScreen = () => {
     const params = useParams();
 
     //get title category
-    const mainCategories = useSelector(state => state.product.mainCategories);
+    const listCategories = useSelector(state => state.product.listCategories);
     const [titleCategory, setTitleCategory] = React.useState({});
 
     useEffect(() => {
-        mainCategories.forEach(category => {
+        listCategories.forEach(category => {
             category.listChildCategories.forEach(childCategory => {
                 if (childCategory.id === params.categoryId) {
                     setTitleCategory({ fatherCategory: category, childCategory });
                 }
             })
         })
-    }, [mainCategories, params.categoryId]);
+    }, [listCategories, params.categoryId]);
 
     //get manu and list product
     useEffect(() => {
@@ -32,7 +32,6 @@ const ProductsScreen = () => {
         dispatch(fetchAsyncGetManu())
         return () => {
             dispatch(deleteListProducts());
-            console.log('unmount');
         }
 
     }, [dispatch, params.categoryId]);

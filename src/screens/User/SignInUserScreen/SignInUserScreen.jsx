@@ -14,11 +14,11 @@ const SignInUserScreen = () => {
     const navigate = useNavigate()
     const classes = useStyles()
     const [showPassword, setShowPassword] = useState(false)
-    const [errorEmail, setErrorEmail] = useState('')
+    const [error, setError] = useState('')
 
-    // const changeErrorEmail = (e) => {
-    //     setErrorEmail('')
-    // }
+    const changeError = (e) => {
+        setError('')
+    }
 
 
     const handleShowPassword = () => {
@@ -46,7 +46,7 @@ const SignInUserScreen = () => {
         dispatch(fetchAsyncSignIn(values)).unwrap().then(() => {
             navigate('/')
         }).catch(err => {
-            setErrorEmail(err.message)
+            setError(err)
         })
     }
 
@@ -74,8 +74,8 @@ const SignInUserScreen = () => {
                                                 component={InputField}
                                                 label="Email"
                                                 type="email"
-                                            // errorEmail={errorEmail}
-                                            // changeErrorEmail={changeErrorEmail}
+                                                error={error}
+                                                changeError={changeError}
                                             />
 
                                             <Field
@@ -83,6 +83,8 @@ const SignInUserScreen = () => {
                                                 component={InputField}
                                                 label="Password"
                                                 type={showPassword ? "text" : "password"} handleShowPassword={handleShowPassword}
+                                                error={error}
+                                                changeError={changeError}
                                             />
                                         </Grid>
                                         <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>

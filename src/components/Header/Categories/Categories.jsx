@@ -1,17 +1,38 @@
 import * as React from 'react';
 import useStyles from './styles';
 import Box from '@mui/material/Box';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { setListCategories } from 'slices/ProductSlice';
+import ListCategories from 'utils/ListCategories';
+import CallApiByBody from 'common/ConfigApi/CallApiByBody';
 
 
 export default function Categories(props) {
     const classes = useStyles()
-    const mainCategories = useSelector(state => state.product.mainCategories)
+    const dispatch = useDispatch();
+    const listCategories = useSelector(state => state.product.listCategories)
 
-    //list categories render
-    const listNav = mainCategories.map((category, index) => {
+    React.useEffect(() => {
+        let getAllCategories = async () => {
+            try {
+                let reponse = await CallApiByBody("categories/get-all-categories.php", "get", null);
+                dispatch(setListCategories(ListCategories(reponse.data.data)));
+
+            }
+            catch (e) {
+                console.log(e);
+            }
+        }
+        getAllCategories();
+    }, [dispatch]);
+
+    console.log(listCategories)
+
+
+    // list categories render
+    const listNav = listCategories.map((category, index) => {
         return (
             <li key={index} className={classes.primaryCategories}>
                 {category.name}
@@ -35,7 +56,7 @@ export default function Categories(props) {
         <Box sx={{ marginTop: "6rem" }}>
             <nav className={classes.nav}>
                 <ul className={classes.ul}>
-                    {mainCategories.length > 0 ?
+                    {listCategories.length > 0 ?
                         (
                             <>
                                 {listNav}

@@ -15,11 +15,12 @@ export default function Products() {
 
     //rating
     const [valueRating, setValueRating] = React.useState(2);
+
     //navigate
     const handleClick = (id) => {
         navigate(`/products/detail/${id}`);
     }
-    // component={Link} to={`/products/${product.productName}`}
+
     return (
         <Box>
             <Typography sx={{ marginBottom: '1rem' }} color="text.secondary">
@@ -32,9 +33,10 @@ export default function Products() {
                             <Grid item xs={3} key={index}>
                                 <Card className={classes.rootCard} onClick={() => { handleClick(product.id) }}>
                                     {/* sale */}
-                                    <Typography className={classes.sale} color="text.secondary">
-                                        Sale: {product.promotion * 100}%
-                                    </Typography>
+                                    {Number(product.promotion) > 0 ?
+                                        (<Typography className={classes.sale} color="text.secondary">
+                                            Sale: {product.promotion * 100}%
+                                        </Typography>) : null}
                                     {/* image */}
                                     <CardMedia className={classes.rootCardMedia}
                                         component="img"

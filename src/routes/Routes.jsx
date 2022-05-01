@@ -165,9 +165,11 @@ function PrivateRouter() {
     return RouteConfigs.map((route, index) => {
         if ((!route.isPrivate || (route.isPrivate && jwtToken && route.isScreenAdmin === false && userType === "user")) || (route.isPrivate && jwtToken && route.isScreenAdmin === true && userType === "admin")) {
             return <Route key={index} path={route.path} element={(() => {
-                return (<route.layout>
-                    <route.element />
-                </route.layout>)
+                return (
+                    <route.layout>
+                        <route.element />
+                    </route.layout>
+                )
             })()}
             />
         }

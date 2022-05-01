@@ -52,8 +52,6 @@ const Filter = () => {
         setCheckedSale(event.target.checked);
 
     };
-
-    console.log(checkedSale)
     React.useEffect(() => {
         if (valueIdManu && !checkedSale) {
             dispatch(fetchAsyncFilterProduct(
@@ -76,8 +74,6 @@ const Filter = () => {
             dispatch(fetchAsyncFilterProduct(
                 {
                     cate_Id: params.categoryId,
-
-
                 }))
         }
         // return () => {

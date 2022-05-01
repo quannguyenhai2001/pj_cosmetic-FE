@@ -1,16 +1,21 @@
+export default function ListCategories(listCategories) {
+    let listFatherCategories = [];
+    listCategories.forEach((category, index) => {
+        if (!category.fatherCateId) {
+            listFatherCategories.push(category)
+        }
+    })
 
-const listCategories = (childCategories, fatherCategories) => {
-    let newArray = [...fatherCategories]
-    const addProperty = newArray.map(value => {
+    const setListCategoriesAgain = listFatherCategories.map(value => {
         let listChildCategoriesArray = []
-        for (let i = 0; i < childCategories.length; i++) {
-            if (childCategories[i].fatherCateId === value.id) {
-                listChildCategoriesArray.push(childCategories[i])
+        for (let i = 0; i < listCategories.length; i++) {
+            if (listCategories[i].fatherCateId === value.id) {
+                listChildCategoriesArray.push(listCategories[i])
             }
         }
         return { id: value.id, name: value.name, listChildCategories: listChildCategoriesArray }
     })
-    return addProperty
+    return setListCategoriesAgain
+
 };
 
-export default listCategories;

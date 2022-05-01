@@ -5,7 +5,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { ErrorMessage } from 'formik';
 
 function InputField(props) {
-    const { field, form, type, label, half, disabled, handleShowPassword, errorEmail, changeErrorEmail
+    const { field, form, type, label, half, disabled, handleShowPassword, error, changeError
     } = props
     const { name, value, onChange, onBlur } = field
     const showError = form.errors[name] && form.touched[name]
@@ -29,8 +29,8 @@ function InputField(props) {
                 fullWidth
                 label={label}
                 type={type}
-                error={(showError || errorEmail) ? true : false}
-                // onClick={sethiddenErrorHandler}
+                error={(showError || error) ? true : false}
+                onClick={changeError}
                 InputProps={name === "password" || name === "confirmPassword" ? {
                     endAdornment: (
                         <InputAdornment position="end" >
@@ -45,7 +45,7 @@ function InputField(props) {
             />
             <Box sx={{ color: 'red', fontSize: '1.3rem', margin: '1rem 0 0 0' }}>
                 <ErrorMessage name={name} />
-                {/* {errorEmail} */}
+                {(error && error.field === name) ? error.message : null}
             </Box>
         </Grid >
 
