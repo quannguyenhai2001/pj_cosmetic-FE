@@ -25,52 +25,54 @@ export default function Products() {
 
     //render lissProducts
     let renderList = listProducts.length > 0 ?
-        (listProducts.map((product, index) => {
-            return (
-                <Grid item xs={3} key={index}>
-                    <Card className={classes.rootCard} onClick={() => { handleClick(product.id) }}>
-                        {/* sale */}
-                        {Number(product.promotion) > 0 ?
-                            (<Typography className={classes.sale} color="text.secondary">
-                                Sale: {product.promotion * 100}%
-                            </Typography>) : null}
-                        {/* image */}
-                        <CardMedia className={classes.rootCardMedia}
-                            component="img"
-                            height="220"
-                            image="https://res.cloudinary.com/cosmeticv1/image/upload/v1651659763/myfolder/mysubfolder/product1.png"
-                            alt="green iguana"
-                        />
-                        {/* content */}
-                        <CardContent>
-                            <Typography gutterBottom noWrap sx={{ fontWeight: 650 }} component="div">
-                                {product.manufacturersName}
-                            </Typography>
-                            <Typography gutterBottom sx={{ height: 42 }} component="div">
-                                {product.productName}
-                            </Typography>
-                            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                                <Typography color="text.primary" sx={{ fontWeight: 650 }}>
-                                    ${product.price}.00
+        (<Grid container spacing={4}>
+            {listProducts.map((product, index) => {
+                return (
+                    <Grid item xs={3} key={index}>
+                        <Card className={classes.rootCard} onClick={() => { handleClick(product.id) }}>
+                            {/* sale */}
+                            {Number(product.promotion) > 0 ?
+                                (<Typography className={classes.sale} color="text.secondary">
+                                    Sale: {product.promotion * 100}%
+                                </Typography>) : null}
+                            {/* image */}
+                            <CardMedia className={classes.rootCardMedia}
+                                component="img"
+                                height="220"
+                                image="https://res.cloudinary.com/cosmeticv1/image/upload/v1651659763/myfolder/mysubfolder/product1.png"
+                                alt="green iguana"
+                            />
+                            {/* content */}
+                            <CardContent>
+                                <Typography gutterBottom noWrap sx={{ fontWeight: 650 }} component="div">
+                                    {product.manufacturersName}
                                 </Typography>
-                                <Rating sx={{ positon: 'relative', top: '-2px' }}
-                                    name="simple-controlled"
-                                    value={valueRating}
-                                    onChange={(event, newValue) => {
-                                        setValueRating(newValue);
-                                    }}
-                                />
-                            </Box>
-                        </CardContent>
-                    </Card>
-                </Grid>
-            )
-        }))
+                                <Typography gutterBottom sx={{ height: 42 }} component="div">
+                                    {product.productName}
+                                </Typography>
+                                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                                    <Typography color="text.primary" sx={{ fontWeight: 650 }}>
+                                        ${product.price}.00
+                                    </Typography>
+                                    <Rating sx={{ positon: 'relative', top: '-2px' }}
+                                        name="simple-controlled"
+                                        value={valueRating}
+                                        onChange={(event, newValue) => {
+                                            setValueRating(newValue);
+                                        }}
+                                    />
+                                </Box>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                )
+            })}
+        </Grid>)
         : (
-            <>
-                {arraySkeleton.map(item => {
+            <Grid container spacing={4}>
+                {arraySkeleton.map((item, index) => {
                     return (
-                        <Grid item xs={3} >
+                        <Grid item xs={3} key={index} >
                             <Stack spacing={3}>
                                 <Skeleton variant="text" />
                                 <Skeleton variant="circular" width={40} height={40} />
@@ -79,7 +81,7 @@ export default function Products() {
                         </Grid>
                     )
                 })}
-            </>
+            </Grid>
         )
     //rating
 
@@ -89,22 +91,21 @@ export default function Products() {
             <Typography sx={{ marginBottom: '1rem' }} color="text.secondary">
                 {listProducts.length} Results
             </Typography>
-            <Grid container spacing={4}>
+            <Box>
                 {
                     !errorListProducts ?
                         (
                             <>
                                 {renderList}
+                                <Box>dsdsds</Box>
                             </>
                         ) :
                         (<Grid item xs={12}>
                             No Product!
                         </Grid>)
                 }
-
-            </Grid>
+            </Box>
         </Box>
-
     )
 }
 

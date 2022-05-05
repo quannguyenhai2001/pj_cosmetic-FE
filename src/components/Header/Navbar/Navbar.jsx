@@ -22,7 +22,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { deleteUserDetail } from 'slices/UserSlice';
 import Cart from './components/Cart/Cart';
-
+import logo from '../../../assets/logo/logo_web.png';
 //hide and show navbar
 function HideOnScroll(props) {
     const { children, window } = props;
@@ -113,8 +113,8 @@ export default function NavBar(props) {
             <HideOnScroll {...props}>
                 <AppBar className={classes.rootAppBarTop} elevation={0}>
                     <Toolbar className={classes.rootToolBar}>
-                        <Box component={Link} to="/" sx={{ width: "15rem", height: "3rem", marginRight: 4 }}>
-                            <img style={{ width: "100%", height: "100%" }} src="https://www.sephora.com/img/ufe/logo.svg" alt="green iguana" />
+                        <Box component={Link} to="/" sx={{ width: "15rem", height: "2.8rem", marginRight: 4 }}>
+                            <img style={{ width: "100%", height: "100%" }} src={logo} alt="green iguana" />
                         </Box>
 
                         <TextField onChange={handleChangeSearch} onKeyDown={handleKeyDownSearch}
@@ -186,16 +186,16 @@ export default function NavBar(props) {
                                     title={
                                         <>
                                             <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-                                                <ListItem className={classes.rootListItem}>
+                                                <ListItem className={classes.rootListItem} disablePadding>
                                                     <Box sx={{ marginRight: 1 }}>
                                                         <AccountCircleIcon />
                                                     </Box>
-                                                    <Typography component={Link} to={`/user/${user.id}`}>
+                                                    <Typography component={Link} to={`/user/${user.id}`} sx={{ transform: 'translateY(-1px)' }}>
                                                         Profile
                                                     </Typography>
                                                 </ListItem>
-                                                <Divider />
-                                                <ListItem className={classes.rootListItem} onClick={logOutHandle}>
+                                                <Divider sx={{ margin: '0.5rem 0' }} />
+                                                <ListItem className={classes.rootListItem} onClick={logOutHandle} disablePadding>
                                                     <Box sx={{ marginRight: 1 }}>
                                                         <LogoutIcon />
                                                     </Box>
@@ -219,7 +219,7 @@ export default function NavBar(props) {
                                     size="medium"
                                     sx={{ "&:hover": { color: "blue" }, margin: "0 0 0 4rem" }}
                                 >
-                                    <Badge badgeContent={2} color="primary">
+                                    <Badge badgeContent={0} color="primary">
                                         <FavoriteBorderIcon />
                                     </Badge>
                                 </IconButton>

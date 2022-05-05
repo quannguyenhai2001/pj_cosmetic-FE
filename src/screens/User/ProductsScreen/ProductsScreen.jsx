@@ -28,7 +28,7 @@ const ProductsScreen = () => {
 
     //get manu and list product
     useEffect(() => {
-        dispatch(fetchAsyncGetListProductByChidCategories({ id: params.categoryId }))
+        // dispatch(fetchAsyncGetListProductByChidCategories({ id: params.categoryId }))
         dispatch(fetchAsyncGetManu())
         return () => {
             dispatch(deleteListProducts());

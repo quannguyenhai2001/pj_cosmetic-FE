@@ -19,6 +19,7 @@ export default makeStyles((theme) => ({
         right: 0,
         textAlign: "center",
         zIndex: "3000",
+        transition: "all 0.3s ease-in-out",
         width: '41.7rem',
         '& $cartButtonOrder': {
             height: 50,

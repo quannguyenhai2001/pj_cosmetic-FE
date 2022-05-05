@@ -161,12 +161,12 @@ const productSlice = createSlice({
         },
         //get list products by child categories
         [fetchAsyncGetListProductByChidCategories.fulfilled]: (state, action) => {
-            state.errorListProducts = false
+
             state.listProducts = action.payload
             // console.log(action.payload)
         },
         [fetchAsyncGetListProductByChidCategories.rejected]: (state, action) => {
-            state.errorListProducts = true
+
         },
         //get detail product
         [fetchAsyncGetDetailProduct.fulfilled]: (state, action) => {
@@ -210,10 +210,12 @@ const productSlice = createSlice({
         //filter product
         [fetchAsyncFilterProduct.fulfilled]: (state, action) => {
             state.listProducts = action.payload
-            console.log(action.payload)
+            state.errorListProducts = false
+            // console.log(action.payload)
         },
         [fetchAsyncFilterProduct.rejected]: (state, action) => {
-            console.log(action.payload)
+            state.errorListProducts = true
+            // console.log(action.payload)
         },
         //test
         [fetchAsyncTestFile.fulfilled]: (state, action) => {

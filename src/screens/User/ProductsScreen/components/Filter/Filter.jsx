@@ -98,18 +98,16 @@ const Filter = () => {
         }
         return () => {
             dispatch(deleteListProducts());
-            console.log("unmount filter")
+            // console.log("unmount filter")
 
         }
     }, [valueIdManu, checkedSale, dispatch, params.categoryId, valuePrice]);
     React.useEffect(() => {
-
         setValueIdManu('');
         setValueIndex('');
         setCheckedManu(false);
         setCheckedSale(false);
         setValuePrice([0, 1000]);
-        console.log("unmount filter 1")
     }, [params.categoryId]);
     return (
         <Box>
