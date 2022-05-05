@@ -29,7 +29,6 @@ export default makeStyles((theme) => ({
 
     },
 
-
     rootCardMedia: {
         '&.MuiCardMedia-root': {
             transition: '0.3s',
@@ -47,6 +46,10 @@ export default makeStyles((theme) => ({
         padding: '5px 10px',
         fontSize: '12px',
         fontWeight: 'bold',
-    }
+    },
 
+    //pagination
+    stackPagination: {
+        alignItems: 'center',
+    }
 }));

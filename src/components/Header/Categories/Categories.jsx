@@ -50,7 +50,7 @@ export default function Categories(props) {
                     <Grid container spacing={3}>
                         {category.listChildCategories ? category.listChildCategories.map((childCategory, index) => {
                             return (
-                                <Grid item xs={3} key={index}>
+                                <Grid item xs={3} key={index} sx={{ textAlign: 'center' }}>
                                     <Box className={classes.boxEachChildCate} onClick={handleHiddenNav}>
                                         <Typography component={Link} to={`/products/${childCategory.id}`} className={classes.eachChildCate}> {childCategory.name}</Typography>
                                     </Box>
@@ -77,6 +77,9 @@ export default function Categories(props) {
                                 {listNav}
                                 <li>
                                     Blogs
+                                </li>
+                                <li>
+                                    About us
                                 </li>
                                 <li>
                                     About us

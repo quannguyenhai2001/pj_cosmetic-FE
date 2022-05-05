@@ -21,6 +21,7 @@ export default makeStyles((theme) => ({
     },
     primaryCategories: {
         '&:hover': {
+            color: '#e3eefa',
             '& $secondaryCategories': {
                 visibility: 'visible',
                 opacity: 1,
@@ -97,7 +98,7 @@ export default makeStyles((theme) => ({
             right: '0',
             height: '2px',
             backgroundColor: '#1976d2',
-            transformOrigin: 'bottom right',
+            transformOrigin: '50% 50%',
             transform: 'scaleX(0)',
             transition: 'transform 0.5s ease',
         },
@@ -108,4 +109,5 @@ export default makeStyles((theme) => ({
             }
         }
     }
+
 }));

@@ -4,7 +4,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { useSelector } from 'react-redux';
-import { Box, Grid, Skeleton, Stack } from '@mui/material';
+import { Box, Grid, Pagination, Skeleton, Stack } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import useStyles from './styles';
 import Rating from '@mui/material/Rating';
@@ -74,9 +74,10 @@ export default function Products() {
                     return (
                         <Grid item xs={3} key={index} >
                             <Stack spacing={3}>
+                                <Skeleton variant="rectangular" width="100%" height={220} />
                                 <Skeleton variant="text" />
-                                <Skeleton variant="circular" width={40} height={40} />
-                                <Skeleton variant="rectangular" width="100%" height={118} />
+                                <Skeleton variant="text" />
+                                <Skeleton variant="text" />
                             </Stack>
                         </Grid>
                     )
@@ -97,7 +98,11 @@ export default function Products() {
                         (
                             <>
                                 {renderList}
-                                <Box>dsdsds</Box>
+                                <Box sx={{ margin: '5rem 0', textAlign: 'center' }}>
+                                    <Stack spacing={2} className={classes.stackPagination}>
+                                        <Pagination count={10} color="primary" size="large" shape="rounded" variant="outlined" />
+                                    </Stack>
+                                </Box>
                             </>
                         ) :
                         (<Grid item xs={12}>

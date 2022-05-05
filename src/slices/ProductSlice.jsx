@@ -14,17 +14,6 @@ export const fetchAsyncGetManu = createAsyncThunk(
     }
 );
 
-export const fetchAsyncGetListProductByChidCategories = createAsyncThunk(
-    "product/fetchAsyncGetListProductByChidCategories",
-    async (arg, { rejectWithValue }) => {
-        try {
-            const response = await CallApiByParams("products/get-products-by-chid-categories.php", "get", arg)
-            return response.data
-        } catch (error) {
-            return rejectWithValue(error.response.data)
-        }
-    }
-);
 
 export const fetchAsyncGetDetailProduct = createAsyncThunk(
     "product/fetchAsyncGetDetailProduct",
@@ -78,7 +67,7 @@ export const fetchAsyncSearchProducts = createAsyncThunk(
     "product/fetchAsyncSearchProducts",
     async (arg, { rejectWithValue }) => {
         try {
-            const response = await CallApiByParams("products/search-product-by-key.php", "get", arg)
+            const response = await CallApiByParams("products/filter-product.php", "get", arg)
             return response.data
         } catch (error) {
             return rejectWithValue(error.response.data)
@@ -159,15 +148,6 @@ const productSlice = createSlice({
         [fetchAsyncGetManu.rejected]: (state, action) => {
             console.log(action.payload)
         },
-        //get list products by child categories
-        [fetchAsyncGetListProductByChidCategories.fulfilled]: (state, action) => {
-
-            state.listProducts = action.payload
-            // console.log(action.payload)
-        },
-        [fetchAsyncGetListProductByChidCategories.rejected]: (state, action) => {
-
-        },
         //get detail product
         [fetchAsyncGetDetailProduct.fulfilled]: (state, action) => {
             state.detailProduct = action.payload
@@ -201,7 +181,7 @@ const productSlice = createSlice({
         },
         //search product
         [fetchAsyncSearchProducts.fulfilled]: (state, action) => {
-            state.ListProductsBySearch = action.payload
+            state.ListProductsBySearch = action.payload.data
             console.log(action.payload)
         },
         [fetchAsyncSearchProducts.rejected]: (state, action) => {
@@ -217,6 +197,11 @@ const productSlice = createSlice({
             state.errorListProducts = true
             // console.log(action.payload)
         },
+
+
+
+
+
         //test
         [fetchAsyncTestFile.fulfilled]: (state, action) => {
             console.log(action.payload)

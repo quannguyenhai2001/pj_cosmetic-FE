@@ -11,8 +11,8 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteListProducts, deleteLErrorListProducts, fetchAsyncFilterProduct } from 'slices/ProductSlice';
-import { useParams } from 'react-router-dom';
+import { deleteListProducts, fetchAsyncFilterProduct } from 'slices/ProductSlice';
+import { useNavigate, useParams } from 'react-router-dom';
 
 //price
 function valuetext(value) {
@@ -21,13 +21,18 @@ function valuetext(value) {
 const Filter = () => {
     const classes = useStyles();
     const listManu = useSelector(state => state.product.listManufacturers);
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const params = useParams();
+
     //filter price
     const [valuePrice, setValuePrice] = React.useState([0, 1000]);
+    const [isCheckChangePrice, setIsCheckChangePrice] = React.useState(false);
     const handleChangePrice = (event, newValue) => {
         setValuePrice(newValue);
-        console.log(45454)
+        setIsCheckChangePrice(true);
+        console.log("dfdfd")
+
     };
 
     //filter manu
@@ -56,15 +61,25 @@ const Filter = () => {
 
     //call api
     React.useEffect(() => {
-        if (valueIdManu && !checkedSale) {
+        if (valueIdManu && !checkedSale && !isCheckChangePrice) {
             dispatch(fetchAsyncFilterProduct(
                 {
                     cate_Id: params.categoryId,
                     manu_Id: valueIdManu,
 
                 }))
+            navigate('/products/' + params.categoryId + '?manu_id=' + valueIdManu)
         }
-        else if (valueIdManu && checkedSale) {
+        else if (!valueIdManu && checkedSale && !isCheckChangePrice) {
+            dispatch(fetchAsyncFilterProduct(
+                {
+                    cate_Id: params.categoryId,
+                    promotion: true,
+
+                }))
+            navigate('/products/' + params.categoryId + '?promotion=' + true)
+        }
+        else if (valueIdManu && checkedSale && !isCheckChangePrice) {
             dispatch(fetchAsyncFilterProduct(
                 {
                     cate_Id: params.categoryId,
@@ -72,24 +87,30 @@ const Filter = () => {
                     promotion: true,
 
                 }))
+            navigate('/products/' + params.categoryId + '?manu_id=' + valueIdManu + '&promotion=' + true)
         }
-        else if (!valueIdManu && checkedSale) {
+
+        else if (valueIdManu && checkedSale && valuePrice && isCheckChangePrice) {
             dispatch(fetchAsyncFilterProduct(
                 {
                     cate_Id: params.categoryId,
                     promotion: true,
+                    price: valuePrice,
+                    manu_Id: valueIdManu,
 
                 }))
+            navigate('/products/' + params.categoryId + '?manu_id=' + valueIdManu + '&price[]=' + valuePrice[0] + '&price[]=' + valuePrice[1] + '&promotion=' + true)
         }
-        // if (valueIdManu && checkedSale && valuePrice) {
-        //     dispatch(fetchAsyncFilterProduct(
-        //         {
-        //             cate_Id: params.categoryId,
-        //             promotion: true,
-        //             price: valuePrice,
+        else if (!valueIdManu && checkedSale && valuePrice && isCheckChangePrice) {
+            dispatch(fetchAsyncFilterProduct(
+                {
+                    cate_Id: params.categoryId,
+                    promotion: true,
+                    price: valuePrice,
 
-        //         }))
-        // }
+                }))
+            navigate('/products/' + params.categoryId + '?price[]=' + valuePrice[0] + '&price[]=' + valuePrice[1] + '&promotion=' + true)
+        }
         else {
             dispatch(fetchAsyncFilterProduct(
                 {
@@ -101,7 +122,8 @@ const Filter = () => {
             // console.log("unmount filter")
 
         }
-    }, [valueIdManu, checkedSale, dispatch, params.categoryId, valuePrice]);
+    }, [valueIdManu, checkedSale, dispatch, params.categoryId, valuePrice, isCheckChangePrice]);
+
     React.useEffect(() => {
         setValueIdManu('');
         setValueIndex('');

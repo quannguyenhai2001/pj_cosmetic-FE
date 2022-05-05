@@ -5,8 +5,9 @@ export default makeStyles((theme) => ({
     cartDrawer: {
         '& .MuiDrawer-paper': {
             width: '41.7rem',
-            height: 'calc(100vh - 50px)',
+            height: '100vh',
             paddingRight: '6rem',
+            paddingBottom: '5rem',
         },
         '& .MuiPaper-root': {
             overflowX: 'hidden',
@@ -21,13 +22,12 @@ export default makeStyles((theme) => ({
         zIndex: "3000",
         transition: "all 0.3s ease-in-out",
         width: '41.7rem',
-        '& $cartButtonOrder': {
-            height: 50,
-        }
+
 
     },
     cartButtonOrder: {
-
+        height: 50,
+        borderRadius: 0
     },
     rootCartContent: {
 
