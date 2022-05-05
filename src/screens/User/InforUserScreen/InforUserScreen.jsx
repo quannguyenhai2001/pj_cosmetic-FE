@@ -1,5 +1,6 @@
 import { Box, Divider, Typography } from '@mui/material';
 import React from 'react';
+import FormInfor from './components/FormInfor/FormInfor';
 
 const InforUserScreen = () => {
     return (
@@ -11,6 +12,7 @@ const InforUserScreen = () => {
                 <Typography>Manage profile information for account security</Typography>
             </Box>
             <Divider />
+            <FormInfor />
         </Box>
     );
 };

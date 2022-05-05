@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 const ListProducts = () => {
     const classes = useStyles();
     const navigate = useNavigate();
-    const searchListProducts = useSelector(state => state.product.searchListProducts);
+    const ListProductsBySearch = useSelector(state => state.product.ListProductsBySearch);
     //rating
     const [valueRating, setValueRating] = React.useState(2);
     //navigate
@@ -20,8 +20,8 @@ const ListProducts = () => {
     }
     return (
         <Grid container spacing={4}>
-            {searchListProducts.length > 0 ?
-                (searchListProducts.map((product, index) => {
+            {ListProductsBySearch.length > 0 ?
+                (ListProductsBySearch.map((product, index) => {
                     return (
                         <Grid item xs={2} key={index}>
                             <Card className={classes.rootCard} onClick={() => { handleClick(product.id) }}>

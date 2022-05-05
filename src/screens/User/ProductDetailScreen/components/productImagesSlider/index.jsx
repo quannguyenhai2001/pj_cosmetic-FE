@@ -6,7 +6,17 @@ import { useState } from 'react'
 
 const ProductImagesSlider = props => {
     const [activeThumb, setActiveThumb] = useState()
+    // state = {
+    //     backgroundImage: `url(${src})`,
+    //     backgroundPosition: '0% 0%'
+    // }
 
+    // const handleMouseMove = e => {
+    //     const { left, top, width, height } = e.target.getBoundingClientRect()
+    //     const x = (e.pageX - left) / width * 100
+    //     const y = (e.pageY - top) / height * 100
+    //     this.setState({ backgroundPosition: `${x}% ${y}%` })
+    // }
     return <>
         <Swiper
             loop={true}
@@ -29,7 +39,7 @@ const ProductImagesSlider = props => {
             onSwiper={setActiveThumb}
             loop={true}
             spaceBetween={10}
-            slidesPerView={8}
+            slidesPerView={6}
             modules={[Navigation, Thumbs]}
             className='product-images-slider-thumbs'
         >

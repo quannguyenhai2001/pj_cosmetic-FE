@@ -8,7 +8,7 @@ import store from 'store/RootReducer';
 
 const theme = createTheme({
   typography: {
-    fontSize: 20,
+    fontSize: 19,
   },
 });
 

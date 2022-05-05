@@ -17,9 +17,8 @@ export default function Categories(props) {
     React.useEffect(() => {
         let getAllCategories = async () => {
             try {
-                let reponse = await CallApiByBody("categories/get-all-categories.php", "get", null);
-                dispatch(setListCategories(ListCategories(reponse.data.data)));
-
+                let response = await CallApiByBody("categories/get-all-categories.php", "get", null);
+                dispatch(setListCategories(ListCategories(response.data.data)));
             }
             catch (e) {
                 console.log(e);
@@ -28,7 +27,6 @@ export default function Categories(props) {
         getAllCategories();
     }, [dispatch]);
 
-    console.log(listCategories)
 
 
     // list categories render

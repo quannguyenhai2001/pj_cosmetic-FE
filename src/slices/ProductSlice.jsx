@@ -13,6 +13,7 @@ export const fetchAsyncGetManu = createAsyncThunk(
         }
     }
 );
+
 export const fetchAsyncGetListProductByChidCategories = createAsyncThunk(
     "product/fetchAsyncGetListProductByChidCategories",
     async (arg, { rejectWithValue }) => {
@@ -98,6 +99,20 @@ export const fetchAsyncFilterProduct = createAsyncThunk(
     }
 );
 
+
+//filter
+export const fetchAsyncTestFile = createAsyncThunk(
+    "product/fetchAsyncTestFile",
+    async (arg, { rejectWithValue }) => {
+        try {
+            const response = await CallApiByBody("thungrac/test-cloudinary.php", "post", arg)
+            return response.data
+        } catch (error) {
+            return rejectWithValue(error.response.data)
+        }
+    }
+);
+
 const productSlice = createSlice({
     name: 'product',
     initialState: {
@@ -108,10 +123,11 @@ const productSlice = createSlice({
         listProductInCart: [],
 
         //header > nav > search
-        searchListProducts: [],
+        ListProductsBySearch: [],
 
         //screen products
         listProducts: [],
+        errorListProducts: false,
         listManufacturers: [],
 
         //screen detail product
@@ -126,6 +142,9 @@ const productSlice = createSlice({
         },
         deleteListProducts: (state, action) => {
             state.listProducts = []
+        },
+        deleteLErrorListProducts: (state, action) => {
+            state.listProducts = false
         },
         deleteSearchListProducts: (state, action) => {
             state.searchListProducts = []
@@ -142,11 +161,12 @@ const productSlice = createSlice({
         },
         //get list products by child categories
         [fetchAsyncGetListProductByChidCategories.fulfilled]: (state, action) => {
+            state.errorListProducts = false
             state.listProducts = action.payload
             // console.log(action.payload)
         },
         [fetchAsyncGetListProductByChidCategories.rejected]: (state, action) => {
-            console.log(action.payload)
+            state.errorListProducts = true
         },
         //get detail product
         [fetchAsyncGetDetailProduct.fulfilled]: (state, action) => {
@@ -181,11 +201,11 @@ const productSlice = createSlice({
         },
         //search product
         [fetchAsyncSearchProducts.fulfilled]: (state, action) => {
-            state.searchListProducts = action.payload
+            state.ListProductsBySearch = action.payload
             console.log(action.payload)
         },
         [fetchAsyncSearchProducts.rejected]: (state, action) => {
-            state.searchListProducts = []
+            state.ListProductsBySearch = []
         },
         //filter product
         [fetchAsyncFilterProduct.fulfilled]: (state, action) => {
@@ -195,9 +215,16 @@ const productSlice = createSlice({
         [fetchAsyncFilterProduct.rejected]: (state, action) => {
             console.log(action.payload)
         },
+        //test
+        [fetchAsyncTestFile.fulfilled]: (state, action) => {
+            console.log(action.payload)
+        },
+        [fetchAsyncTestFile.rejected]: (state, action) => {
+            console.log(action.payload)
+        },
     }
 })
 const { reducer, actions } = productSlice
-export const { setListCategories, deleteListProducts, deleteSearchListProducts } = actions
+export const { setListCategories, deleteListProducts, deleteLErrorListProducts, deleteSearchListProducts } = actions
 export default reducer
 

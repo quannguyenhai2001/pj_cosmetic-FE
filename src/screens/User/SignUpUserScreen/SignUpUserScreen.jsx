@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Container, Grid, Paper, Typography } from '@mui/material'
+import { Avatar, Button, Container, Grid, Paper, Typography } from '@mui/material'
 import React, { useState } from 'react';
 import * as Yup from 'yup';
 import useStyles from './styles'
@@ -65,7 +65,7 @@ const SignUpUserScreen = () => {
     })
 
 
-    const onSubmit = (values) => {
+    const onSubmit = async (values) => {
         let objValues = { ...values }
         delete objValues['firstName']
         delete objValues['lastName']
@@ -79,6 +79,18 @@ const SignUpUserScreen = () => {
         }).catch(err => {
             setError(err)
         })
+        // try {
+        //     const response = await fetch('https://cometicv1.000webhostapp.com/auth/sign-up.php', {
+        //         method: 'GET', // or 'PUT'
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //         },
+        //         params: JSON.stringify(userData),
+        //     })
+        //     console.log(response.json());
+        // } catch (error) {
+        //     return console.log(error.response)
+        // }
     }
 
 

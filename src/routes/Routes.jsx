@@ -22,6 +22,7 @@ import SearchScreen from "screens/User/SearchScreen/SearchScreen";
 import ChangePasswordScreen from "screens/User/ChangePasswordScreen/ChangePasswordScreen";
 import OrderUserScreen from "screens/User/OrderUserScreen/OrderUserScreen";
 import DeleteAccountUserScreen from "screens/User/DeleteAccountUserScreen/DeleteAccountUserScreen";
+import TestScreen1 from "screens/User/TestScreen1/TestScreen1";
 
 
 
@@ -36,7 +37,7 @@ const RouteConfigs = [
     },
     {
         path: "/test",
-        element: TestScreen,
+        element: TestScreen1,
         isPrivate: false,
         layout: React.Fragment,
         isScreenAdmin: false,
@@ -161,6 +162,12 @@ const RouteConfigs = [
 ]
 function PrivateRouter() {
     const userType = useSelector(state => state.user.userDetail.role);
+    const [isRole, setIsRole] = React.useState(false);
+    React.useEffect(() => {
+        if (userType) {
+            setIsRole(true)
+        }
+    }, [userType])
     const jwtToken = localStorage.getItem("token");
     return RouteConfigs.map((route, index) => {
         if ((!route.isPrivate || (route.isPrivate && jwtToken && route.isScreenAdmin === false && userType === "user")) || (route.isPrivate && jwtToken && route.isScreenAdmin === true && userType === "admin")) {
@@ -173,13 +180,15 @@ function PrivateRouter() {
             })()}
             />
         }
-        else if (route.isPrivate && !jwtToken && route.isScreenAdmin === false) {
-            return <Route key={index} path={route.path} element={<Navigate to="/sign-in" />} />
-        } else if (route.isPrivate && !jwtToken && route.isScreenAdmin === true) {
-            return <Route key={index} path={route.path} element={<Navigate to="/admin" />} />
-        }
-        else {
-            return <Route key={index} path={route.path} element={<Navigate to="/" />} />
+        else if (isRole) {
+            if (route.isPrivate && !jwtToken && route.isScreenAdmin === false) {
+                return <Route key={index} path={route.path} element={<Navigate to="/sign-in" />} />
+            } else if (route.isPrivate && !jwtToken && route.isScreenAdmin === true) {
+                return <Route key={index} path={route.path} element={<Navigate to="/admin" />} />
+            }
+            else {
+                return <Route key={index} path={route.path} element={<Navigate to="/" />} />
+            }
         }
     })
 }

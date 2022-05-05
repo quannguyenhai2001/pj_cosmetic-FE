@@ -16,11 +16,8 @@ function App() {
     const token = localStorage.getItem('token')
     if (token) {
       dispatch(fetchAsyncGetUser())
-      dispatch(fetchAsyncGetListProductInCart())
-
     }
   }, [dispatch])
-  console.log(process.env.REACT_APP_URL_FILE_UPLOAD_AVATAR)
   return (
     <div>
       <Routers />

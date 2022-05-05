@@ -1,33 +1,17 @@
 import * as React from 'react';
 import useStyles from './styles';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import useScrollTrigger from '@mui/material/useScrollTrigger';
 import Box from '@mui/material/Box';
-import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
-import Slide from '@mui/material/Slide';
-import { styled } from '@mui/material/styles';
-import { Badge, Button, CardMedia, Container, Divider, Drawer, Grid, IconButton, TextField, Tooltip, tooltipClasses, Typography } from '@mui/material';
-import ContactMailOutlinedIcon from '@mui/icons-material/ContactMailOutlined';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { Badge, Button, CardMedia, Drawer, Grid, IconButton, Typography, Stack } from '@mui/material';
 import ShoppingBasketOutlinedIcon from '@mui/icons-material/ShoppingBasketOutlined';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import Avatar from '@mui/material/Avatar';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import PeopleIcon from '@mui/icons-material/People';
-import StoreIcon from '@mui/icons-material/Store';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import LogoutIcon from '@mui/icons-material/Logout';
-import { deleteUserDetail } from 'slices/UserSlice';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { productImages } from 'assets/img/imgProductDetail';
-
+import DeleteIcon from '@mui/icons-material/Delete';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
-import { fetchAsyncDecreaseQuantityProduct } from 'slices/ProductSlice';
+import { fetchAsyncDecreaseQuantityProduct, fetchAsyncGetListProductInCart } from 'slices/ProductSlice';
 
 const Cart = () => {
     const dispatch = useDispatch();
@@ -35,6 +19,9 @@ const Cart = () => {
     const listProductInCart = useSelector(state => state.product.listProductInCart);
     const classes = useStyles();
     //cart
+    React.useEffect(() => {
+        dispatch(fetchAsyncGetListProductInCart())
+    }, [dispatch])
     const [state, setState] = React.useState(false);
     const toggleDrawer = (open) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -60,24 +47,43 @@ const Cart = () => {
                                     component="img"
                                     sx={{ width: '100%', height: '100%' }}
                                     image={productImages[0]}
-                                    alt="Live from space album cover"
+                                    alt="product"
                                 />
                             </Grid>
                             <Grid item xs={9}>
-                                <CardContent>
-                                    <Typography gutterBottom>
+                                <CardContent className={classes.rootCartContent}>
+
+                                    <Typography noWrap gutterBottom>
                                         {item.product.productsName}
                                     </Typography>
-                                    <Typography variant="body2" color="textSecondary" component="span" sx={{ marginRight: '2rem' }}>
-                                        Price: ${item.product.price}
-                                    </Typography>
-                                    <Typography variant="body2" color="textSecondary" component="span">
-                                        Sale: {item.product.promotion * 100}%
-                                    </Typography>
+                                    <Box sx={{ display: 'flex', margin: '1rem 0' }}>
+                                        <Typography variant="body2" color="textSecondary" sx={{ marginRight: '2rem' }}>
+                                            Price: ${item.product.price}
+                                        </Typography>
+                                        <Typography variant="body2" color="textSecondary" >
+                                            Sale: {item.product.promotion * 100}%
+                                        </Typography>
+                                    </Box>
+                                    <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
+                                        <Box>
+                                            <Stack direction="row" alignItems="center" spacing={1}>
+                                                <IconButton aria-label="delete" size="small">
+                                                    <RemoveIcon fontSize="inherit" />
+                                                </IconButton>
+                                                <Typography>{item.quantity}</Typography>
+                                                <IconButton aria-label="delete" size="small">
+                                                    <AddIcon fontSize="inherit" />
+                                                </IconButton>
+                                            </Stack>
+                                        </Box>
+                                        <IconButton aria-label="delete" size="small" sx={{ transformX: '2rem' }}>
+                                            <DeleteIcon fontSize="inherit" />
+                                        </IconButton>
+                                    </Stack>
+
                                 </CardContent>
-                                <Button variant="outlined" startIcon={<RemoveIcon onClick={() => handleClickDecrease(item.id)} />} endIcon={<AddIcon onClick={handleClickIncrease} />}>
-                                    {item.quantity}
-                                </Button>
+
+
                             </Grid>
                         </Grid>
                     </Card>

@@ -3,10 +3,14 @@ import { makeStyles } from '@mui/styles';
 export default makeStyles((theme) => ({
     //cart
     cartDrawer: {
-
+        '& .MuiDrawer-paper': {
+            width: '41.7rem',
+            height: 'calc(100vh - 50px)',
+            paddingRight: '6rem',
+        },
         '& .MuiPaper-root': {
-            width: '41.7rem'
-
+            overflowX: 'hidden',
+            overflowY: 'auto',
         }
     },
     cartDivButton: {
@@ -24,8 +28,18 @@ export default makeStyles((theme) => ({
     cartButtonOrder: {
 
     },
+    rootCartContent: {
+
+        '& .MuiCardContent-root': {
+            '&:last-child': {
+                paddingBottom: 0
+            }
+        },
+        padding: '2.4rem 1rem',
+    },
     cartBox: {
-        width: '40rem',
+        minWidth: '41.7rem',
+
     },
     cartCard: {
         display: 'grid'

@@ -4,25 +4,33 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchAsyncAddProductToCart, fetchAsyncGetDetailProduct, fetchAsyncGetListProductInCart } from 'slices/ProductSlice';
-import ProductImagesSlider from './components/product-images-slider';
+import ProductImagesSlider from './components/productImagesSlider';
 
 const ProductDetailScreen = () => {
     const dispatch = useDispatch();
     const detailProduct = useSelector(state => state.product.detailProduct);
+    const listProductInCart = useSelector(state => state.product.listProductInCart);
     const params = useParams();
     const { id } = params;
     useEffect(() => {
         dispatch(fetchAsyncGetDetailProduct({ id }));
     }, [dispatch, id]);
-
-    const handleAddProduct = () => {
-        dispatch(fetchAsyncAddProductToCart({ id })).unwrap().then(() => {
-            dispatch(fetchAsyncGetListProductInCart());
-        }).catch(err => {
-            console.log(err);
-        })
+    const compare = (value1) => {
+        return JSON.stringify(value1) === JSON.stringify(detailProduct)
     }
+    const handleAddProduct = () => {
 
+        if (!listProductInCart.some(compare)) {
+            dispatch(fetchAsyncAddProductToCart({ id })).unwrap().then(() => {
+                dispatch(fetchAsyncGetListProductInCart());
+            }).catch(err => {
+                console.log(err);
+            })
+        } else {
+            Window.alert('Sản phẩm đã có trong giỏ hàng');
+        }
+    }
+    console.log({ detailProduct, listProductInCart });
     return (
         <Container maxWidth='xl' sx={{ height: 'fit-content' }}>
             <Typography>Title</Typography>

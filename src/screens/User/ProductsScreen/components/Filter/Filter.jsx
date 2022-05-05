@@ -11,7 +11,7 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAsyncFilterProduct } from 'slices/ProductSlice';
+import { deleteListProducts, deleteLErrorListProducts, fetchAsyncFilterProduct } from 'slices/ProductSlice';
 import { useParams } from 'react-router-dom';
 
 //price
@@ -24,9 +24,10 @@ const Filter = () => {
     const dispatch = useDispatch();
     const params = useParams();
     //filter price
-    const [valuePrice, setValuePrice] = React.useState([0, 300]);
+    const [valuePrice, setValuePrice] = React.useState([0, 1000]);
     const handleChangePrice = (event, newValue) => {
         setValuePrice(newValue);
+        console.log(45454)
     };
 
     //filter manu
@@ -52,6 +53,8 @@ const Filter = () => {
         setCheckedSale(event.target.checked);
 
     };
+
+    //call api
     React.useEffect(() => {
         if (valueIdManu && !checkedSale) {
             dispatch(fetchAsyncFilterProduct(
@@ -70,16 +73,44 @@ const Filter = () => {
 
                 }))
         }
+        else if (!valueIdManu && checkedSale) {
+            dispatch(fetchAsyncFilterProduct(
+                {
+                    cate_Id: params.categoryId,
+                    promotion: true,
+
+                }))
+        }
+        // if (valueIdManu && checkedSale && valuePrice) {
+        //     dispatch(fetchAsyncFilterProduct(
+        //         {
+        //             cate_Id: params.categoryId,
+        //             promotion: true,
+        //             price: valuePrice,
+
+        //         }))
+        // }
         else {
             dispatch(fetchAsyncFilterProduct(
                 {
                     cate_Id: params.categoryId,
                 }))
         }
-        // return () => {
-        //     console.log('unmount filter');
-        // }
-    }, [valueIdManu, checkedSale, dispatch, params.categoryId]);
+        return () => {
+            dispatch(deleteListProducts());
+            console.log("unmount filter")
+
+        }
+    }, [valueIdManu, checkedSale, dispatch, params.categoryId, valuePrice]);
+    React.useEffect(() => {
+
+        setValueIdManu('');
+        setValueIndex('');
+        setCheckedManu(false);
+        setCheckedSale(false);
+        setValuePrice([0, 1000]);
+        console.log("unmount filter 1")
+    }, [params.categoryId]);
     return (
         <Box>
             <Typography variant="h6">Filter</Typography>
