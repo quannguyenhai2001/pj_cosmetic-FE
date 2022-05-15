@@ -2,6 +2,7 @@ import CallApiByBody from "common/ConfigApi/CallApiByBody";
 import CallApiByParams from "common/ConfigApi/CallApiByParams";
 const { createSlice, createAsyncThunk } = require("@reduxjs/toolkit");
 
+//manu
 export const fetchAsyncGetManu = createAsyncThunk(
     "product/fetchAsyncGetManu",
     async (arg, { rejectWithValue }) => {
@@ -14,7 +15,33 @@ export const fetchAsyncGetManu = createAsyncThunk(
     }
 );
 
+//search
+export const fetchAsyncSearchProducts = createAsyncThunk(
+    "product/fetchAsyncSearchProducts",
+    async (arg, { rejectWithValue }) => {
+        try {
+            const response = await CallApiByParams("products/get-products.php", "get", arg)
+            return response.data
+        } catch (error) {
+            return rejectWithValue(error.response.data)
+        }
+    }
+);
 
+//filter
+export const fetchAsyncFilterProduct = createAsyncThunk(
+    "product/fetchAsyncFilterProduct",
+    async (arg, { rejectWithValue }) => {
+        try {
+            const response = await CallApiByParams("products/get-products.php", "get", arg)
+            return response.data
+        } catch (error) {
+            return rejectWithValue(error.response.data)
+        }
+    }
+);
+
+//detail
 export const fetchAsyncGetDetailProduct = createAsyncThunk(
     "product/fetchAsyncGetDetailProduct",
     async (arg, { rejectWithValue }) => {
@@ -26,6 +53,31 @@ export const fetchAsyncGetDetailProduct = createAsyncThunk(
         }
     }
 );
+
+export const fetchAsyncGetListCommentByProduct = createAsyncThunk(
+    "product/fetchAsyncGetListCommentByProduct",
+    async (arg, { rejectWithValue }) => {
+        try {
+            const response = await CallApiByParams("comments/get-each-by-product.php", "get", arg)
+            return response.data
+        } catch (error) {
+            return rejectWithValue(error.response.data)
+        }
+    }
+);
+
+export const fetchAsyncUpdateComment = createAsyncThunk(
+    "product/fetchAsyncUpdateComment",
+    async (arg, { rejectWithValue }) => {
+        try {
+            const response = await CallApiByParams("comments/update-comment.php", "put", arg)
+            return response.data
+        } catch (error) {
+            return rejectWithValue(error.response.data)
+        }
+    }
+);
+
 
 //cart
 export const fetchAsyncGetListProductInCart = createAsyncThunk(
@@ -62,34 +114,10 @@ export const fetchAsyncDecreaseQuantityProduct = createAsyncThunk(
     }
 );
 
-//search
-export const fetchAsyncSearchProducts = createAsyncThunk(
-    "product/fetchAsyncSearchProducts",
-    async (arg, { rejectWithValue }) => {
-        try {
-            const response = await CallApiByParams("products/filter-product.php", "get", arg)
-            return response.data
-        } catch (error) {
-            return rejectWithValue(error.response.data)
-        }
-    }
-);
-
-//filter
-export const fetchAsyncFilterProduct = createAsyncThunk(
-    "product/fetchAsyncFilterProduct",
-    async (arg, { rejectWithValue }) => {
-        try {
-            const response = await CallApiByParams("products/filter-product.php", "get", arg)
-            return response.data
-        } catch (error) {
-            return rejectWithValue(error.response.data)
-        }
-    }
-);
 
 
-//filter
+
+//image
 export const fetchAsyncTestFile = createAsyncThunk(
     "product/fetchAsyncTestFile",
     async (arg, { rejectWithValue }) => {
@@ -119,8 +147,10 @@ const productSlice = createSlice({
         errorListProducts: false,
         listManufacturers: [],
 
+
         //screen detail product
         detailProduct: [],
+        listComments: [],
 
 
 
@@ -154,6 +184,25 @@ const productSlice = createSlice({
             console.log(action.payload)
         },
         [fetchAsyncGetDetailProduct.rejected]: (state, action) => {
+            console.log(action.payload)
+        },
+
+
+        //get comment by product
+        [fetchAsyncGetListCommentByProduct.fulfilled]: (state, action) => {
+            state.listComments = action.payload.data
+            console.log(action.payload.data)
+        },
+        [fetchAsyncGetListCommentByProduct.rejected]: (state, action) => {
+            console.log(action.payload)
+        },
+        //update comment
+
+        [fetchAsyncUpdateComment.fulfilled]: (state, action) => {
+            state.listComments = action.payload.data
+            console.log(action.payload.data)
+        },
+        [fetchAsyncUpdateComment.rejected]: (state, action) => {
             console.log(action.payload)
         },
         //get list product in cart

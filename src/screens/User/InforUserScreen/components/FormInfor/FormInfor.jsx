@@ -1,171 +1,99 @@
-import { Avatar, Button, Container, Grid, Paper, Typography } from '@mui/material'
-import React, { useState } from 'react';
-import * as Yup from 'yup';
-import useStyles from './styles'
-import { FastField, Field, Form, Formik } from 'formik';
-import InputField from 'custom-fields/InputField/InputField';
-import CheckBoxField from 'custom-fields/CheckBoxField/CheckBoxField';
-import { useDispatch } from 'react-redux';
-import { fetchAsyncSignUp } from 'slices/UserSlice';
-import SelectField from 'custom-fields/SelectField/SelectField';
-import { useNavigate } from 'react-router-dom';
+import { Avatar, Box, Divider, Grid, TextField, Typography } from '@mui/material';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import useStyles from './styles';
+
+//create circle avatar
+function stringToColor(string) {
+    let hash = 0;
+    let i;
+
+    /* eslint-disable no-bitwise */
+    for (i = 0; i < string.length; i += 1) {
+        hash = string.charCodeAt(i) + ((hash << 5) - hash);
+    }
+
+    let color = '#';
+
+    for (i = 0; i < 3; i += 1) {
+        const value = (hash >> (i * 8)) & 0xff;
+        color += `00${value.toString(16)}`.slice(-2);
+    }
+    /* eslint-enable no-bitwise */
+
+    return color;
+}
+
+function stringAvatar(name) {
+    return {
+        sx: {
+            bgcolor: stringToColor(name),
+            width: '40px',
+            height: '40px',
+        },
+        children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+    };
+}
 
 const FormInfor = () => {
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
-    const classes = useStyles()
-    const [showPassword, setShowPassword] = useState(false)
-    const [error, setError] = useState('')
-
-    const changeError = (e) => {
-        setError('')
-    }
-
-    const handleShowPassword = () => {
-        setShowPassword(!showPassword)
-    }
-
-    const initialValues = {
-        displayName: '',
-        userName: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
-        sex: '',
-        phoneNumber: '',
-        address: '',
-        age: ''
-    }
-    const validationSchema = Yup.object().shape({
-        displayName: Yup.string().required('This field is required'),
-        userName: Yup.string()
-            .min(5, 'User name must be at least 5 characters')
-            .max(15, 'User name must be at most 15 characters')
-            .required('This field is required'),
-        email: Yup.string()
-            .email('Invalid email!')
-            .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, "Only alphabets are allowed for this field ")
-            .required('This field is required'),
-        password: Yup.string()
-            .min(5, 'Password must be at least 5 characters')
-            .max(15, 'Password must be at most 15 characters')
-            .required('This field is required'),
-        confirmPassword: Yup.string()
-            .oneOf(
-                [Yup.ref('password'), null],
-                "Password doesn't  match"
-            )
-            .required('This field is required'),
-        sex: Yup.string().required('This field is required'),
-        phoneNumber: Yup.string().required('This field is required'),
-        address: Yup.string().required('This field is required'),
-        age: Yup.number().required('This field is required'),
-    })
-
-
-    const onSubmit = (values) => {
-        let objValues = { ...values }
-        delete objValues['firstName']
-        delete objValues['lastName']
-        const displayName = `${values.firstName} ${values.lastName}`
-        const userData = {
-            displayName,
-            ...objValues
+    const classes = useStyles();
+    const userDetail = useSelector(state => state.user.userDetail);
+    const [valueArray, setValueArray] = React.useState({});
+    const [base64, setBase64] = React.useState('');
+    const changeHandle = (e) => {
+        function getBase64(file) {
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function () {
+                setBase64(reader.result);
+            };
+            reader.onerror = function (error) {
+                console.log('Error: ', error);
+            };
         }
-        dispatch(fetchAsyncSignUp(userData)).unwrap().then(() => {
-            navigate('/sign-in')
-        }).catch(err => {
-            setError(err)
-        })
+        console.log(e.target.files[0]);
+        getBase64(e.target.files[0]); // prints the base64 string
+
     }
-
-
+    console.log(userDetail);
     return (
-        <Formik
-            initialValues={initialValues}
-            validationSchema={validationSchema}
-            onSubmit={onSubmit}
-        >
-            {formikProps => {
-                // const { values, errors, touched, isSubmitting } = formikProps
-                // console.log({ touched, errors })
-                return (
-                    <Form className={classes.form}>
-
-                        <Grid container spacing={2}>
-
-                            <FastField
-                                name="firstName"
-                                component={InputField}
-                                label="First Name"
-                                half
-                                type="text"
-                            />
-
-                            <Field
-                                name="email"
-                                component={InputField}
-                                label="Email"
-                                type="email"
-                                error={error}
-                                changeError={changeError}
-                            />
-
-                            <Field
-                                name="password"
-                                component={InputField}
-                                label="Password"
-                                type={showPassword ? "text" : "password"} handleShowPassword={handleShowPassword}
-                            />
-                            <Field
-                                name="confirmPassword"
-                                component={InputField}
-                                label="Comfirm Password"
-                                type={showPassword ? "text" : "password"} handleShowPassword={handleShowPassword}
-                            />
-
-                            <Grid item xs={12} sm={12}>
-                                <Grid container>
-                                    <FastField
-                                        name="age"
-                                        component={SelectField}
-                                        label="Age"
-                                        half
-                                    />
-                                    <FastField
-                                        name="sex"
-                                        component={CheckBoxField}
-                                        label="Sex"
-                                        type="checkbox"
-                                        half
-                                    />
-                                </Grid>
-                            </Grid>
-
-                            <FastField
-                                name="phoneNumber"
-                                component={InputField}
-                                label="Phone Number"
-                                type="number"
-                            />
-
-                            <FastField
-                                name="address"
-                                component={InputField}
-                                label="Address"
-                                type="text"
-                            />
-                        </Grid>
-                        <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
-                            Sign Up
-                        </Button>
-
-
-
-                    </Form>
-                )
-            }}
-        </Formik >
+        <Box sx={{ padding: '2rem 0' }}>
+            <Grid container spacing={2}>
+                <Grid item xs={2}>
+                    <Box className={classes.Typo}>
+                        <Typography className={classes.rootTypo}>User name:</Typography>
+                        <Typography className={classes.rootTypo} >Display name:</Typography>
+                        <Typography className={classes.rootTypo}>Email:</Typography>
+                        <Typography className={classes.rootTypo}>Phone:</Typography>
+                        <Typography className={classes.rootTypo}>Sex:</Typography>
+                        <Typography className={classes.rootTypo}>Age:</Typography>
+                        <Typography className={classes.rootTypo}>Address:</Typography>
+                    </Box>
+                </Grid>
+                <Grid item xs={6}>
+                    <Typography className={classes.rootTyp1}>{userDetail.displayName}</Typography>
+                    <TextField className={classes.rootTextField} id="outlined-basic" variant="outlined" size="small" />
+                    <Typography >{userDetail.email}</Typography>
+                    <Typography className={classes.rootTyp1}>{userDetail.displayName}</Typography>
+                </Grid>
+                <Grid item xs={1}>
+                    <Box sx={{
+                        height: '100%',
+                        width: '1px',
+                        backgroundColor: '#f5f5f5',
+                    }}></Box>
+                </Grid>
+                <Grid item xs={3}>
+                    {base64 ? (
+                        <Avatar className={classes.rootAvatar} src={base64} />
+                    ) : (
+                        <Avatar className={classes.rootAvatar} {...stringAvatar(userDetail.displayName)} />
+                    )}
+                    <label className={classes.labelFile} htmlFor="upload-photo">Select file</label>
+                    <input type="file" className={classes.customFileInput} onChange={changeHandle} id="upload-photo" />
+                </Grid>
+            </Grid>
+        </Box>
     );
 };
 

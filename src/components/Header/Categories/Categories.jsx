@@ -33,14 +33,16 @@ export default function Categories(props) {
     //hidden nav
     const [isCheck, setIsCheck] = React.useState(false);
     const handleHiddenNav = () => {
-        setIsCheck(!isCheck);
+        setIsCheck(true);
     }
     //check if have param in url
     React.useEffect(() => {
         if (isCheck) {
-            setIsCheck(!isCheck)
+            setIsCheck(false)
+            console.log("fgfgf")
         }
     }, [params.categoryId, isCheck]);
+
     // list categories render
     const listNav = listCategories.map((category, index) => {
         return (
@@ -50,9 +52,11 @@ export default function Categories(props) {
                     <Grid container spacing={3}>
                         {category.listChildCategories ? category.listChildCategories.map((childCategory, index) => {
                             return (
-                                <Grid item xs={3} key={index} sx={{ textAlign: 'center' }}>
-                                    <Box className={classes.boxEachChildCate} onClick={handleHiddenNav}>
-                                        <Typography component={Link} to={`/products/${childCategory.id}`} className={classes.eachChildCate}> {childCategory.name}</Typography>
+                                <Grid item xs={3} key={index} >
+                                    <Box sx={{ display: 'grid', placeItems: 'center' }}>
+                                        <Box className={classes.boxEachChildCate} onClick={handleHiddenNav}>
+                                            <Typography component={Link} to={`/products/${childCategory.id}`} className={classes.eachChildCate}> {childCategory.name}</Typography>
+                                        </Box>
                                     </Box>
                                 </Grid>
 

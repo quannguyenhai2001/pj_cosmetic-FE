@@ -1,9 +1,11 @@
-import { Container, Typography, Grid, Button } from '@mui/material';
+import { Container, Typography, Grid, Button, Box } from '@mui/material';
 import { productImages } from 'assets/img/imgProductDetail';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { fetchAsyncAddProductToCart, fetchAsyncGetDetailProduct, fetchAsyncGetListProductInCart } from 'slices/ProductSlice';
+import { fetchAsyncAddProductToCart, fetchAsyncGetDetailProduct, fetchAsyncGetListCommentByProduct, fetchAsyncGetListProductInCart } from 'slices/ProductSlice';
+import CommentList from './components/CommentList/CommentList';
+import InpuntComment from './components/InpuntComment/InpuntComment';
 import ProductImagesSlider from './components/productImagesSlider';
 
 const ProductDetailScreen = () => {
@@ -14,7 +16,10 @@ const ProductDetailScreen = () => {
     const { id } = params;
     useEffect(() => {
         dispatch(fetchAsyncGetDetailProduct({ id }));
+        dispatch(fetchAsyncGetListCommentByProduct({ id }));
     }, [dispatch, id]);
+
+    //add product to cart
     const compare = (value1) => {
         return JSON.stringify(value1) === JSON.stringify(detailProduct)
     }
@@ -30,7 +35,9 @@ const ProductDetailScreen = () => {
             Window.alert('Sản phẩm đã có trong giỏ hàng');
         }
     }
-    console.log({ detailProduct, listProductInCart });
+
+
+    console.log(detailProduct);
     return (
         <Container maxWidth='xl' sx={{ height: 'fit-content' }}>
             <Typography>Title</Typography>
@@ -51,6 +58,10 @@ const ProductDetailScreen = () => {
             <Typography>description</Typography>
             <Typography>Comment</Typography>
             <Typography>Product relative</Typography>
+            <Box>
+                <InpuntComment />
+                <CommentList />
+            </Box>
         </Container>
     );
 };

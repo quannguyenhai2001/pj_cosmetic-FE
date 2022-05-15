@@ -23,6 +23,7 @@ import ChangePasswordScreen from "screens/User/ChangePasswordScreen/ChangePasswo
 import OrderUserScreen from "screens/User/OrderUserScreen/OrderUserScreen";
 import DeleteAccountUserScreen from "screens/User/DeleteAccountUserScreen/DeleteAccountUserScreen";
 import TestScreen1 from "screens/User/TestScreen1/TestScreen1";
+import Test2 from "screens/User/test2/Test2";
 
 
 
@@ -36,8 +37,8 @@ const RouteConfigs = [
 
     },
     {
-        path: "/test",
-        element: TestScreen1,
+        path: "/test2",
+        element: Test2,
         isPrivate: false,
         layout: React.Fragment,
         isScreenAdmin: false,
