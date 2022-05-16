@@ -1,4 +1,4 @@
-import { Container, Typography, Grid, Button, Box } from '@mui/material';
+import { Container, Typography, Grid, Button, Box, Paper, Divider } from '@mui/material';
 import { productImages } from 'assets/img/imgProductDetail';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,8 +7,9 @@ import { fetchAsyncAddProductToCart, fetchAsyncGetDetailProduct, fetchAsyncGetLi
 import CommentList from './components/CommentList/CommentList';
 import InpuntComment from './components/InpuntComment/InpuntComment';
 import ProductImagesSlider from './components/productImagesSlider';
-
+import useStyles from './styles';
 const ProductDetailScreen = () => {
+    const classes = useStyles();
     const dispatch = useDispatch();
     const detailProduct = useSelector(state => state.product.detailProduct);
     const listProductInCart = useSelector(state => state.product.listProductInCart);
@@ -37,7 +38,6 @@ const ProductDetailScreen = () => {
     }
 
 
-    console.log(detailProduct);
     return (
         <Container maxWidth='xl' sx={{ height: 'fit-content' }}>
             <Typography>Title</Typography>
@@ -45,24 +45,25 @@ const ProductDetailScreen = () => {
                 <Grid item xs={12} sm={5}>
                     <ProductImagesSlider images={productImages} />
                 </Grid>
-                <Grid item xs={12} sm={7}>
-                    <Typography>{detailProduct.productName}</Typography>
-                    <Typography>{detailProduct.description}</Typography>
-                    <Typography>{detailProduct.price}</Typography>
-                    <Typography>{detailProduct.manufacturersName}</Typography>
-                    <Typography>{detailProduct.promotion}</Typography>
+                <Grid item xs={12} sm={7} sx={{ fontSize: '3rem' }}>
+                    <Typography variant='h6' sx={{ fontWeight: 650 }}>{detailProduct.productName}</Typography>
+                    <Typography variant='subtitle1' >{detailProduct.manufacturersName}</Typography>
+                    <Typography><Box component="span" sx={{ fontWeight: 650 }}>${detailProduct.price}.00</Box> or <span>$9.00 off your ASP order when you open and use a Sephora Credit Card today.</span></Typography>
+                    <Typography>Size: {detailProduct.size}</Typography>
+                    <Typography>Standard size</Typography>
+                    <Button variant="outlined">8.5 oz/250 mL</Button><br />
                     <Button variant="contained" onClick={handleAddProduct}>Add to cart</Button>
                 </Grid>
             </Grid>
-            <Typography>tag</Typography>
+
             <Typography>description</Typography>
-            <Typography>Comment</Typography>
-            <Typography>Product relative</Typography>
+
             <Box>
+                <Divider></Divider>
                 <InpuntComment />
                 <CommentList />
             </Box>
-        </Container>
+        </Container >
     );
 };
 

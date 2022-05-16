@@ -8,6 +8,37 @@ import useStyles from './styles';
 import LogoutIcon from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
+//create circle avatar
+function stringToColor(string) {
+  let hash = 0;
+  let i;
+
+  /* eslint-disable no-bitwise */
+  for (i = 0; i < string.length; i += 1) {
+    hash = string.charCodeAt(i) + ((hash << 5) - hash);
+  }
+
+  let color = '#';
+
+  for (i = 0; i < 3; i += 1) {
+    const value = (hash >> (i * 8)) & 0xff;
+    color += `00${value.toString(16)}`.slice(-2);
+  }
+  /* eslint-enable no-bitwise */
+
+  return color;
+}
+
+function stringAvatar(name) {
+  return {
+    sx: {
+      bgcolor: stringToColor(name),
+      width: '40px',
+      height: '40px',
+    },
+    children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+  };
+}
 
 const CommentList = (props) => {
   const listComment = useSelector(state => state.product.listComments)
@@ -54,14 +85,19 @@ const CommentList = (props) => {
     setValueEdit({ ...valueEdit, content: target.value })
   }
 
+
   const render = (listComment.length) === 0 ? (<div>loading...</div>) :
     (
       listComment.map((value, index) => {
         return (<Box className="comment-each" key={index}>
           <Grid container>
             <Grid item >
-              <Box className="comment-each-avatar">
-                <Avatar>H</Avatar>
+              <Box>
+                {value.avatar ? (
+                  <Avatar className={classes.rootAvatar} src={value.avatar} />
+                ) : (
+                  <Avatar className={classes.rootAvatar} {...stringAvatar(value.displayName)} />
+                )}
               </Box>
             </Grid>
             <Grid item xs={11}>
@@ -69,14 +105,14 @@ const CommentList = (props) => {
                 <div className="comment-each-content_title">{value.displayName}</div>
                 <form onSubmit={submitCommemtHandle}>
                   <div className="comment-content-box-input">
-                    <TextField fullWidth value={conditionInput && alo === value.id ? (valueEdit.content) : (value.content || "")} onChange={onChangeComment} id="standard-basic" variant="standard" disabled={conditionInput && alo === value.id ? false : true} />
+                    <TextField className={classes.rootTextField} fullWidth value={conditionInput && alo === value.id ? (valueEdit.content) : (value.content || "")} onChange={onChangeComment} id="standard-basic" variant="standard" disabled={conditionInput && alo === value.id ? false : true} />
                   </div>
                 </form>
                 {/* <div className="comment-content__react">
-              <ThumbUpOutlinedIcon />
-              <ThumbUpOutlinedIcon />
-              <span>Feedback</span>
-            </div> */}
+                  <ThumbUpOutlinedIcon />
+                  <ThumbUpOutlinedIcon />
+                  <span>Feedback</span>
+                </div> */}
                 <div className="comment-each-box">
                   {/*click hiện bảng chọn, class là đang set đk click edit thì mất icon*/}
                   <MoreVertIcon onClick={clickIconHandle} className={conditionInput ? "display--none" : "fas fa-ellipsis-v"} />

@@ -67,9 +67,13 @@ const ProfileLayout = (props) => {
     return (
         <Box>
             <Header />
-            <Box sx={{ padding: '2rem 5rem', minHeight: '90vh', bgcolor: 'rgb(245,245,245)' }}>
+            <Box sx={{ overflowX: 'hidden', padding: '2rem 5rem', minHeight: '90vh', bgcolor: 'rgb(245,245,245)' }}>
                 <Box sx={{ display: 'flex', padding: '2rem 0' }}>
-                    <Avatar {...stringAvatar(displayName)} />
+                    {avatar ? (
+                        <Avatar className={classes.rootAvatar} src={avatar} />
+                    ) : (
+                        <Avatar className={classes.rootAvatar} {...stringAvatar(displayName)} />
+                    )}
                     <Box sx={{ marginLeft: '1rem' }}>
                         <Typography variant="h7" sx={{ marginBottom: '2px' }} component="div">{displayName}</Typography>
                         <Box sx={{ display: 'flex' }}>

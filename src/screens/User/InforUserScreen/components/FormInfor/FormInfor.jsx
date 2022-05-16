@@ -1,6 +1,8 @@
-import { Avatar, Box, Divider, Grid, TextField, Typography } from '@mui/material';
+import { Avatar, Box, Button, FormControl, FormControlLabel, FormLabel, Grid, Radio, RadioGroup, TextField, Typography } from '@mui/material';
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { fetchAsyncGetUser, fetchAsyncUpdateUser } from 'slices/UserSlice';
 import useStyles from './styles';
 
 //create circle avatar
@@ -38,8 +40,15 @@ function stringAvatar(name) {
 const FormInfor = () => {
     const classes = useStyles();
     const userDetail = useSelector(state => state.user.userDetail);
-    const [valueArray, setValueArray] = React.useState({});
-    const [base64, setBase64] = React.useState('');
+    const dispatch = useDispatch();
+    const [valueArray, setValueArray] = React.useState({
+        displayName: userDetail.displayName,
+        address: userDetail.address,
+        sex: userDetail.sex,
+        age: userDetail.age,
+        avatar: userDetail.avatar
+    });
+    const [base64, setBase64] = React.useState(userDetail.avatar);
     const changeHandle = (e) => {
         function getBase64(file) {
             var reader = new FileReader();
@@ -51,10 +60,34 @@ const FormInfor = () => {
                 console.log('Error: ', error);
             };
         }
-        console.log(e.target.files[0]);
+        setValueArray({ ...valueArray, [e.target.name]: e.target.files[0] });
         getBase64(e.target.files[0]); // prints the base64 string
 
     }
+
+    const handleChange = (event) => {
+        setValueArray({ ...valueArray, [event.target.name]: event.target.value });
+
+    };
+
+    const handleSubmit = (e) => {
+        console.log(valueArray);
+        let data = new FormData();
+        data.append("avatar", valueArray.avatar);
+        data.append("displayName", valueArray.displayName);
+        data.append("sex", valueArray.sex);
+        data.append("age", valueArray.age);
+        data.append("address", valueArray.address);
+        dispatch(fetchAsyncUpdateUser(data)).unwrap().then(() => {
+
+            dispatch(fetchAsyncGetUser())
+
+        }).catch(err => {
+            console.log(err)
+        })
+
+    }
+
     console.log(userDetail);
     return (
         <Box sx={{ padding: '2rem 0' }}>
@@ -71,11 +104,41 @@ const FormInfor = () => {
                     </Box>
                 </Grid>
                 <Grid item xs={6}>
-                    <Typography className={classes.rootTyp1}>{userDetail.displayName}</Typography>
-                    <TextField className={classes.rootTextField} id="outlined-basic" variant="outlined" size="small" />
+                    <Typography className={classes.rootTyp1}>{userDetail.userName}</Typography>
+                    <TextField onChange={handleChange} value={valueArray.displayName} name="displayName" className={classes.rootTextField} id="outlined-basic" variant="outlined" size="small" />
                     <Typography >{userDetail.email}</Typography>
-                    <Typography className={classes.rootTyp1}>{userDetail.displayName}</Typography>
+                    <Typography className={classes.rootTyp1}>{userDetail.phoneNumber}</Typography>
+                    <FormControl>
+                        <RadioGroup className={classes.rootRadio}
+                            aria-labelledby="demo-radio-buttons-group-label"
+                            defaultValue={userDetail.sex}
+                            onChange={handleChange}
+                            name="sex"
+                        >
+                            <FormControlLabel value="female" control={<Radio />} label="female" />
+                            <FormControlLabel value="male" control={<Radio />} label="male" />
+                        </RadioGroup>
+                    </FormControl>
+
+                    {/* age */}
+                    <TextField
+                        id="outlined-number"
+                        className={classes.rootTextField1}
+                        type="number"
+                        size="small"
+                        onChange={handleChange}
+                        value={valueArray.age}
+                        name="age"
+                    />
+
+                    {/* address */}
+                    <TextField onChange={handleChange} value={valueArray.address} name="address" className={classes.rootTextField} id="outlined-basic" variant="outlined" size="small" />
+
+                    {/* button */}
+                    <Button variant="contained" onClick={handleSubmit}>Save</Button>
                 </Grid>
+
+                {/* divide */}
                 <Grid item xs={1}>
                     <Box sx={{
                         height: '100%',
@@ -90,7 +153,7 @@ const FormInfor = () => {
                         <Avatar className={classes.rootAvatar} {...stringAvatar(userDetail.displayName)} />
                     )}
                     <label className={classes.labelFile} htmlFor="upload-photo">Select file</label>
-                    <input type="file" className={classes.customFileInput} onChange={changeHandle} id="upload-photo" />
+                    <input type="file" className={classes.customFileInput} onChange={changeHandle} name="avatar" id="upload-photo" />
                 </Grid>
             </Grid>
         </Box>

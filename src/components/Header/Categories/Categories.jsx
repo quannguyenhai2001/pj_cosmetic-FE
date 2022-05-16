@@ -39,7 +39,7 @@ export default function Categories(props) {
     React.useEffect(() => {
         if (isCheck) {
             setIsCheck(false)
-            console.log("fgfgf")
+
         }
     }, [params.categoryId, isCheck]);
 

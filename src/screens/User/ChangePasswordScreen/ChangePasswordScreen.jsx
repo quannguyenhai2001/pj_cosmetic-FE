@@ -1,7 +1,6 @@
 import { Box, Divider, Typography } from '@mui/material';
 import React from 'react';
-import FormChangePassword from './components/FormChangePassword/FormChangePassword';
-
+import FormChange from './components/FormChange/FormChange';
 const ChangePasswordScreen = () => {
     return (
         <Box sx={{ bgcolor: 'white', width: '100%', padding: '0 2rem' }}>
@@ -12,7 +11,7 @@ const ChangePasswordScreen = () => {
                 <Typography>For account security, please do not share your password with others</Typography>
             </Box>
             <Divider />
-            <FormChangePassword />
+            <FormChange />
         </Box>
     );
 };

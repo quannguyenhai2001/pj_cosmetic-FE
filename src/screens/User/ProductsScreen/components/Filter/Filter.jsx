@@ -122,7 +122,7 @@ const Filter = () => {
             // console.log("unmount filter")
 
         }
-    }, [valueIdManu, checkedSale, dispatch, params.categoryId, valuePrice, isCheckChangePrice]);
+    }, [valueIdManu, checkedSale, dispatch, params.categoryId, valuePrice, isCheckChangePrice, navigate]);
 
     React.useEffect(() => {
         setValueIdManu('');
@@ -130,7 +130,8 @@ const Filter = () => {
         setCheckedManu(false);
         setCheckedSale(false);
         setValuePrice([0, 1000]);
-    }, [params.categoryId]);
+        navigate('/products/' + params.categoryId)
+    }, [params.categoryId, navigate]);
     return (
         <Box>
             <Typography variant="h6">Filter</Typography>

@@ -209,7 +209,11 @@ export default function NavBar(props) {
                                     }
                                 >
                                     <Box sx={{ display: "flex", alignItems: "center", margin: "0 2rem 0 2rem", "&:hover": { color: "blue", cursor: "pointer" } }}>
-                                        <Avatar {...stringAvatar(user.displayName)} />
+                                        {user.avatar ? (
+                                            <Avatar className={classes.rootAvatar} src={user.avatar} />
+                                        ) : (
+                                            <Avatar className={classes.rootAvatar} {...stringAvatar(user.displayName)} />
+                                        )}
                                         <Typography sx={{ position: "relative", marginLeft: 1 }}>{user.displayName}</Typography>
                                     </Box>
                                 </CustomTooltip>

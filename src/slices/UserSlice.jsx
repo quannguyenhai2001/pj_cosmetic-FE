@@ -37,6 +37,20 @@ export const fetchAsyncGetUser = createAsyncThunk(
         }
     }
 );
+export const fetchAsyncUpdateUser = createAsyncThunk(
+    "user/fetchAsyncUpdateUser",
+    async (arg, { rejectWithValue }) => {
+        try {
+            const response = await CallApiByBody("auth/update-user.php", "post", arg)
+            return response.data
+        } catch (error) {
+            return rejectWithValue(error.response.data)
+        }
+    }
+);
+
+
+
 
 const userSlice = createSlice({
     name: 'user',
@@ -66,11 +80,18 @@ const userSlice = createSlice({
             console.log(action.payload)
         },
         [fetchAsyncGetUser.fulfilled]: (state, action) => {
-            state.userDetail = action.payload
-            // console.log(action.payload)
+            state.userDetail = action.payload.data
+            console.log(action.payload)
         },
         [fetchAsyncGetUser.rejected]: (state, action) => {
             console.log("error login")
+        },
+        [fetchAsyncUpdateUser.fulfilled]: (state, action) => {
+
+            console.log(action.payload)
+        },
+        [fetchAsyncUpdateUser.rejected]: (state, action) => {
+            console.log(action.payload)
         },
     }
 })
