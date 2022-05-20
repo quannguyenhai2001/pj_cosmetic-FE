@@ -115,7 +115,17 @@ export const fetchAsyncDecreaseQuantityProduct = createAsyncThunk(
 );
 
 
-
+export const fetchAsyncCreateComment = createAsyncThunk(
+    "product/fetchAsyncCreateComment",
+    async (arg, { rejectWithValue }) => {
+        try {
+            const response = await CallApiByBody("comments/create-comment.php", "post", arg)
+            return response.data
+        } catch (error) {
+            return rejectWithValue(error.response.data)
+        }
+    }
+);
 
 //image
 export const fetchAsyncTestFile = createAsyncThunk(
@@ -248,8 +258,15 @@ const productSlice = createSlice({
         },
 
 
+        //create comment
+        [fetchAsyncCreateComment.fulfilled]: (state, action) => {
 
+            console.log(action.payload)
+        },
+        [fetchAsyncCreateComment.rejected]: (state, action) => {
 
+            console.log(action.payload)
+        },
 
         //test
         [fetchAsyncTestFile.fulfilled]: (state, action) => {

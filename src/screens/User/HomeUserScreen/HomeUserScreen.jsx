@@ -1,11 +1,14 @@
 import { Box, Container, Typography } from '@mui/material';
 import React from 'react';
+import DialogBox from './components/DialogBox/DialogBox';
 import SlideBanner from './components/SlideBanner/SlideBanner';
 import TagsProduct from './components/TagsProduct/TagsProduct';
 
 const HomeUserScreen = () => {
+
     return (
         <Box sx={{ marginBottom: 30 }}>
+            <DialogBox />
             <SlideBanner />
             <Container maxWidth="lg">
                 <TagsProduct />

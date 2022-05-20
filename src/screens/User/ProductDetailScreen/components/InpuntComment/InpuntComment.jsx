@@ -1,8 +1,9 @@
 import { Avatar, Box, Button, Grid, TextField } from '@mui/material';
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import useStyles from './styles';
-
+import { useParams } from 'react-router-dom';
+import { fetchAsyncCreateComment, fetchAsyncGetListCommentByProduct } from 'slices/ProductSlice';
 //create circle avatar
 function stringToColor(string) {
     let hash = 0;
@@ -38,15 +39,26 @@ function stringAvatar(name) {
 const InpuntComment = () => {
     const classes = useStyles();
     const user = useSelector(state => state.user.userDetail)
-
-
+    const dispatch = useDispatch();
+    const params = useParams();
+    const { id } = params;
 
     const [isCheckComment, setIsCheckComment] = React.useState(false);
+    const [isDisable, setIsDisable] = React.useState(true);
     const [comment, setComment] = React.useState('');
 
     const handleComment = () => {
         setIsCheckComment(false);
+        dispatch(fetchAsyncCreateComment({
+            id: id,
+            comment: comment,
+        })).unwrap().then(() => {
 
+            dispatch(fetchAsyncGetListCommentByProduct({ id }))
+
+        }).catch(err => {
+            console.log(err)
+        })
     }
 
     return (
@@ -64,9 +76,18 @@ const InpuntComment = () => {
                 <Grid item xs={11}>
                     <TextField
 
-                        onChange={(e) => setComment(e.target.value)}
+                        onChange={(e) => {
+                            setComment(e.target.value)
+                            if (e.target.value.length === 0) {
+                                setIsDisable(true)
+                            }
+                            else {
+                                setIsDisable(false)
+                            }
+                        }}
                         value={comment}
                         variant="standard"
+
                         fullWidth
                         onClick={() => setIsCheckComment(true)}
                     />
@@ -74,7 +95,7 @@ const InpuntComment = () => {
             </Grid>
             <Box className={isCheckComment ? classes.boxButtonComment : classes.displayNone}>
                 <Button sx={{ marginRight: 2 }} onClick={() => setIsCheckComment(false)} variant="outlined">Cancel</Button>
-                <Button onClick={handleComment} variant="contained">Comment</Button>
+                <Button disabled={isDisable} onClick={handleComment} variant="contained">Comment</Button>
             </Box>
         </Box>
     );

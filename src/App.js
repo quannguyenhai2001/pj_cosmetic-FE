@@ -18,6 +18,26 @@ function App() {
       dispatch(fetchAsyncGetUser())
     }
   }, [dispatch])
+
+  //reomove count loaded
+  useEffect(() => {
+    window.onclick = () => {
+      console.log("fgfgfg")
+    }
+
+    window.ondestroy = (e) => {
+      console.log(e.clientY)
+      // if (window.event.clientY < 0) {
+      console.log(e)
+      if (e.clientY < 0) {
+        localStorage.removeItem('loaded')
+      }
+
+      // }
+
+    }
+  }, []);
+
   return (
     <div>
       <Routers />

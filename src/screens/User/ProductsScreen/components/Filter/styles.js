@@ -9,7 +9,24 @@ import { makeStyles } from '@mui/styles';
 
 // bên dưới là select sâu vào các div bên trong, chẳng hạn 1 cp của MUI có 1 tag nhưng bên trong chứa rất nhiều tag thì ta phải css sâu vào như bên dưới
 // vd: bên trong AccordionSummary có chứa tận 3 cái tag html nên ta phải select sâu vào như bên dưới(dòng 28) còn cái AccordionDetail thì tạo 1 class khác
+// rootTextField: {
+//     '&.MuiFormControl-root': {
+//         marginBottom: '3rem',
+//             display: 'block',
 
+//                 '& .MuiInput-input': {
+//             textFillColor: 'black',
+//                 '&.Mui-disabled': {
+//                 color: 'black'
+//             }
+//         },
+//         '& .MuiInput-root': {
+//             '&::before': {
+//                 borderBottom: 'none',
+//                 }
+//         },
+//     },
+// },
 
 
 export default makeStyles((theme) => ({

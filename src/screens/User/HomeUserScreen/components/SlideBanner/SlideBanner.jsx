@@ -1,10 +1,9 @@
 import React, { useRef } from 'react';
-
 import { Swiper, SwiperSlide } from 'swiper/react';
 import useStyles from './styles'
 import Images from 'assets/img/imgBanner';
 // import required modules
-import { Navigation, Autoplay, Pagination, EffectCreative } from 'swiper'
+import { Navigation, Autoplay, Pagination } from 'swiper'
 // Import Swiper styles
 
 import 'swiper/css';
@@ -23,23 +22,15 @@ const SlideBanner = () => {
         <Swiper className={classes.swiper}
             spaceBetween={0}
             slidesPerView={1}
-            grabCursor={true}
-            effect={"creative"}
             centeredSlides={true}
-            creativeEffect={{
-                prev: {
-                    shadow: true,
-                    translate: [0, 0, -400],
-                },
-                next: {
-                    translate: ["100%", 0, 0],
-                },
+            autoplay={{
+                delay: 2500,
+                disableOnInteraction: false,
             }}
-
             pagination={{
                 dynamicBullets: true,
             }}
-            modules={[Autoplay, EffectCreative, Navigation, Pagination]}
+            modules={[Autoplay, Navigation, Pagination]}
             // onSlideChange={() => { }}
             onInit={(swiper) => {
                 swiper.params.navigation.prevEl = prevRef.current;
@@ -58,15 +49,9 @@ const SlideBanner = () => {
                     <ArrowForwardIosIcon sx={{ fontSize: '4rem' }} />
                 </IconButton>
             </div>
-            <SwiperSlide>
-                <div style={{ position: "relative" }} className={classes.swiperSlide}>
-                    <img className={classes.swiperSlideImg} src={Images.bg1} alt="game" />
-                    {/* <button style={{ position: "absolute" }}>sdsd</button> */}
-                </div>
-            </SwiperSlide>
             <SwiperSlide><div className={classes.swiperSlide}> <img className={classes.swiperSlideImg} src={Images.bg1} alt="product"></img></div></SwiperSlide>
-            <SwiperSlide><div className={classes.swiperSlide}><img className={classes.swiperSlideImg} src={Images.bg1} alt="product"></img></div></SwiperSlide>
-            <SwiperSlide><div className={classes.swiperSlide}><img className={classes.swiperSlideImg} src={Images.bg1} alt="product"></img></div></SwiperSlide>
+            <SwiperSlide><div className={classes.swiperSlide}><img className={classes.swiperSlideImg} src={Images.bg2} alt="product"></img></div></SwiperSlide>
+            <SwiperSlide><div className={classes.swiperSlide}><img className={classes.swiperSlideImg} src={Images.bg3} alt="product"></img></div></SwiperSlide>
         </Swiper >
     );
 };
