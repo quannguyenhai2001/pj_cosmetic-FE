@@ -1,13 +1,17 @@
 import { makeStyles } from '@mui/styles';
-
+import logo from 'assets/img/imgBgSignUp/bg.jpg';
 export default makeStyles((theme) => ({
   form: {
-    background: 'url("https://c8.alamy.com/comp/T5KEG1/flat-lay-makeup-background-frame-of-professional-cosmetic-products-and-accessories-on-white-table-top-view-T5KEG1.jpg") no-repeat center center fixed',
-    height: '100rem',
+    // background: `url(${logo})`,
+    height: 'fit-content',
+    // backgroundSize: 'cover',
     // backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
     // backgroundPosition: 'center',
+    // background- color: #ffffff;
+
+
   },
+
   rootGridContainer: {
     '&.MuiContainer-root': {
       padding: '6rem 0',

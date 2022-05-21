@@ -31,9 +31,11 @@ export default makeStyles((theme) => ({
         [`& fieldset`]: {
             borderRadius: '50px',
         },
-        [`& input`]: {
+        '& input': {
             height: '6px',
         },
         flex: "1",
+        overflow: "hidden",
+        borderRadius: '50px',
     },
 }));

@@ -29,6 +29,15 @@ import { makeStyles } from '@mui/styles';
 // },
 
 
+//
+// [`& fieldset`]: {
+//     borderRadius: '50px',
+//         },
+// '& input': {
+//     height: '6px',
+//         },
+// 2 cách trên giống hệt nhau và đây là cách css vào các class sâu trong luôn k cần phải đi từ cái class gốc như dòng 13
+
 export default makeStyles((theme) => ({
     rootPaper: {
         '&.MuiPaper-root': {

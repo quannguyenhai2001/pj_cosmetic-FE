@@ -1,48 +1,24 @@
-import { Avatar, Box, Button, Grid, TextField } from '@mui/material';
-import React from 'react';
+import { Avatar, Box, Button, Container, Grid, TextField, Typography } from '@mui/material';
+import React, { memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useStyles from './styles';
 import { useParams } from 'react-router-dom';
 import { fetchAsyncCreateComment, fetchAsyncGetListCommentByProduct } from 'slices/ProductSlice';
-//create circle avatar
-function stringToColor(string) {
-    let hash = 0;
-    let i;
-
-    /* eslint-disable no-bitwise */
-    for (i = 0; i < string.length; i += 1) {
-        hash = string.charCodeAt(i) + ((hash << 5) - hash);
-    }
-
-    let color = '#';
-
-    for (i = 0; i < 3; i += 1) {
-        const value = (hash >> (i * 8)) & 0xff;
-        color += `00${value.toString(16)}`.slice(-2);
-    }
-    /* eslint-enable no-bitwise */
-
-    return color;
-}
-
-function stringAvatar(name) {
-    return {
-        sx: {
-            bgcolor: stringToColor(name),
-            width: '40px',
-            height: '40px',
-        },
-        children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
-    };
-}
+import StringAvatar from 'utils/StringAvatar';
 
 const InpuntComment = () => {
     const classes = useStyles();
     const user = useSelector(state => state.user.userDetail)
+    const [isCheckComment1, setIsCheckComment1] = React.useState('');
     const dispatch = useDispatch();
     const params = useParams();
     const { id } = params;
 
+    React.useEffect(() => {
+        if (user) {
+            setIsCheckComment1(user.displayName)
+        }
+    }, [user])
     const [isCheckComment, setIsCheckComment] = React.useState(false);
     const [isDisable, setIsDisable] = React.useState(true);
     const [comment, setComment] = React.useState('');
@@ -69,13 +45,12 @@ const InpuntComment = () => {
                         {user.avatar ? (
                             <Avatar className={classes.rootAvatar} src={user.avatar} />
                         ) : (
-                            <Avatar className={classes.rootAvatar} />
+                            <Avatar className={classes.rootAvatar} {...StringAvatar('A U')} />
                         )}
                     </Box>
                 </Grid>
                 <Grid item xs={11}>
                     <TextField
-
                         onChange={(e) => {
                             setComment(e.target.value)
                             if (e.target.value.length === 0) {
@@ -87,7 +62,7 @@ const InpuntComment = () => {
                         }}
                         value={comment}
                         variant="standard"
-
+                        placeholder='Write a comment...'
                         fullWidth
                         onClick={() => setIsCheckComment(true)}
                     />
@@ -101,4 +76,4 @@ const InpuntComment = () => {
     );
 };
 
-export default InpuntComment;
+export default memo(InpuntComment);

@@ -1,41 +1,10 @@
-import { Avatar, Box, Button, FormControl, FormControlLabel, FormLabel, Grid, Radio, RadioGroup, TextField, Typography } from '@mui/material';
+import { Avatar, Box, Button, FormControl, FormControlLabel, Grid, Radio, RadioGroup, TextField, Typography } from '@mui/material';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchAsyncGetUser, fetchAsyncUpdateUser } from 'slices/UserSlice';
 import useStyles from './styles';
-
-//create circle avatar
-function stringToColor(string) {
-    let hash = 0;
-    let i;
-
-    /* eslint-disable no-bitwise */
-    for (i = 0; i < string.length; i += 1) {
-        hash = string.charCodeAt(i) + ((hash << 5) - hash);
-    }
-
-    let color = '#';
-
-    for (i = 0; i < 3; i += 1) {
-        const value = (hash >> (i * 8)) & 0xff;
-        color += `00${value.toString(16)}`.slice(-2);
-    }
-    /* eslint-enable no-bitwise */
-
-    return color;
-}
-
-function stringAvatar(name) {
-    return {
-        sx: {
-            bgcolor: stringToColor(name),
-            width: '40px',
-            height: '40px',
-        },
-        children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
-    };
-}
+import StringAvatar from 'utils/StringAvatar';
 
 const FormInfor = () => {
     const classes = useStyles();
@@ -79,9 +48,7 @@ const FormInfor = () => {
         data.append("age", valueArray.age);
         data.append("address", valueArray.address);
         dispatch(fetchAsyncUpdateUser(data)).unwrap().then(() => {
-
             dispatch(fetchAsyncGetUser())
-
         }).catch(err => {
             console.log(err)
         })
@@ -150,7 +117,7 @@ const FormInfor = () => {
                     {base64 ? (
                         <Avatar className={classes.rootAvatar} src={base64} />
                     ) : (
-                        <Avatar className={classes.rootAvatar} {...stringAvatar(userDetail.displayName)} />
+                        <Avatar className={classes.rootAvatar} {...StringAvatar(userDetail.displayName)} />
                     )}
                     <label className={classes.labelFile} htmlFor="upload-photo">Select file</label>
                     <input type="file" className={classes.customFileInput} onChange={changeHandle} name="avatar" id="upload-photo" />

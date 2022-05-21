@@ -16,7 +16,6 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/effect-creative";
 import { Button } from '@mui/material';
-
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
     const classes = useStyles();
@@ -31,28 +30,100 @@ function TabPanel(props) {
             {value === index && (
                 <Swiper
                     className={classes.swiper}
-                    slidesPerView={5}
-                    spaceBetween={20}
+                    slidesPerView={6}
+                    spaceBetween={45}
                     navigation={true}
                     modules={[Navigation]}
                 >
-                    <SwiperSlide >
-                        <img className={classes.swiperSlideImg} src={productImages[0]} alt="game" />
+                    <SwiperSlide>
+                        <Box className={classes.boxContent}>
+                            <Box className={classes.boxContentNumber}>
+                                #1
+                            </Box>
+
+                            <img className={classes.swiperSlideImg} src={productImages[0]} alt="Product" />
+
+
+                            <Box sx={{ textAlign: 'center' }}>
+                                <Typography component="div" sx={{ fontWeight: 'bold', margin: '1rem 0' }}>
+                                    Ten nha cung cap
+                                </Typography>
+                                <Typography component="div">
+                                    ten san pham
+                                </Typography>
+                            </Box>
+                        </Box>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <Box className={classes.boxContent}>
+                            <Box className={classes.boxContentNumber}>
+                                #1
+                            </Box>
+                            <img className={classes.swiperSlideImg} src={productImages[0]} alt="Product" />
+                            <Box sx={{ textAlign: 'center' }}>
+                                <Typography component="div" sx={{ fontWeight: 'bold', margin: '1rem 0' }}>
+                                    Ten nha cung cap
+                                </Typography>
+                                <Typography component="div">
+                                    ten san pham
+                                </Typography>
+                            </Box>
+                        </Box>
                     </SwiperSlide>
                     <SwiperSlide >
-                        <img className={classes.swiperSlideImg} src={productImages[0]} alt="game"></img>
+                        <img className={classes.swiperSlideImg} src={productImages[0]} alt="Product" />
+                        <Box sx={{ textAlign: 'center' }}>
+                            <Typography component="div" sx={{ fontWeight: 'bold', margin: '1rem 0' }}>
+                                Ten nha cung cap
+                            </Typography>
+                            <Typography component="div">
+                                ten san pham
+                            </Typography>
+                        </Box>
                     </SwiperSlide>
                     <SwiperSlide >
-                        <img className={classes.swiperSlideImg} src={productImages[0]} alt="game"></img>
+                        <img className={classes.swiperSlideImg} src={productImages[0]} alt="Product" />
+                        <Box sx={{ textAlign: 'center' }}>
+                            <Typography component="div" sx={{ fontWeight: 'bold', margin: '1rem 0' }}>
+                                Ten nha cung cap
+                            </Typography>
+                            <Typography component="div">
+                                ten san pham
+                            </Typography>
+                        </Box>
                     </SwiperSlide>
                     <SwiperSlide >
-                        <img className={classes.swiperSlideImg} src={productImages[0]} alt="game"></img>
+                        <img className={classes.swiperSlideImg} src={productImages[0]} alt="Product" />
+                        <Box sx={{ textAlign: 'center' }}>
+                            <Typography component="div" sx={{ fontWeight: 'bold', margin: '1rem 0' }}>
+                                Ten nha cung cap
+                            </Typography>
+                            <Typography component="div">
+                                ten san pham
+                            </Typography>
+                        </Box>
                     </SwiperSlide>
                     <SwiperSlide >
-                        <img className={classes.swiperSlideImg} src={productImages[0]} alt="game"></img>
+                        <img className={classes.swiperSlideImg} src={productImages[0]} alt="Product" />
+                        <Box sx={{ textAlign: 'center' }}>
+                            <Typography component="div" sx={{ fontWeight: 'bold', margin: '1rem 0' }}>
+                                Ten nha cung cap
+                            </Typography>
+                            <Typography component="div">
+                                ten san pham
+                            </Typography>
+                        </Box>
                     </SwiperSlide>
                     <SwiperSlide >
-                        <img className={classes.swiperSlideImg} src={productImages[0]} alt="game"></img>
+                        <img className={classes.swiperSlideImg} src={productImages[0]} alt="Product" />
+                        <Box sx={{ textAlign: 'center' }}>
+                            <Typography component="div" sx={{ fontWeight: 'bold', margin: '1rem 0' }}>
+                                Ten nha cung cap
+                            </Typography>
+                            <Typography component="div">
+                                ten san pham
+                            </Typography>
+                        </Box>
                     </SwiperSlide>
                 </Swiper >
             )}
@@ -84,23 +155,23 @@ export default function TagsProduct() {
             </Box>
             <Box sx={{ margin: "2rem 0" }}>
                 <Tabs sx={{ justifyContent: 'center', display: 'grid' }} value={value} onChange={handleChange} aria-label="basic tabs example">
-                    <Tab label="List Product 1" {...a11yProps(0)} />
-                    <Tab label="List Product 2" {...a11yProps(1)} />
-                    <Tab label="List Product 3" {...a11yProps(2)} />
+                    <Tab label="Selling Fast" {...a11yProps(0)} />
+                    <Tab label="Value Sets" {...a11yProps(1)} />
+                    <Tab label="Chosen For You" {...a11yProps(2)} />
                 </Tabs>
             </Box>
             <Box>
                 <TabPanel value={value} index={0}>
-                    List Product 1
+                    Selling Fast
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    List Product 2
+                    Value Sets
                 </TabPanel>
                 <TabPanel value={value} index={2}>
-                    List Product 3
+                    Chosen For You
                 </TabPanel>
             </Box>
-            <Box sx={{ display: 'flex', justifyContent: 'center', margin: '3rem 0' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'center', margin: '1rem 0 3rem 0' }}>
                 <Button variant="outlined" endIcon={<StartIcon />}>View More</Button>
             </Box>
         </Box>

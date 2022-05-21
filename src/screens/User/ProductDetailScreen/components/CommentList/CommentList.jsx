@@ -7,42 +7,14 @@ import useStyles from './styles';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import ElevatorIcon from '@mui/icons-material/Elevator';
-//create circle avatar
-function stringToColor(string) {
-  let hash = 0;
-  let i;
-
-  /* eslint-disable no-bitwise */
-  for (i = 0; i < string.length; i += 1) {
-    hash = string.charCodeAt(i) + ((hash << 5) - hash);
-  }
-
-  let color = '#';
-
-  for (i = 0; i < 3; i += 1) {
-    const value = (hash >> (i * 8)) & 0xff;
-    color += `00${value.toString(16)}`.slice(-2);
-  }
-  /* eslint-enable no-bitwise */
-
-  return color;
-}
-
-function stringAvatar(name) {
-  return {
-    sx: {
-      bgcolor: stringToColor(name),
-      width: '40px',
-      height: '40px',
-    },
-    children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
-  };
-}
+import StringAvatar from 'utils/StringAvatar';
 
 const CommentList = (props) => {
   const listComment = useSelector(state => state.product.listComments)
   const user = useSelector(state => state.user.userDetail)
   const classes = useStyles();
+  const dispatch = useDispatch()
+
 
   //tắt mở box edit or evaluate
   const [conditionIcon, SetConditionIcon] = useState(false)
@@ -54,10 +26,10 @@ const CommentList = (props) => {
   })
 
   const [idCommentEdit, setIdCommentEdit] = useState("")
-  const dispatch = useDispatch()
+
   const clickIconHandle = () => {
     SetConditionIcon(!conditionIcon)
-    console.log("fgfg")
+
   }
 
 
@@ -100,7 +72,7 @@ const CommentList = (props) => {
                 {value.avatar ? (
                   <Avatar className={classes.rootAvatar} src={value.avatar} />
                 ) : (
-                  <Avatar className={classes.rootAvatar} {...stringAvatar(value.displayName)} />
+                  <Avatar className={classes.rootAvatar} {...StringAvatar(value.displayName)} />
                 )}
               </Box>
             </Grid>

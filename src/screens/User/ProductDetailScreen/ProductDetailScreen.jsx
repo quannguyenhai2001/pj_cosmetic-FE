@@ -15,6 +15,7 @@ const ProductDetailScreen = () => {
     const listProductInCart = useSelector(state => state.product.listProductInCart);
     const params = useParams();
     const { id } = params;
+
     useEffect(() => {
         dispatch(fetchAsyncGetDetailProduct({ id }));
         dispatch(fetchAsyncGetListCommentByProduct({ id }));

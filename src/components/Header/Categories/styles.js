@@ -20,17 +20,22 @@ export default makeStyles((theme) => ({
         justifyContent: 'space-between',
     },
     primaryCategories: {
+        cursor: 'pointer',
         '&:hover': {
             color: '#e3eefa',
+
             '& $secondaryCategories': {
+                transitionDelay: '0.3s',
                 visibility: 'visible',
                 opacity: 1,
                 transform: 'scale(1)',
+                top: '100%',
             },
             '& $overlay': {
-                display: 'block',
+                transitionDelay: '0.3s',
+                visibility: 'visible',
+                opacity: 1,
             }
-
         }
     },
     secondaryCategories: {
@@ -39,14 +44,13 @@ export default makeStyles((theme) => ({
         backgroundColor: 'white',
         color: 'black',
         right: '0',
-        top: '100%',
+        top: '4.5rem',
         padding: 20,
         width: '100%',
         visibility: 'hidden',
         opacity: 0,
-        transition: 'all 0.3s',
-        transformOrigin: 'top center',
-        transform: 'scale(0.2)',
+        transition: 'all 0.4s',
+        transformOrigin: 'top',
         '&:after': {
             content: '""',
             position: 'absolute',
@@ -65,9 +69,7 @@ export default makeStyles((theme) => ({
         //     left: '-15px'
         // }
     },
-    isOff: {
-        display: 'none'
-    },
+
     //overlay
     overlay: {
         content: '""',
@@ -75,21 +77,28 @@ export default makeStyles((theme) => ({
         top: '100%',
         left: 0,
         width: '100%',
-        display: 'none',
+        visibility: 'hidden',
+        opacity: 0,
         height: '100vh',
         backgroundColor: 'rgba(0,0,0,0.5)',
+        transition: 'all 0.4s',
         zIndex: 900,
-        '&:hover': {
-            display: 'none',
-        }
     },
 
+    // click
+    isOff: {
+        display: 'none',
+        visibility: 'visible',
+        opacity: 0,
+    },
     //item
     boxEachChildCate: {
         position: 'relative',
         width: 'fit-content',
+        transform: 'translateX(-30px)',
     },
     eachChildCate: {
+
         '&:before': {
             content: '""',
             position: 'absolute',

@@ -2,7 +2,7 @@ import { makeStyles } from '@mui/styles';
 
 export default makeStyles((theme) => ({
     box: {
-        margin: '2rem 0',
+        margin: '3rem 0',
         position: 'relative',
     },
 

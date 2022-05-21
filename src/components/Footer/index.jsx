@@ -1,6 +1,7 @@
 import { Box, Container, Divider, Grid, Typography } from '@mui/material';
 import React from 'react'
 import useStyles from './styles';
+
 const Footer = () => {
   const classes = useStyles();
   return (
@@ -38,7 +39,7 @@ const Footer = () => {
             </Grid>
           </Grid>
           <Divider sx={{ borderColor: 'gray' }} />
-          <Grid container sx={{ padding: '1rem 0' }}>
+          {/* <Grid container sx={{ padding: '1rem 0' }}>
             <Grid item xs={2}>
               <Box>
                 <h1>Footer</h1>
@@ -64,7 +65,8 @@ const Footer = () => {
                 <h1>Footer</h1>
               </Box>
             </Grid>
-          </Grid>
+          </Grid> */}
+
         </Container>
       </Box>
     </Box>

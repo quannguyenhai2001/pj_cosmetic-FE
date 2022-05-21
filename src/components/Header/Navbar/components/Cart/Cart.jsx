@@ -88,7 +88,11 @@ const Cart = () => {
                         </Grid>
                     </Card>
                 )))
-                : null
+                : (
+                    <Typography sx={{ display: 'grid', placeItems: 'center', height: 'inherit' }}>
+                        Cart is empty
+                    </Typography>
+                )
             }
         </Box>
     );

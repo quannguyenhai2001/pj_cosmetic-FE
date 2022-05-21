@@ -3,14 +3,16 @@ import React from 'react';
 import DialogBox from './components/DialogBox/DialogBox';
 import SlideBanner from './components/SlideBanner/SlideBanner';
 import TagsProduct from './components/TagsProduct/TagsProduct';
+import Video from './components/Video/Video';
 
 const HomeUserScreen = () => {
 
     return (
-        <Box sx={{ marginBottom: 30 }}>
-            <DialogBox />
-            <SlideBanner />
-            <Container maxWidth="lg">
+        <Box sx={{ marginBottom: 30, position: 'relative' }}>
+            {/* <DialogBox /> */}
+            {/* <SlideBanner /> */}
+            <Video />
+            <Container maxWidth="lg" sx={{ paddingTop: '55rem' }}>
                 <TagsProduct />
                 <Box sx={{ textAlign: 'center' }}>
                     <Typography variant="h4" gutterBottom>Map location</Typography>

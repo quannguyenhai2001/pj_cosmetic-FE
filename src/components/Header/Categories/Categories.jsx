@@ -39,21 +39,27 @@ export default function Categories(props) {
     React.useEffect(() => {
         if (isCheck) {
             setIsCheck(false)
-
+            console.log("check")
         }
     }, [params.categoryId, isCheck]);
 
+
+    const handleMouseLeave = (event) => {
+        if (event.target.id === 'overlay') {
+            setIsCheck(true)
+        }
+    }
     // list categories render
     const listNav = listCategories.map((category, index) => {
         return (
             <li key={index} className={classes.primaryCategories}>
                 {category.name}
-                <ul className={!isCheck ? classes.secondaryCategories : classes.isOff}>
+                <ul className={!isCheck ? classes.secondaryCategories : classes.isOff}  >
                     <Grid container spacing={3}>
                         {category.listChildCategories ? category.listChildCategories.map((childCategory, index) => {
                             return (
                                 <Grid item xs={3} key={index} >
-                                    <Box sx={{ display: 'grid', placeItems: 'center' }}>
+                                    <Box sx={{ display: 'grid', placeItems: 'center' }} >
                                         <Box className={classes.boxEachChildCate} onClick={handleHiddenNav}>
                                             <Typography component={Link} to={`/products/${childCategory.id}`} className={classes.eachChildCate}> {childCategory.name}</Typography>
                                         </Box>
@@ -64,7 +70,7 @@ export default function Categories(props) {
                         }) : null}
                     </Grid>
                 </ul>
-                <Box className={!isCheck ? classes.overlay : classes.isOff}>
+                <Box id="overlay" className={!isCheck ? classes.overlay : classes.isOff} >
 
                 </Box>
             </li>
@@ -72,7 +78,7 @@ export default function Categories(props) {
     })
 
     return (
-        <Box sx={{ marginTop: "6rem" }}>
+        <Box sx={{ marginTop: "6rem" }} onMouseMove={handleMouseLeave}>
             <nav className={classes.nav}>
                 <ul className={classes.ul}>
                     {listCategories.length > 0 ?

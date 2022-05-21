@@ -1,10 +1,10 @@
-import { Button, Container, Divider, Grid, Typography } from '@mui/material'
+import { Avatar, Box, Button, Container, Divider, FormControl, Grid, Typography } from '@mui/material'
 import React, { useState } from 'react';
 import * as Yup from 'yup';
 import useStyles from './styles'
 import { Field, Form, Formik } from 'formik';
 import InputField from 'custom-fields/InputField/InputField';
-
+import Logo from 'assets/img/logo/logo_web.png';
 import { useDispatch } from 'react-redux';
 import { fetchAsyncSignIn } from 'slices/UserSlice';
 import { Link, useNavigate } from 'react-router-dom';
@@ -23,7 +23,6 @@ const SignInUserScreen = () => {
 
     const handleShowPassword = () => {
         setShowPassword(!showPassword)
-        console.log("click")
     }
 
     const initialValues = {
@@ -53,7 +52,7 @@ const SignInUserScreen = () => {
     return (
         <Container maxWidth="xl" className={classes.container}>
             <Grid container className={classes.gridContainer}>
-                <Grid item xs={6} className={classes.sideRight}>
+                <Grid item xs={6} className={classes.eachSide}>
                     <Formik
                         initialValues={initialValues}
                         validationSchema={validationSchema}
@@ -65,10 +64,11 @@ const SignInUserScreen = () => {
                             return (
                                 <Form className={classes.formSignIn}>
                                     <Container sx={{ width: '35rem' }}>
-                                        <Typography variant="h5" sx={{ textAlign: 'center', marginBottom: '2rem' }}>
+                                        <Typography variant="h4" className={classes.typoTitleRight}>
                                             SIGN IN
                                         </Typography>
                                         <Grid container spacing={2}>
+
                                             <Field
                                                 name="email"
                                                 component={InputField}
@@ -86,6 +86,7 @@ const SignInUserScreen = () => {
                                                 error={error}
                                                 changeError={changeError}
                                             />
+
                                         </Grid>
                                         <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
                                             Submit
@@ -96,8 +97,23 @@ const SignInUserScreen = () => {
                         }}
                     </Formik >
                 </Grid>
-
+                <Grid item>
+                    <Box sx={{
+                        height: '50rem',
+                        width: '1px',
+                        position: 'absolute',
+                        margin: '2rem 0',
+                        backgroundColor: 'black',
+                    }}></Box>
+                </Grid>
                 <Grid item xs={6} className={classes.sideRight}>
+                    <Typography>
+                        Supplier of high quality beauty products
+                    </Typography>
+                    <Typography variant='h6' sx={{ fontWeight: 600 }}>
+                        Please come with us
+                    </Typography>
+                    <Avatar className={classes.avatar} src={Logo} alt="logo" />
                     <Typography sx={{ display: 'inline-block' }}>
                         Do not have an account?
                     </Typography>

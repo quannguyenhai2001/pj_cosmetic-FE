@@ -62,7 +62,6 @@ export default makeStyles((theme) => ({
   },
   customFileInput: {
     opacity: 0,
-    position: 'absolute',
     zIndex: - 1,
   },
   labelFile: {

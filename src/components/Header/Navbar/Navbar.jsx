@@ -22,7 +22,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { deleteUserDetail } from 'slices/UserSlice';
 import Cart from './components/Cart/Cart';
-import logo from '../../../assets/logo/logo_web.png';
+import logo from 'assets/img/logo/logo_web.png';
 //hide and show navbar
 function HideOnScroll(props) {
     const { children, window } = props;

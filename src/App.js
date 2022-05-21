@@ -20,23 +20,23 @@ function App() {
   }, [dispatch])
 
   //reomove count loaded
-  useEffect(() => {
-    window.onclick = () => {
-      console.log("fgfgfg")
-    }
+  // useEffect(() => {
+  //   window.onclick = () => {
 
-    window.ondestroy = (e) => {
-      console.log(e.clientY)
-      // if (window.event.clientY < 0) {
-      console.log(e)
-      if (e.clientY < 0) {
-        localStorage.removeItem('loaded')
-      }
+  //   }
 
-      // }
+  //   window.ondestroy = (e) => {
+  //     console.log(e.clientY)
+  //     // if (window.event.clientY < 0) {
+  //     console.log(e)
+  //     if (e.clientY < 0) {
+  //       localStorage.removeItem('loaded')
+  //     }
 
-    }
-  }, []);
+  //     // }
+
+  //   }
+  // }, []);
 
   return (
     <div>
