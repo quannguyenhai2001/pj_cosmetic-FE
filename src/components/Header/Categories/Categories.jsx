@@ -92,7 +92,7 @@ export default function Categories(props) {
                                     About us
                                 </li>
                                 <li>
-                                    About us
+                                    Contact
                                 </li>
                             </>
                         )

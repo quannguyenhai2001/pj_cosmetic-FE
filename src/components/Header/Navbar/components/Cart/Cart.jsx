@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import { productImages } from 'assets/img/imgProductDetail';
 import DeleteIcon from '@mui/icons-material/Delete';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
@@ -46,7 +45,7 @@ const Cart = () => {
                                 <CardMedia
                                     component="img"
                                     sx={{ width: '100%', height: '100%' }}
-                                    image={productImages[0]}
+                                    image="https://res.cloudinary.com/cosmeticv1/image/upload/v1653237463/cosmetic/products/Product7_2.webp"
                                     alt="product"
                                 />
                             </Grid>

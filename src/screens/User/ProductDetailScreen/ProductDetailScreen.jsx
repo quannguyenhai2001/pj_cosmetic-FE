@@ -1,5 +1,4 @@
 import { Container, Typography, Grid, Button, Box, Paper, Divider } from '@mui/material';
-import { productImages } from 'assets/img/imgProductDetail';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -15,6 +14,7 @@ const ProductDetailScreen = () => {
     const listProductInCart = useSelector(state => state.product.listProductInCart);
     const params = useParams();
     const { id } = params;
+
 
     useEffect(() => {
         dispatch(fetchAsyncGetDetailProduct({ id }));
@@ -38,13 +38,13 @@ const ProductDetailScreen = () => {
         }
     }
 
-
+    console.log(JSON.parse(detailProduct.image))
     return (
         <Container maxWidth='xl' sx={{ height: 'fit-content' }}>
             <Typography>Title</Typography>
             <Grid container spacing={3}>
                 <Grid item xs={12} sm={5}>
-                    <ProductImagesSlider images={productImages} />
+                    {detailProduct.image && <ProductImagesSlider images={JSON.parse(detailProduct.image)} />}
                 </Grid>
                 <Grid item xs={12} sm={7} sx={{ fontSize: '3rem' }}>
                     <Typography variant='h6' sx={{ fontWeight: 650 }}>{detailProduct.productName}</Typography>

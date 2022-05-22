@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import useStyles from './styles';
 import Rating from '@mui/material/Rating';
 
-const Products = () => {
+const Products = (props) => {
     const classes = useStyles();
     const listProducts = useSelector(state => state.product.listProducts);
     const errorListProducts = useSelector(state => state.product.errorListProducts);
@@ -26,7 +26,7 @@ const Products = () => {
 
     //pagination
     const handleChange = (event, value) => {
-        console.log(value);
+        props.setPage(value);
     };
 
     //render lissProducts
@@ -105,7 +105,7 @@ const Products = () => {
                                 {renderList}
                                 <Box sx={{ margin: '5rem 0', textAlign: 'center' }}>
                                     <Stack spacing={2} className={classes.stackPagination}>
-                                        <Pagination count={listProducts.pageTotal} color="primary" size="large" shape="rounded" variant="outlined" onChange={handleChange} />
+                                        <Pagination count={listProducts.pageTotal} color="primary" size="large" page={props.page} shape="rounded" variant="outlined" onChange={handleChange} />
                                     </Stack>
                                 </Box>
                             </>

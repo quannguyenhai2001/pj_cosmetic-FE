@@ -8,7 +8,7 @@ export const fetchAsyncGetAllProducts = createAsyncThunk(
     "product/fetchAsyncGetAllProducts",
     async (arg, { rejectWithValue }) => {
         try {
-            const response = await CallApiByBody("products/get-product.php", "get", null)
+            const response = await CallApiByBody("products/get-products.php", "get", null)
             return response.data
         } catch (error) {
             return rejectWithValue(error.response.data)
@@ -47,7 +47,7 @@ export const fetchAsyncFilterProduct = createAsyncThunk(
     "product/fetchAsyncFilterProduct",
     async (arg, { rejectWithValue }) => {
         try {
-            const response = await CallApiByParams("products/get-product.php", "get", arg)
+            const response = await CallApiByParams("products/get-products.php", "get", arg)
             return response.data
         } catch (error) {
             return rejectWithValue(error.response.data)
@@ -200,7 +200,7 @@ const productSlice = createSlice({
         //get all products
         [fetchAsyncGetAllProducts.fulfilled]: (state, action) => {
             state.listAllProducts = action.payload.data
-            // console.log(action.payload.data)
+            console.log(action.payload)
         },
         [fetchAsyncGetAllProducts.rejected]: (state, action) => {
             console.log(action.payload)

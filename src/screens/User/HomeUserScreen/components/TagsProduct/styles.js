@@ -22,7 +22,7 @@ export default makeStyles((theme) => ({
         width: '100%',
         height: '60%',
         objectFit: 'fill',
-        border: '1px solid #e6e6e6',
+
     },
 
     //number 
@@ -30,6 +30,7 @@ export default makeStyles((theme) => ({
         position: 'relative',
         width: '100%',
         height: '100%',
+        cursor: 'pointer',
     },
 
     boxContentNumber: {
@@ -37,13 +38,13 @@ export default makeStyles((theme) => ({
         top: 1,
         left: 1,
         boxShadow: ' 50px 50px 100px #5a5a5a,-50px -50px 100px #ffffff',
-        clipPath: 'polygon(0 0, 100% 0%, 75% 100%, 0% 100%)',
-        backgroundColor: '#fff',
+        backgroundColor: 'black',
+        color: 'white',
         width: '3rem',
-        height: '2.6rem',
+        height: '2rem',
         paddingTop: '0.5rem',
         textAlign: 'center',
         fontWeight: 'bold',
-        fontSize: '1.3rem',
+        fontSize: '1.1rem',
     }
 }));

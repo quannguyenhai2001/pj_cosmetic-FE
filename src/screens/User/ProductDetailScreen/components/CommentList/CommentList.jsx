@@ -62,7 +62,7 @@ const CommentList = (props) => {
   }
 
 
-  const render = (listComment.length) === 0 ? (<div>loading...</div>) :
+  const render = (listComment.length) === 0 ? (<div>No comment...</div>) :
     (
       listComment.map((value, index) => {
         return (<Box className={classes.eachComment} key={index}>

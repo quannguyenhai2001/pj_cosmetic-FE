@@ -59,6 +59,7 @@ export default makeStyles((theme) => ({
     box: {
         display: 'flex',
         flexDirection: 'column-reverse',
+        marginBottom: '3rem',
     },
 
     displayNone: {

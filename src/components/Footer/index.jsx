@@ -9,6 +9,11 @@ import PinterestIcon from '@mui/icons-material/Pinterest';
 import GoogleIcon from '@mui/icons-material/Google';
 import USIcon from 'assets/img/footer/img-language/united-states.png'
 import CanadaIcon from 'assets/img/footer/img-language/canada.png'
+import AddBusinessIcon from '@mui/icons-material/AddBusiness';
+import AddCardIcon from '@mui/icons-material/AddCard';
+import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
+import ApprovalIcon from '@mui/icons-material/Approval';
 const Footer = () => {
   const classes = useStyles();
   return (
@@ -18,30 +23,47 @@ const Footer = () => {
       </Box>
       <Box className={classes.boxFooter}>
         <Container maxWidth="xl">
-          <Grid container sx={{ padding: '1rem 0' }}>
+          <Grid container sx={{ padding: '2rem 0' }}>
             <Grid item xs={2}>
-              <Box>
-                <h1>Footer</h1>
+              <Box sx={{ display: 'flex', gap: '1rem', alignItems: 'center' }} >
+                <AddBusinessIcon fontSize='large' />
+                <Typography component='span'>
+                  Find a Store
+                </Typography>
+              </Box>
+
+            </Grid>
+            <Grid item xs={2}>
+              <Box sx={{ display: 'flex', gap: '1rem', alignItems: 'center' }} >
+                <ChatBubbleOutlineIcon fontSize='large' />
+                <Typography component='span'>
+                  Live Beauty Help
+                </Typography>
               </Box>
             </Grid>
             <Grid item xs={2}>
-              <Box>
-                <h1>Footer</h1>
-              </Box>
-            </Grid>
-            <Grid item xs={2}>
-              <Box>
-                <h1>Footer</h1>
+              <Box sx={{ display: 'flex', gap: '1rem', alignItems: 'center' }} >
+                <LocalPhoneIcon fontSize='large' />
+                <Typography component='span'>
+                  1-877-737-4672
+                </Typography>
               </Box>
             </Grid>
             <Grid item xs={3}>
-              <Box>
-                <h1>Footer</h1>
+              <Box sx={{ display: 'flex', gap: '1rem', alignItems: 'center' }} >
+                <ApprovalIcon fontSize='large' />
+                <Typography component='span'>
+                  Get the App
+                </Typography>
               </Box>
             </Grid>
             <Grid item xs={3}>
-              <Box>
-                <h1>Footer</h1>
+
+              <Box sx={{ display: 'flex', gap: '1rem', alignItems: 'center' }} >
+                <AddCardIcon fontSize='large' />
+                <Typography component='span'>
+                  Want 25% off your ASP purchase1? DETAILS
+                </Typography>
               </Box>
             </Grid>
           </Grid>
@@ -133,19 +155,19 @@ const Footer = () => {
                 <Typography sx={{ fontWeight: 'bold' }}>
                   Region & Language
                 </Typography>
-                <Box sx={{ display: 'flex' }}>
+                <Box sx={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
                   <img src={USIcon} alt="US" style={{ width: '2.5rem', height: '2.5rem' }} />
                   <Typography component='span'>
                     United States - English
                   </Typography>
                 </Box>
-                <Box sx={{ display: 'flex' }}>
+                <Box sx={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
                   <img src={CanadaIcon} alt="canada" style={{ width: '2.5rem', height: '2.5rem' }} />
                   <Typography component='span'>
                     Canada - English
                   </Typography>
                 </Box>
-                <Box sx={{ display: 'flex' }}>
+                <Box sx={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
                   <img src={CanadaIcon} alt="canada" style={{ width: '2.5rem', height: '2.5rem' }} />
                   <Typography component='span'>
                     Canada - Français

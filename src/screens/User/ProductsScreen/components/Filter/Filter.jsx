@@ -26,113 +26,95 @@ const Filter = (props) => {
     const dispatch = useDispatch();
     const params = useParams();
 
+
+    const handleSetPage = () => {
+        props.handleSetPage();
+    }
     //filter price
-    const [valuePrice, setValuePrice] = React.useState([0, 1000]);
     const [isCheckChangePrice, setIsCheckChangePrice] = React.useState(false);
     const handleChangePrice = (event, newValue) => {
-        setValuePrice(newValue);
         setIsCheckChangePrice(true);
-        console.log("dfdfd")
+        setArray1({ ...array1, price: newValue, page: '' })
 
     };
 
     //filter manu
     const [checkedManu, setCheckedManu] = React.useState(false);
     const [valueIndex, setValueIndex] = React.useState('');
-    const [valueIdManu, setValueIdManu] = React.useState('');
     const handleChangeCheckedManu = (event) => {
         setCheckedManu(event.target.checked)
         if (!event.target.checked) {
-            setValueIdManu('')
+            setArray1({ ...array1, manu_Id: '' })
+
         }
-
     }
-
     const handleClickCheckBox = (arg) => {
         setValueIndex(arg.index);
-        setValueIdManu(arg.item.id);
+        setArray1({ ...array1, manu_Id: arg.item.id })
+
     }
 
     //filter sale
-    const [checkedSale, setCheckedSale] = React.useState(false);
     const handleChangeCheckedSale = (event) => {
-        setCheckedSale(event.target.checked);
-
+        // setCheckedSale(event.target.checked);
+        setArray1({ ...array1, promotion: event.target.checked })
     };
-    console.log({ page: props.page })
+
+    // array tham so
+    const [array1, setArray1] = React.useState({ cate_Id: params.categoryId, manu_Id: '', price: [0, 300], promotion: '', limit: 16, page: '' });
+
     //call api
     React.useEffect(() => {
-        if (valueIdManu && !checkedSale && !isCheckChangePrice) {
-            dispatch(fetchAsyncFilterProduct(
-                {
-                    cate_Id: params.categoryId,
-                    manu_Id: valueIdManu,
+        // console.log({ array: array1 })
+        let newArray = {};
 
-                }))
-            navigate('/products/' + params.categoryId + '?manu_id=' + valueIdManu)
+        for (let key in array1) {
+            if (array1[key]) {
+                newArray[key] = array1[key];
+            }
         }
-        else if (!valueIdManu && checkedSale && !isCheckChangePrice) {
-            dispatch(fetchAsyncFilterProduct(
-                {
-                    cate_Id: params.categoryId,
-                    promotion: true,
-
-                }))
-            navigate('/products/' + params.categoryId + '?promotion=' + true)
-        }
-        else if (valueIdManu && checkedSale && !isCheckChangePrice) {
-            dispatch(fetchAsyncFilterProduct(
-                {
-                    cate_Id: params.categoryId,
-                    manu_Id: valueIdManu,
-                    promotion: true,
-
-                }))
-            navigate('/products/' + params.categoryId + '?manu_id=' + valueIdManu + '&promotion=' + true)
+        if (props.page !== 0) {
+            newArray.page = props.page;
         }
 
-        else if (valueIdManu && checkedSale && valuePrice && isCheckChangePrice) {
-            dispatch(fetchAsyncFilterProduct(
-                {
-                    cate_Id: params.categoryId,
-                    promotion: true,
-                    price: valuePrice,
-                    manu_Id: valueIdManu,
+        dispatch(fetchAsyncFilterProduct(
+            {
+                cate_Id: params.categoryId,
+                ...newArray
+            }))
 
-                }))
-            navigate('/products/' + params.categoryId + '?manu_id=' + valueIdManu + '&price[]=' + valuePrice[0] + '&price[]=' + valuePrice[1] + '&promotion=' + true)
+        //params string
+        let stringParams = '';
+        for (let key in newArray) {
+
+            if (key !== 'price' & key !== 'limit' & key !== 'cate_Id') {
+                stringParams += `${key}=${newArray[key]}&`;
+            }
         }
-        else if (!valueIdManu && checkedSale && valuePrice && isCheckChangePrice) {
-            dispatch(fetchAsyncFilterProduct(
-                {
-                    cate_Id: params.categoryId,
-                    promotion: true,
-                    price: valuePrice,
+        if (!isCheckChangePrice) {
 
-                }))
-            navigate('/products/' + params.categoryId + '?price[]=' + valuePrice[0] + '&price[]=' + valuePrice[1] + '&promotion=' + true)
+            const editedTextNoPrice = stringParams.slice(0, -1)
+            navigate('/products/' + params.categoryId + `?${editedTextNoPrice}`)
         }
         else {
-            dispatch(fetchAsyncFilterProduct(
-                {
-                    cate_Id: params.categoryId,
-                }))
+            stringParams += `price[]=${newArray.price[0]}&price[]=${newArray.price[1]}&`;
+            const editedTextHavePrice = stringParams.slice(0, -1)
+            navigate('/products/' + params.categoryId + `?${editedTextHavePrice}`)
         }
         return () => {
             dispatch(deleteListProducts());
             // console.log("unmount filter")
-
         }
-    }, [valueIdManu, checkedSale, dispatch, params.categoryId, valuePrice, isCheckChangePrice, navigate]);
+    }, [array1, props.page, isCheckChangePrice, dispatch, params.categoryId, navigate]);
 
+    //reset filter
     React.useEffect(() => {
-        setValueIdManu('');
+        setArray1({ cate_Id: params.categoryId, manu_Id: '', price: [0, 300], promotion: '', limit: 16 });
         setValueIndex('');
         setCheckedManu(false);
-        setCheckedSale(false);
-        setValuePrice([0, 1000]);
         navigate('/products/' + params.categoryId)
     }, [params.categoryId, navigate]);
+
     return (
         <Box>
             <Typography variant="h6">Filter</Typography>
@@ -175,14 +157,14 @@ const Filter = (props) => {
                             <Slider
                                 sx={{ width: '80%' }}
                                 max={300}
-                                value={valuePrice}
+                                value={array1.price}
                                 onChange={handleChangePrice}
                                 valueLabelDisplay="auto"
                                 getAriaValueText={valuetext}
                             />
                         </Box>
 
-                        <Typography>Price ${valuePrice[0]} to ${valuePrice[1]}</Typography>
+                        <Typography>Price ${array1.price[0]} to ${array1.price[1]}</Typography>
                     </Box>
                 </AccordionDetails>
             </Accordion>
@@ -198,8 +180,10 @@ const Filter = (props) => {
                 </AccordionSummary>
                 <AccordionDetails className={classes.rootAccordionDetails}>
                     <FormGroup>
-                        <FormControlLabel control={<Checkbox checked={checkedSale}
+                        <FormControlLabel control={<Checkbox checked={setArray1.promotion}
                             onChange={handleChangeCheckedSale}
+
+                            onClick={handleSetPage}
                             inputProps={{ 'aria-label': 'controlled' }} />} label="Sale" />
                     </FormGroup>
                 </AccordionDetails>

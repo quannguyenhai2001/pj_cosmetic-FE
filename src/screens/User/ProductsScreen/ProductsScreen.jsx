@@ -35,8 +35,10 @@ const ProductsScreen = () => {
 
 
     //page panigation
-    const [page, setPage] = React.useState(0);
-
+    const [page, setPage] = React.useState(1);
+    const handleSetPage = () => {
+        setPage(1);
+    }
     return (
         <Container maxWidth="xl" className={classes.screen}>
             <Grid container spacing={2}>
@@ -48,10 +50,10 @@ const ProductsScreen = () => {
                             </>)
                             : ''}
                     </Typography>
-                    <Filter page={page} />
+                    <Filter page={page} handleSetPage={handleSetPage} />
                 </Grid>
                 <Grid item xs={10}>
-                    <Products page={setPage} />
+                    <Products setPage={setPage} page={page} />
                 </Grid>
             </Grid>
             <Box>

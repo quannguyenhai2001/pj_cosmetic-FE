@@ -29,9 +29,8 @@ const InpuntComment = () => {
             id: id,
             comment: comment,
         })).unwrap().then(() => {
-
             dispatch(fetchAsyncGetListCommentByProduct({ id }))
-
+            setComment('')
         }).catch(err => {
             console.log(err)
         })
