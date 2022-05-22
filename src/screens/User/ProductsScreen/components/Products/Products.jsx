@@ -8,7 +8,8 @@ import { Box, Grid, Pagination, Skeleton, Stack } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import useStyles from './styles';
 import Rating from '@mui/material/Rating';
-export default function Products() {
+
+const Products = () => {
     const classes = useStyles();
     const listProducts = useSelector(state => state.product.listProducts);
     const errorListProducts = useSelector(state => state.product.errorListProducts);
@@ -21,12 +22,17 @@ export default function Products() {
     }
 
     //skeleton
-    const [arraySkeleton, setArraySkeleton] = React.useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
+    let arraySkeleton = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
+    //pagination
+    const handleChange = (event, value) => {
+        console.log(value);
+    };
 
     //render lissProducts
-    let renderList = listProducts.length > 0 ?
+    let renderList = Object.keys(listProducts).length > 0 ?
         (<Grid container spacing={4}>
-            {listProducts.map((product, index) => {
+            {listProducts.data.map((product, index) => {
                 return (
                     <Grid item xs={3} key={index}>
                         <Card className={classes.rootCard} onClick={() => { handleClick(product.id) }}>
@@ -39,7 +45,7 @@ export default function Products() {
                             <CardMedia className={classes.rootCardMedia}
                                 component="img"
                                 height="220"
-                                image="https://res.cloudinary.com/cosmeticv1/image/upload/v1651659763/myfolder/mysubfolder/product1.png"
+                                image="https://res.cloudinary.com/cosmeticv1/image/upload/v1653222162/myfolder/mysubfolder/Product17_2_fhe5qr.webp"
                                 alt="green iguana"
                             />
                             {/* content */}
@@ -48,7 +54,7 @@ export default function Products() {
                                     {product.manufacturersName}
                                 </Typography>
                                 <Typography gutterBottom sx={{ height: 42 }} component="div">
-                                    {product.productName}
+                                    {product.productsName}
                                 </Typography>
                                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                                     <Typography color="text.primary" sx={{ fontWeight: 650 }}>
@@ -86,11 +92,10 @@ export default function Products() {
         )
     //rating
 
-
     return (
         <Box>
             <Typography sx={{ marginBottom: '1rem' }} color="text.secondary">
-                {listProducts.length} Results
+                {listProducts.total} Results
             </Typography>
             <Box>
                 {
@@ -100,7 +105,7 @@ export default function Products() {
                                 {renderList}
                                 <Box sx={{ margin: '5rem 0', textAlign: 'center' }}>
                                     <Stack spacing={2} className={classes.stackPagination}>
-                                        <Pagination count={10} color="primary" size="large" shape="rounded" variant="outlined" />
+                                        <Pagination count={listProducts.pageTotal} color="primary" size="large" shape="rounded" variant="outlined" onChange={handleChange} />
                                     </Stack>
                                 </Box>
                             </>
@@ -115,3 +120,4 @@ export default function Products() {
 }
 
 
+export default React.memo(Products);

@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import React from 'react';
+import React, { memo } from 'react';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -18,7 +18,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 function valuetext(value) {
     return `${value}°C`;
 }
-const Filter = () => {
+
+const Filter = (props) => {
     const classes = useStyles();
     const listManu = useSelector(state => state.product.listManufacturers);
     const navigate = useNavigate();
@@ -58,7 +59,7 @@ const Filter = () => {
         setCheckedSale(event.target.checked);
 
     };
-
+    console.log({ page: props.page })
     //call api
     React.useEffect(() => {
         if (valueIdManu && !checkedSale && !isCheckChangePrice) {
@@ -208,4 +209,4 @@ const Filter = () => {
     );
 };
 
-export default Filter;
+export default memo(Filter);

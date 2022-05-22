@@ -1,11 +1,18 @@
 import { Box, Container, Typography } from '@mui/material';
-import React from 'react';
+import React, { memo } from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchAsyncGetAllProducts } from 'slices/ProductSlice';
 import DialogBox from './components/DialogBox/DialogBox';
 import SlideBanner from './components/SlideBanner/SlideBanner';
 import TagsProduct from './components/TagsProduct/TagsProduct';
 import Video from './components/Video/Video';
-
 const HomeUserScreen = () => {
+    const dispatch = useDispatch();
+
+    React.useEffect(() => {
+        dispatch(fetchAsyncGetAllProducts());
+    }, [dispatch]);
+
 
     return (
         <Box sx={{ marginBottom: 30, position: 'relative' }}>
@@ -23,4 +30,4 @@ const HomeUserScreen = () => {
     );
 };
 
-export default HomeUserScreen;
+export default memo(HomeUserScreen);

@@ -6,7 +6,7 @@ import { deleteListProducts, fetchAsyncGetManu } from 'slices/ProductSlice';
 import Filter from './components/Filter/Filter';
 import Products from './components/Products/Products';
 import useStyles from './styles';
-import { fetchAsyncGetListProductByChidCategories } from 'slices/ProductSlice';
+
 const ProductsScreen = () => {
     const dispatch = useDispatch();
     const classes = useStyles();
@@ -15,7 +15,6 @@ const ProductsScreen = () => {
     //get title category
     const listCategories = useSelector(state => state.product.listCategories);
     const [titleCategory, setTitleCategory] = React.useState({});
-
     useEffect(() => {
         listCategories.forEach(category => {
             category.listChildCategories.forEach(childCategory => {
@@ -26,15 +25,17 @@ const ProductsScreen = () => {
         })
     }, [listCategories, params.categoryId]);
 
-    //get manu and list product
+    //get manu and delete list manu
     useEffect(() => {
-        // dispatch(fetchAsyncGetListProductByChidCategories({ id: params.categoryId }))
         dispatch(fetchAsyncGetManu())
         return () => {
             dispatch(deleteListProducts());
         }
-
     }, [dispatch, params.categoryId]);
+
+
+    //page panigation
+    const [page, setPage] = React.useState(0);
 
     return (
         <Container maxWidth="xl" className={classes.screen}>
@@ -47,10 +48,10 @@ const ProductsScreen = () => {
                             </>)
                             : ''}
                     </Typography>
-                    <Filter />
+                    <Filter page={page} />
                 </Grid>
                 <Grid item xs={10}>
-                    <Products />
+                    <Products page={setPage} />
                 </Grid>
             </Grid>
             <Box>

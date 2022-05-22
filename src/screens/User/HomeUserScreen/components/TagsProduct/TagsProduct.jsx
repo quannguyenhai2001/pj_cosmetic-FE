@@ -16,9 +16,10 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/effect-creative";
 import { Button } from '@mui/material';
+import { useSelector } from 'react-redux';
+import GetRandomNumber from 'utils/GetRandomNumber';
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
-    const classes = useStyles();
     return (
         <div
             role="tabpanel"
@@ -28,104 +29,9 @@ function TabPanel(props) {
             {...other}
         >
             {value === index && (
-                <Swiper
-                    className={classes.swiper}
-                    slidesPerView={6}
-                    spaceBetween={45}
-                    navigation={true}
-                    modules={[Navigation]}
-                >
-                    <SwiperSlide>
-                        <Box className={classes.boxContent}>
-                            <Box className={classes.boxContentNumber}>
-                                #1
-                            </Box>
-
-                            <img className={classes.swiperSlideImg} src={productImages[0]} alt="Product" />
-
-
-                            <Box sx={{ textAlign: 'center' }}>
-                                <Typography component="div" sx={{ fontWeight: 'bold', margin: '1rem 0' }}>
-                                    Ten nha cung cap
-                                </Typography>
-                                <Typography component="div">
-                                    ten san pham
-                                </Typography>
-                            </Box>
-                        </Box>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <Box className={classes.boxContent}>
-                            <Box className={classes.boxContentNumber}>
-                                #1
-                            </Box>
-                            <img className={classes.swiperSlideImg} src={productImages[0]} alt="Product" />
-                            <Box sx={{ textAlign: 'center' }}>
-                                <Typography component="div" sx={{ fontWeight: 'bold', margin: '1rem 0' }}>
-                                    Ten nha cung cap
-                                </Typography>
-                                <Typography component="div">
-                                    ten san pham
-                                </Typography>
-                            </Box>
-                        </Box>
-                    </SwiperSlide>
-                    <SwiperSlide >
-                        <img className={classes.swiperSlideImg} src={productImages[0]} alt="Product" />
-                        <Box sx={{ textAlign: 'center' }}>
-                            <Typography component="div" sx={{ fontWeight: 'bold', margin: '1rem 0' }}>
-                                Ten nha cung cap
-                            </Typography>
-                            <Typography component="div">
-                                ten san pham
-                            </Typography>
-                        </Box>
-                    </SwiperSlide>
-                    <SwiperSlide >
-                        <img className={classes.swiperSlideImg} src={productImages[0]} alt="Product" />
-                        <Box sx={{ textAlign: 'center' }}>
-                            <Typography component="div" sx={{ fontWeight: 'bold', margin: '1rem 0' }}>
-                                Ten nha cung cap
-                            </Typography>
-                            <Typography component="div">
-                                ten san pham
-                            </Typography>
-                        </Box>
-                    </SwiperSlide>
-                    <SwiperSlide >
-                        <img className={classes.swiperSlideImg} src={productImages[0]} alt="Product" />
-                        <Box sx={{ textAlign: 'center' }}>
-                            <Typography component="div" sx={{ fontWeight: 'bold', margin: '1rem 0' }}>
-                                Ten nha cung cap
-                            </Typography>
-                            <Typography component="div">
-                                ten san pham
-                            </Typography>
-                        </Box>
-                    </SwiperSlide>
-                    <SwiperSlide >
-                        <img className={classes.swiperSlideImg} src={productImages[0]} alt="Product" />
-                        <Box sx={{ textAlign: 'center' }}>
-                            <Typography component="div" sx={{ fontWeight: 'bold', margin: '1rem 0' }}>
-                                Ten nha cung cap
-                            </Typography>
-                            <Typography component="div">
-                                ten san pham
-                            </Typography>
-                        </Box>
-                    </SwiperSlide>
-                    <SwiperSlide >
-                        <img className={classes.swiperSlideImg} src={productImages[0]} alt="Product" />
-                        <Box sx={{ textAlign: 'center' }}>
-                            <Typography component="div" sx={{ fontWeight: 'bold', margin: '1rem 0' }}>
-                                Ten nha cung cap
-                            </Typography>
-                            <Typography component="div">
-                                ten san pham
-                            </Typography>
-                        </Box>
-                    </SwiperSlide>
-                </Swiper >
+                <Box>
+                    {children}
+                </Box>
             )}
         </div>
     );
@@ -140,7 +46,9 @@ function a11yProps(index) {
 
 export default function TagsProduct() {
     const [value, setValue] = React.useState(0);
-
+    const classes = useStyles();
+    const listAllProducts = useSelector(state => state.product.listAllProducts);
+    // console.log(GetRandomNumber(listAllProducts, 15))
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
@@ -162,13 +70,100 @@ export default function TagsProduct() {
             </Box>
             <Box>
                 <TabPanel value={value} index={0}>
-                    Selling Fast
+                    <Swiper
+                        className={classes.swiper}
+                        slidesPerView={6}
+                        spaceBetween={45}
+                        navigation={true}
+                        modules={[Navigation]}
+                    >
+                        {listAllProducts.length > 0 ?
+                            (
+                                listAllProducts.slice(1, 15).map((item, index) => (
+                                    <SwiperSlide key={index}>
+                                        <Box className={classes.boxContent}>
+                                            <Box className={classes.boxContentNumber}>
+                                                #{index + 1}
+                                            </Box>
+                                            <img className={classes.swiperSlideImg} src={productImages[0]} alt="Product" />
+                                            <Box sx={{ textAlign: 'center' }}>
+                                                <Typography component="div" sx={{ fontWeight: 'bold', margin: '1rem 0' }}>
+                                                    ten nha cung cap
+                                                </Typography>
+                                                <Typography component="div" noWrap sx={{ height: '2rem' }}>
+                                                    {item.name}
+                                                </Typography>
+                                            </Box>
+                                        </Box>
+                                    </SwiperSlide>
+                                ))
+                            ) :
+                            null}
+                    </Swiper >
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    Value Sets
+                    <Swiper
+                        className={classes.swiper}
+                        slidesPerView={6}
+                        spaceBetween={45}
+                        navigation={true}
+                        modules={[Navigation]}
+                    >
+                        {listAllProducts.length > 0 ?
+                            (
+                                listAllProducts.slice(15, 30).map((item, index) => (
+                                    <SwiperSlide key={index}>
+                                        <Box className={classes.boxContent}>
+                                            <Box className={classes.boxContentNumber}>
+                                                #{index + 1}
+                                            </Box>
+                                            <img className={classes.swiperSlideImg} src={productImages[0]} alt="Product" />
+                                            <Box sx={{ textAlign: 'center' }}>
+                                                <Typography component="div" sx={{ fontWeight: 'bold', margin: '1rem 0' }}>
+                                                    ten nha cung cap
+                                                </Typography>
+                                                <Typography component="div" noWrap sx={{ height: '2rem' }}>
+                                                    {item.name}
+                                                </Typography>
+                                            </Box>
+                                        </Box>
+                                    </SwiperSlide>
+                                ))
+                            ) :
+                            null}
+                    </Swiper>
                 </TabPanel>
                 <TabPanel value={value} index={2}>
-                    Chosen For You
+                    <Swiper
+                        className={classes.swiper}
+                        slidesPerView={6}
+                        spaceBetween={45}
+                        navigation={true}
+                        modules={[Navigation]}
+                    >
+                        {listAllProducts.length > 0 ?
+                            (
+                                listAllProducts.slice(30, 45).map((item, index) => (
+                                    <SwiperSlide key={index}>
+                                        <Box className={classes.boxContent}>
+                                            <Box className={classes.boxContentNumber}>
+                                                #{index + 1}
+                                            </Box>
+                                            <img className={classes.swiperSlideImg} src={productImages[0]} alt="Product" />
+                                            <Box sx={{ textAlign: 'center' }}>
+                                                <Typography component="div" sx={{ fontWeight: 'bold', margin: '1rem 0' }}>
+                                                    ten nha cung cap
+                                                </Typography>
+                                                <Typography component="div" noWrap sx={{ height: '2rem' }}>
+                                                    {item.name}
+                                                </Typography>
+                                            </Box>
+                                        </Box>
+                                    </SwiperSlide>
+                                ))
+                            ) :
+                            null}
+                    </Swiper>
                 </TabPanel>
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'center', margin: '1rem 0 3rem 0' }}>

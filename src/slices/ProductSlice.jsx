@@ -2,6 +2,20 @@ import CallApiByBody from "common/ConfigApi/CallApiByBody";
 import CallApiByParams from "common/ConfigApi/CallApiByParams";
 const { createSlice, createAsyncThunk } = require("@reduxjs/toolkit");
 
+
+//get all products
+export const fetchAsyncGetAllProducts = createAsyncThunk(
+    "product/fetchAsyncGetAllProducts",
+    async (arg, { rejectWithValue }) => {
+        try {
+            const response = await CallApiByBody("products/get-product.php", "get", null)
+            return response.data
+        } catch (error) {
+            return rejectWithValue(error.response.data)
+        }
+    }
+);
+
 //manu
 export const fetchAsyncGetManu = createAsyncThunk(
     "product/fetchAsyncGetManu",
@@ -33,7 +47,7 @@ export const fetchAsyncFilterProduct = createAsyncThunk(
     "product/fetchAsyncFilterProduct",
     async (arg, { rejectWithValue }) => {
         try {
-            const response = await CallApiByParams("products/get-products.php", "get", arg)
+            const response = await CallApiByParams("products/get-product.php", "get", arg)
             return response.data
         } catch (error) {
             return rejectWithValue(error.response.data)
@@ -143,6 +157,9 @@ export const fetchAsyncTestFile = createAsyncThunk(
 const productSlice = createSlice({
     name: 'product',
     initialState: {
+        //home
+        listAllProducts: [],
+
         //header > cate
         listCategories: [],
 
@@ -153,7 +170,7 @@ const productSlice = createSlice({
         ListProductsBySearch: [],
 
         //screen products
-        listProducts: [],
+        listProducts: {},
         errorListProducts: false,
         listManufacturers: [],
 
@@ -180,6 +197,15 @@ const productSlice = createSlice({
         }
     },
     extraReducers: {
+        //get all products
+        [fetchAsyncGetAllProducts.fulfilled]: (state, action) => {
+            state.listAllProducts = action.payload.data
+            // console.log(action.payload.data)
+        },
+        [fetchAsyncGetAllProducts.rejected]: (state, action) => {
+            console.log(action.payload)
+        },
+
         //get list manu
         [fetchAsyncGetManu.fulfilled]: (state, action) => {
             state.listManufacturers = action.payload
@@ -207,7 +233,6 @@ const productSlice = createSlice({
             console.log(action.payload)
         },
         //update comment
-
         [fetchAsyncUpdateComment.fulfilled]: (state, action) => {
             state.listComments = action.payload.data
             console.log(action.payload.data)
@@ -215,6 +240,7 @@ const productSlice = createSlice({
         [fetchAsyncUpdateComment.rejected]: (state, action) => {
             console.log(action.payload)
         },
+
         //get list product in cart
         [fetchAsyncGetListProductInCart.fulfilled]: (state, action) => {
             state.listProductInCart = JSON.parse(action.payload.data)
@@ -238,6 +264,8 @@ const productSlice = createSlice({
         [fetchAsyncAddProductToCart.rejected]: (state, action) => {
             console.log(action.payload)
         },
+
+
         //search product
         [fetchAsyncSearchProducts.fulfilled]: (state, action) => {
             state.ListProductsBySearch = action.payload.data
@@ -246,11 +274,13 @@ const productSlice = createSlice({
         [fetchAsyncSearchProducts.rejected]: (state, action) => {
             state.ListProductsBySearch = []
         },
+
+
         //filter product
         [fetchAsyncFilterProduct.fulfilled]: (state, action) => {
             state.listProducts = action.payload
             state.errorListProducts = false
-            // console.log(action.payload)
+            console.log(action.payload)
         },
         [fetchAsyncFilterProduct.rejected]: (state, action) => {
             state.errorListProducts = true
