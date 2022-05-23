@@ -4,7 +4,7 @@ import { Routers } from "routes/Routes"
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchAsyncGetUser } from 'slices/UserSlice';
-import { fetchAsyncGetListProductInCart } from 'slices/ProductSlice';
+import { fetchAsyncGetAllProducts } from 'slices/ProductSlice';
 
 //set user, token local
 //check token and remove token if expired
@@ -19,6 +19,10 @@ function App() {
     }
   }, [dispatch])
 
+
+  React.useEffect(() => {
+    dispatch(fetchAsyncGetAllProducts());
+  }, [dispatch]);
   //reomove count loaded
   // useEffect(() => {
   //   window.onclick = () => {

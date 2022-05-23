@@ -24,6 +24,7 @@ import OrderUserScreen from "screens/User/OrderUserScreen/OrderUserScreen";
 import DeleteAccountUserScreen from "screens/User/DeleteAccountUserScreen/DeleteAccountUserScreen";
 import TestScreen1 from "screens/User/TestScreen1/TestScreen1";
 import Test2 from "screens/User/test2/Test2";
+import NotFound from "screens/NotFound/NotFound";
 
 
 
@@ -160,6 +161,14 @@ const RouteConfigs = [
     //     isScreenAdmin: true,
     // },
 
+    //not found
+    {
+        path: "*",
+        element: NotFound,
+        isPrivate: false,
+        layout: React.Fragment,
+        isScreenAdmin: false,
+    },
 ]
 function PrivateRouter() {
     const userType = useSelector(state => state.user.userDetail.role);
@@ -181,6 +190,7 @@ function PrivateRouter() {
             })()}
             />
         }
+        //co role nhung k co token
         else if (isRole) {
             if (route.isPrivate && !jwtToken && route.isScreenAdmin === false) {
                 return <Route key={index} path={route.path} element={<Navigate to="/sign-in" />} />
@@ -191,6 +201,7 @@ function PrivateRouter() {
                 return <Route key={index} path={route.path} element={<Navigate to="/" />} />
             }
         }
+
     })
 }
 

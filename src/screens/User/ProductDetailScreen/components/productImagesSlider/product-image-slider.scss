@@ -18,11 +18,17 @@
     .swiper-button-prev {
         left: 0;
         color: #000;
+        &:after {
+            font-size: 3rem;
+        }
     }
 
     .swiper-button-next {
         right: 0;
         color: #000;
+        &:after {
+            font-size: 3rem;
+        }
     }
 }
 
@@ -32,7 +38,7 @@
         border: 1px solid #dddbdb;
 
         &-thumb-active {
-            border-color: #ff0000;
+            border-color: #000;
         }
     }
 

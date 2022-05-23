@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
@@ -8,7 +8,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import ElevatorIcon from '@mui/icons-material/Elevator';
 import StringAvatar from 'utils/StringAvatar';
-
+import ThumbDownOffAltOutlinedIcon from '@mui/icons-material/ThumbDownOffAltOutlined';
 const CommentList = (props) => {
   const listComment = useSelector(state => state.product.listComments)
   const user = useSelector(state => state.user.userDetail)
@@ -78,26 +78,27 @@ const CommentList = (props) => {
             </Grid>
             <Grid item xs={11}>
               <Box className={classes.eachCommentContent}>
+
                 <Typography component="span" sx={{ fontWeight: "600", fontSize: "1.7rem", marginRight: '0.4rem' }}>{value.displayName}</Typography>
                 <Typography component="span">{value.cmtDate}</Typography>
+
                 <form onSubmit={submitCommemtHandle}>
-
                   <TextField autoFocus={conditionInput && idCommentEdit === value.id ? true : false} className={classes.rootTextField} fullWidth value={conditionInput && idCommentEdit === value.id ? (valueEdit.content) : (value.content || "")} onChange={onChangeComment} id="standard-basic" variant="standard" disabled={conditionInput && idCommentEdit === value.id ? false : true} />
-
                 </form>
-                {/* <div className="comment-content__react">
-                  <ThumbUpOutlinedIcon />
-                  <ThumbUpOutlinedIcon />
-                  <span>Feedback</span>
-                </div> */}
-                <Box className={classes.eachCommentBoxEdit}>
 
+                {/* <Box className={classes.boxIcon}>
+                    <ThumbUpOutlinedIcon />
+                    <ThumbDownOffAltOutlinedIcon />
+                    <span>Feedback</span>
+                  </Box> */}
+
+
+                <Box className={classes.eachCommentBoxEdit}>
                   {/*click hiện bảng chọn, class là đang set đk click edit thì mất icon*/}
                   <MoreVertIcon onClick={clickIconHandle} className={conditionInput ? classes.displayNone : classes.rootIcon} />
                   <Box className={conditionIcon ? "comment-each-box__content" : classes.displayNone}>
                     {value.user_Id === user.id ?
                       (
-
                         <List className={classes.rootList} sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
                           <ListItem onClick={() => handleIconEdit(value.content, value.id)} className={classes.rootListItem} disablePadding>
                             <Box sx={{ marginRight: 1 }}>
@@ -116,7 +117,6 @@ const CommentList = (props) => {
                               delete
                             </Typography>
                           </ListItem>
-
                         </List>
                       ) :
                       (
@@ -136,7 +136,6 @@ const CommentList = (props) => {
 
                 </Box>
               </Box>
-
               <Box className={classes.eachCommentButton}>
                 <Button onClick={() => handleEdit(value.id)} variant="contained" className={conditionInput && idCommentEdit === value.id ? classes.displayBlock : classes.displayNone}>Save</Button>
               </Box>
@@ -152,4 +151,4 @@ const CommentList = (props) => {
   );
 };
 
-export default CommentList;
+export default memo(CommentList);

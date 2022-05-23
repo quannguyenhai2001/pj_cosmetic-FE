@@ -81,7 +81,7 @@ const userSlice = createSlice({
         },
         [fetchAsyncGetUser.fulfilled]: (state, action) => {
             state.userDetail = action.payload.data
-            console.log(action.payload)
+            // console.log(action.payload)
         },
         [fetchAsyncGetUser.rejected]: (state, action) => {
             console.log("error login")

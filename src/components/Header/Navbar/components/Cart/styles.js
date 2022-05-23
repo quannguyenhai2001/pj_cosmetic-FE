@@ -11,7 +11,7 @@ export default makeStyles((theme) => ({
         },
         '& .MuiPaper-root': {
             overflowX: 'hidden',
-            overflowY: 'auto',
+
         }
     },
     cartDivButton: {
@@ -43,6 +43,9 @@ export default makeStyles((theme) => ({
 
     },
     cartCard: {
-        display: 'grid'
+        display: 'grid',
+        height: '11rem',
+        marginBottom: '0.5rem',
+        overflowY: 'hidden',
     },
 }));

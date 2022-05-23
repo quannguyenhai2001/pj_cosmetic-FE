@@ -49,7 +49,7 @@ const Footer = () => {
                 </Typography>
               </Box>
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={2}>
               <Box sx={{ display: 'flex', gap: '1rem', alignItems: 'center' }} >
                 <ApprovalIcon fontSize='large' />
                 <Typography component='span'>
@@ -57,7 +57,7 @@ const Footer = () => {
                 </Typography>
               </Box>
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={4}>
 
               <Box sx={{ display: 'flex', gap: '1rem', alignItems: 'center' }} >
                 <AddCardIcon fontSize='large' />

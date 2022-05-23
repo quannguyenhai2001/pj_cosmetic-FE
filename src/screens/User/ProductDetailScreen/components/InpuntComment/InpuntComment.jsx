@@ -38,6 +38,9 @@ const InpuntComment = () => {
 
     return (
         <Box className={classes.box}>
+            <Typography variant="h5" gutterBottom sx={{ textAlign: 'Left', fontWeight: 'bold', marginBottom: '4rem' }}>
+                Review Product
+            </Typography>
             <Grid container>
                 <Grid item>
                     <Box>

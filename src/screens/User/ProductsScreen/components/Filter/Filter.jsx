@@ -26,7 +26,7 @@ const Filter = (props) => {
     const dispatch = useDispatch();
     const params = useParams();
 
-
+    //set page = 1
     const handleSetPage = () => {
         props.handleSetPage();
     }
@@ -51,6 +51,7 @@ const Filter = (props) => {
     const handleClickCheckBox = (arg) => {
         setValueIndex(arg.index);
         setArray1({ ...array1, manu_Id: arg.item.id })
+        props.handleSetPage();
 
     }
 
@@ -161,6 +162,7 @@ const Filter = (props) => {
                                 onChange={handleChangePrice}
                                 valueLabelDisplay="auto"
                                 getAriaValueText={valuetext}
+                                onClick={handleSetPage}
                             />
                         </Box>
 
@@ -182,7 +184,6 @@ const Filter = (props) => {
                     <FormGroup>
                         <FormControlLabel control={<Checkbox checked={setArray1.promotion}
                             onChange={handleChangeCheckedSale}
-
                             onClick={handleSetPage}
                             inputProps={{ 'aria-label': 'controlled' }} />} label="Sale" />
                     </FormGroup>

@@ -39,7 +39,7 @@ export default makeStyles((theme) => ({
     },
     rootTextField: {
         '&.MuiFormControl-root': {
-            marginBottom: '3rem',
+            marginBottom: '4rem',
             display: 'block',
 
             '& .MuiInput-input': {

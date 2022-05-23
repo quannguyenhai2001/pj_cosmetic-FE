@@ -190,22 +190,16 @@ const productSlice = createSlice({
             state.listProducts = []
         },
         deleteLErrorListProducts: (state, action) => {
-            state.listProducts = false
+            state.errorListProducts = false
         },
         deleteSearchListProducts: (state, action) => {
             state.searchListProducts = []
+        },
+        deleteDetailProduct: (state, action) => {
+            state.detailProduct = []
         }
     },
     extraReducers: {
-        //get all products
-        [fetchAsyncGetAllProducts.fulfilled]: (state, action) => {
-            state.listAllProducts = action.payload.data
-            console.log(action.payload)
-        },
-        [fetchAsyncGetAllProducts.rejected]: (state, action) => {
-            console.log(action.payload)
-        },
-
         //get list manu
         [fetchAsyncGetManu.fulfilled]: (state, action) => {
             state.listManufacturers = action.payload
@@ -214,9 +208,41 @@ const productSlice = createSlice({
         [fetchAsyncGetManu.rejected]: (state, action) => {
             console.log(action.payload)
         },
+
+        //get all products
+        [fetchAsyncGetAllProducts.fulfilled]: (state, action) => {
+            state.listAllProducts = action.payload.data
+            // console.log(action.payload)
+        },
+        [fetchAsyncGetAllProducts.rejected]: (state, action) => {
+            console.log(action.payload)
+        },
+
+        //search product
+        [fetchAsyncSearchProducts.fulfilled]: (state, action) => {
+            state.ListProductsBySearch = action.payload.data
+            console.log(action.payload)
+        },
+        [fetchAsyncSearchProducts.rejected]: (state, action) => {
+            state.ListProductsBySearch = []
+        },
+
+
+        //filter product
+        [fetchAsyncFilterProduct.fulfilled]: (state, action) => {
+            state.listProducts = action.payload
+            state.errorListProducts = false
+            console.log(action.payload)
+        },
+        [fetchAsyncFilterProduct.rejected]: (state, action) => {
+            state.errorListProducts = true
+            state.listProducts = []
+            // console.log(action.payload)
+        },
+
         //get detail product
         [fetchAsyncGetDetailProduct.fulfilled]: (state, action) => {
-            state.detailProduct = action.payload
+            state.detailProduct = action.payload.data
             console.log(action.payload)
         },
         [fetchAsyncGetDetailProduct.rejected]: (state, action) => {
@@ -227,7 +253,7 @@ const productSlice = createSlice({
         //get comment by product
         [fetchAsyncGetListCommentByProduct.fulfilled]: (state, action) => {
             state.listComments = action.payload.data
-            console.log(action.payload.data)
+            // console.log(action.payload.data)
         },
         [fetchAsyncGetListCommentByProduct.rejected]: (state, action) => {
             console.log(action.payload)
@@ -243,8 +269,8 @@ const productSlice = createSlice({
 
         //get list product in cart
         [fetchAsyncGetListProductInCart.fulfilled]: (state, action) => {
-            state.listProductInCart = JSON.parse(action.payload.data)
-            // console.log(JSON.parse(action.payload))
+            state.listProductInCart = action.payload.data
+            console.log(action.payload)
         },
         [fetchAsyncGetListProductInCart.rejected]: (state, action) => {
             console.log(action.payload)
@@ -266,26 +292,7 @@ const productSlice = createSlice({
         },
 
 
-        //search product
-        [fetchAsyncSearchProducts.fulfilled]: (state, action) => {
-            state.ListProductsBySearch = action.payload.data
-            console.log(action.payload)
-        },
-        [fetchAsyncSearchProducts.rejected]: (state, action) => {
-            state.ListProductsBySearch = []
-        },
 
-
-        //filter product
-        [fetchAsyncFilterProduct.fulfilled]: (state, action) => {
-            state.listProducts = action.payload
-            state.errorListProducts = false
-            console.log(action.payload)
-        },
-        [fetchAsyncFilterProduct.rejected]: (state, action) => {
-            state.errorListProducts = true
-            // console.log(action.payload)
-        },
 
 
         //create comment
@@ -308,6 +315,6 @@ const productSlice = createSlice({
     }
 })
 const { reducer, actions } = productSlice
-export const { setListCategories, deleteListProducts, deleteLErrorListProducts, deleteSearchListProducts } = actions
+export const { setListCategories, deleteListProducts, deleteLErrorListProducts, deleteSearchListProducts, deleteDetailProduct } = actions
 export default reducer
 

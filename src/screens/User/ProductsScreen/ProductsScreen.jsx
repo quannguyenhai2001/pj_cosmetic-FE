@@ -1,10 +1,11 @@
-import { Box, Container, Grid, Typography } from '@mui/material';
+import { Box, Container, Divider, Grid, Typography } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { deleteListProducts, fetchAsyncGetManu } from 'slices/ProductSlice';
 import Filter from './components/Filter/Filter';
 import Products from './components/Products/Products';
+import SlideProductRelative from './components/SlideProductRelative/SlideProductRelative';
 import useStyles from './styles';
 
 const ProductsScreen = () => {
@@ -30,6 +31,7 @@ const ProductsScreen = () => {
         dispatch(fetchAsyncGetManu())
         return () => {
             dispatch(deleteListProducts());
+
         }
     }, [dispatch, params.categoryId]);
 
@@ -56,8 +58,9 @@ const ProductsScreen = () => {
                     <Products setPage={setPage} page={page} />
                 </Grid>
             </Grid>
+            <Divider sx={{ margin: '2rem 0' }} />
             <Box>
-                <Typography>Product related</Typography>
+                <SlideProductRelative />
             </Box>
         </Container >
 

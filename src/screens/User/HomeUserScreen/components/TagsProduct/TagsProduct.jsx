@@ -16,7 +16,7 @@ import "swiper/css/pagination";
 import "swiper/css/effect-creative";
 import { Button } from '@mui/material';
 import { useSelector } from 'react-redux';
-import GetRandomNumber from 'utils/GetRandomNumber';
+// import GetRandomNumber from 'utils/GetRandomNumber';
 import { useNavigate } from 'react-router-dom';
 function TabPanel(props) {
     const { children, value, index, ...other } = props;

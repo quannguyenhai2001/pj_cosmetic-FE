@@ -20,7 +20,6 @@ const Products = (props) => {
     const handleClick = (id) => {
         navigate(`/products/detail/${id}`);
     }
-
     //skeleton
     let arraySkeleton = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
@@ -95,7 +94,16 @@ const Products = (props) => {
     return (
         <Box>
             <Typography sx={{ marginBottom: '1rem' }} color="text.secondary">
-                {listProducts.total} Results
+                {Object.keys(listProducts).length > 0 ?
+                    (
+                        <>
+                            {listProducts.total} Results
+                        </>
+                    ) : (
+                        <>
+                            0 Results
+                        </>
+                    )}
             </Typography>
             <Box>
                 {

@@ -1,5 +1,4 @@
 import { makeStyles } from '@mui/styles';
-import logo from 'assets/img/imgBgSignUp/bg.jpg';
 export default makeStyles((theme) => ({
   form: {
     // background: `url(${logo})`,

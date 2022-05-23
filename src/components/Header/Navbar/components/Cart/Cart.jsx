@@ -29,8 +29,9 @@ const Cart = () => {
 
         setState(open);
     };
-    const handleClickIncrease = () => {
-        console.log('fsfs')
+    const handleClickIncrease = (id) => {
+
+
     }
     const handleClickDecrease = (e) => {
         dispatch(fetchAsyncDecreaseQuantityProduct({ id: e }))
@@ -66,7 +67,7 @@ const Cart = () => {
                                     <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
                                         <Box>
                                             <Stack direction="row" alignItems="center" spacing={1}>
-                                                <IconButton aria-label="delete" size="small">
+                                                <IconButton aria-label="delete" size="small" onclick={() => handleClickIncrease(item.id)}>
                                                     <RemoveIcon fontSize="inherit" />
                                                 </IconButton>
                                                 <Typography>{item.quantity}</Typography>
@@ -109,7 +110,7 @@ const Cart = () => {
                 >
                     {RenderlistProductInCart()}
                     <div className={classes.cartDivButton} onClick={toggleDrawer(false)}>
-                        <Button component={Link} to={`/user/${user.id}/payment`} className={classes.cartButtonOrder} fullWidth variant="contained">ORDER</Button>
+                        <Button component={Link} to={`/user/${user.id}/payment`} className={classes.cartButtonOrder} disabled={listProductInCart.length > 0 ? false : true} fullWidth variant="contained">ORDER</Button>
                     </div>
                 </Drawer>
             </Badge>
