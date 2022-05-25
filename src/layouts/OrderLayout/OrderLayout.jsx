@@ -18,6 +18,7 @@ import LockResetIcon from '@mui/icons-material/LockReset';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import useStyles from './styles';
 import StringAvatar from 'utils/StringAvatar';
+import TabContent from './TabContent/TabContent';
 
 const ProfileLayout = (props) => {
     const classes = useStyles();
@@ -31,7 +32,7 @@ const ProfileLayout = (props) => {
     };
 
     const params = useLocation();
-    console.log({ params })
+
     React.useEffect(() => {
         if (params.pathname.includes('order')) {
             setSelectedIndex(2)
@@ -121,7 +122,9 @@ const ProfileLayout = (props) => {
                         </Box>
                     </Grid>
                     <Grid item xs={12} sm={10}>
-                        {children}
+                        <Box sx={{ bgcolor: 'white', width: '100%', padding: '0 2rem' }}>
+                            <TabContent children={children} />
+                        </Box>
                     </Grid>
                 </Grid>
             </Box>

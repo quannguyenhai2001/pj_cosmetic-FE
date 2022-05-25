@@ -51,6 +51,18 @@ const Cart = () => {
                     <Card className={classes.cartCard} key={index}>
                         <Grid container spacing={1}>
                             <Grid item xs={3}>
+                                {Number(item.product.promotion) > 0 ?
+                                    (
+                                        <Box className={classes.sale}>
+                                            <span class="home-product-item__sale-off-percent">{item.product.promotion * 100}%</span>
+
+                                        </Box>
+
+                                    ) : null}
+
+
+
+
                                 <CardMedia
                                     component="img"
                                     sx={{ width: '100%', height: '100%' }}

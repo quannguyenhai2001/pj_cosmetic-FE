@@ -286,7 +286,6 @@ const productSlice = createSlice({
             state.ListProductsBySearch = []
         },
 
-
         //filter product
         [fetchAsyncFilterProduct.fulfilled]: (state, action) => {
             state.listProducts = action.payload
@@ -309,8 +308,6 @@ const productSlice = createSlice({
         },
 
 
-
-
         //get list product in cart
         [fetchAsyncGetListProductInCart.fulfilled]: (state, action) => {
             state.listProductInCart = action.payload.data
@@ -319,6 +316,8 @@ const productSlice = createSlice({
         [fetchAsyncGetListProductInCart.rejected]: (state, action) => {
             console.log(action.payload)
         },
+
+
         //decrease quantity product
         [fetchAsyncDecreaseQuantityProduct.fulfilled]: (state, action) => {
             // state.listProductInCart = JSON.parse(action.payload)

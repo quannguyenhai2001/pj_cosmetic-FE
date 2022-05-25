@@ -53,19 +53,12 @@ const ProductDetailScreen = () => {
                                 marginBottom: '1rem'
                             }} >{detailProduct.manufacturersName}</Typography>
 
-                            <Box sx={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '0.5rem',
-                                marginBottom: '1rem'
-                            }}
-                                className={classes.boxRating}>
-                                <Typography className={classes.typoRating}>{parseFloat(detailProduct.rating.average, 10)}</Typography>
+                            <Box className={classes.boxRating}>
+                                <Typography className={classes.typoRating1}>{parseFloat(detailProduct.rating.average, 10)}</Typography>
                                 <Rating className={classes.rootRating} name="half-rating-read" defaultValue={parseFloat(detailProduct.rating.average, 10)} precision={0.5} readOnly />
                                 <Divider orientation="vertical" flexItem />
-                                <Typography className={classes.typoRating}>{parseFloat(detailProduct.rating.userNumber, 10)} rating</Typography>
+                                <Typography className={classes.typoRating2}>{parseFloat(detailProduct.rating.userNumber, 10)} Rating</Typography>
                             </Box>
-
                             <Typography><Box component="span" sx={{ fontWeight: 650, fontSize: '2rem' }}>${detailProduct.price}</Box> or <span >$9.00 off your ASP order when you open and use a Sephora Credit Card today.</span></Typography>
                             <Typography>Size: {detailProduct.size}</Typography>
                             <Typography>Standard size</Typography>

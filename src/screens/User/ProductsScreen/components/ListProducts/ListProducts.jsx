@@ -73,7 +73,7 @@ const Products = (props) => {
                                     {parseFloat(product.promotion) > 0 ?
                                         (<>
                                             <Typography variant="subtitle1" gutterBottom sx={{ fontSize: '1.5rem', fontWeight: '100', textDecoration: 'line-through' }}>
-                                                ${product.price}.00
+                                                ${product.price}
                                             </Typography>
                                             <Typography variant="subtitle1" gutterBottom sx={{ fontSize: '1.5rem', color: 'red' }}>
                                                 ${parseFloat(product.price - (product.price * product.promotion), 2).toFixed(2)}

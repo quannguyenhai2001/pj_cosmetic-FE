@@ -24,6 +24,44 @@ export default makeStyles((theme) => ({
         height: '11rem',
         marginBottom: '0.5rem',
         overflowY: 'hidden',
+        position: 'relative',
+    },
+
+
+    //sale
+    sale: {
+        position: 'absolute',
+        top: 0,
+        left: '15.5%',
+        background: '#ff0000',
+        color: '#fff',
+        padding: '4px 10px',
+        display: 'grid',
+        textAlign: 'center',
+        fontSize: '9px',
+        fontWeight: 'bold',
+        '& span': {
+            '&:first-child': {
+                transform: 'translateX(1px)',
+                marginBottom: '2px',
+            }
+        },
+        '&:after': {
+            content: '""',
+            position: 'absolute',
+            width: 0,
+            height: 0,
+            top: '100%',
+            right: 0,
+            borderTop: '3px solid #ff0000',
+            borderLeft: '4px solid transparent',
+            borderRight: '4px solid transparent',
+            transform: 'rotate(135deg)',
+
+
+
+
+        },
     },
 
     //box total

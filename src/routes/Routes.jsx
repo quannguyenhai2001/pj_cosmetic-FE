@@ -20,11 +20,14 @@ import SignUpUserScreen from "screens/User/SignUpUserScreen/SignUpUserScreen";
 import TestScreen from "screens/User/TestScreen/TestScreen";
 import SearchScreen from "screens/User/SearchScreen/SearchScreen";
 import ChangePasswordScreen from "screens/User/ChangePasswordScreen/ChangePasswordScreen";
-import OrderUserScreen from "screens/User/OrderUserScreen/OrderUserScreen";
+import OrderUserScreen from "screens/User/OrderUserScreen/OrderDetailScreen/OrderDetailUserScreen";
 import DeleteAccountUserScreen from "screens/User/DeleteAccountUserScreen/DeleteAccountUserScreen";
 import TestScreen1 from "screens/User/TestScreen1/TestScreen1";
 import Test2 from "screens/User/test2/Test2";
 import NotFound from "screens/NotFound/NotFound";
+import OrderLayout from "layouts/OrderLayout/OrderLayout";
+import AllOrderScreen from "screens/User/OrderUserScreen/AllOrderScreen/AllOrderScreen";
+import DeliveryScreen from "screens/User/OrderUserScreen/DeliveryScreen/DeliveryScreen";
 
 
 
@@ -76,18 +79,28 @@ const RouteConfigs = [
     },
     {
         path: "/user/:id/order",
-        element: OrderUserScreen,
+        element: AllOrderScreen,
         isPrivate: true,
-        layout: ProfileLayout,
+        layout: OrderLayout,
+        isScreenAdmin: false,
+    },
+
+    {
+        path: "/user/:id/order/all",
+        element: AllOrderScreen,
+        isPrivate: true,
+        layout: OrderLayout,
         isScreenAdmin: false,
     },
     {
-        path: "/user/:id/delete-account",
-        element: DeleteAccountUserScreen,
+        path: "/user/:id/order/delivery",
+        element: DeliveryScreen,
         isPrivate: true,
-        layout: ProfileLayout,
+        layout: OrderLayout,
         isScreenAdmin: false,
     },
+
+
 
     //list product by child cate
     {

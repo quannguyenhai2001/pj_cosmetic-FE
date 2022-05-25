@@ -7,7 +7,13 @@ export default makeStyles((theme) => ({
             marginBottom: '1.3rem'
         }
     },
+
+    //rating
     boxRating: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: '0.5rem',
+        marginBottom: '1rem',
         '& *': {
             marginBottom: '0',
         }
@@ -18,8 +24,15 @@ export default makeStyles((theme) => ({
             color: 'red',
         }
     },
-    typoRating: {
+    typoRating1: {
         borderBottom: '1px solid red',
+        display: 'inline-block',
+        color: 'red',
+        marginRight: '2px',
+        fontSize: '1.8rem',
+    },
+    typoRating2: {
+
         display: 'inline-block',
         color: 'red',
         marginRight: '2px',
