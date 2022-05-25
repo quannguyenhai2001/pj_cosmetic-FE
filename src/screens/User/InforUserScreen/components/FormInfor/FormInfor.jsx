@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchAsyncGetUser, fetchAsyncUpdateUser } from 'slices/UserSlice';
 import useStyles from './styles';
 import StringAvatar from 'utils/StringAvatar';
+import { Toast } from 'utils/Toast';
 
 const FormInfor = () => {
     const classes = useStyles();
@@ -49,6 +50,7 @@ const FormInfor = () => {
         data.append("address", valueArray.address);
         dispatch(fetchAsyncUpdateUser(data)).unwrap().then(() => {
             dispatch(fetchAsyncGetUser())
+            Toast('success', 'Update user success!');
         }).catch(err => {
             console.log(err)
         })

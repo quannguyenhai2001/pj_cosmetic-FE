@@ -37,16 +37,29 @@ const Products = (props) => {
                         <Card className={classes.rootCard} onClick={() => { handleClick(product.id) }}>
                             {/* sale */}
                             {Number(product.promotion) > 0 ?
-                                (<Typography className={classes.sale} color="text.secondary">
-                                    Sale: {product.promotion * 100}%
-                                </Typography>) : null}
+                                (
+                                    <Box className={classes.sale}>
+                                        <span class="home-product-item__sale-off-percent">{product.promotion * 100}%</span>
+                                        <span class="home-product-item__sale-off-sale">Sale</span>
+                                    </Box>
+
+                                ) : null}
+
                             {/* image */}
-                            <CardMedia className={classes.rootCardMedia}
+                            {product.image ? (<CardMedia className={classes.rootCardMedia}
                                 component="img"
                                 height="220"
-                                image="https://res.cloudinary.com/cosmeticv1/image/upload/v1653222162/myfolder/mysubfolder/Product17_2_fhe5qr.webp"
+                                image={JSON.parse(product.image)[0]}
                                 alt="green iguana"
-                            />
+                            />) : (
+                                <CardMedia className={classes.rootCardMedia}
+                                    component="img"
+                                    height="220"
+                                    image='https://res.cloudinary.com/cosmeticv1/image/upload/v1653237466/cosmetic/products/Product17_2.webp'
+                                    alt="green iguana"
+                                />
+                            )}
+
                             {/* content */}
                             <CardContent>
                                 <Typography gutterBottom noWrap sx={{ fontWeight: 650 }} component="div">
@@ -55,17 +68,24 @@ const Products = (props) => {
                                 <Typography gutterBottom sx={{ height: 42 }} component="div">
                                     {product.productsName}
                                 </Typography>
-                                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                                    <Typography color="text.primary" sx={{ fontWeight: 650 }}>
-                                        ${product.price}.00
-                                    </Typography>
-                                    <Rating sx={{ positon: 'relative', top: '-2px' }}
-                                        name="simple-controlled"
-                                        value={valueRating}
-                                        onChange={(event, newValue) => {
-                                            setValueRating(newValue);
-                                        }}
-                                    />
+
+                                <Box sx={{ display: 'flex', justifyContent: 'space-between', }}>
+                                    {parseFloat(product.promotion) > 0 ?
+                                        (<>
+                                            <Typography variant="subtitle1" gutterBottom sx={{ fontSize: '1.5rem', fontWeight: '100', textDecoration: 'line-through' }}>
+                                                ${product.price}.00
+                                            </Typography>
+                                            <Typography variant="subtitle1" gutterBottom sx={{ fontSize: '1.5rem', color: 'red' }}>
+                                                ${parseFloat(product.price - (product.price * product.promotion), 2).toFixed(2)}
+                                            </Typography>
+                                        </>) : (
+                                            <>
+                                                <Typography variant="subtitle1" gutterBottom sx={{ fontSize: '1.5rem', fontWeight: '600', }}>
+                                                    ${product.price}.00
+                                                </Typography>
+                                            </>
+                                        )}
+
                                 </Box>
                             </CardContent>
                         </Card>
@@ -119,7 +139,7 @@ const Products = (props) => {
                             </>
                         ) :
                         (<Grid item xs={12}>
-                            No Product!
+                            Sold Out!
                         </Grid>)
                 }
             </Box>

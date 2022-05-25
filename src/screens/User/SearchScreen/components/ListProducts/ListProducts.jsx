@@ -6,14 +6,11 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Box, Grid } from '@mui/material';
 import useStyles from './styles';
-import Rating from '@mui/material/Rating';
 import { useNavigate } from 'react-router-dom';
 const ListProducts = () => {
     const classes = useStyles();
     const navigate = useNavigate();
     const ListProductsBySearch = useSelector(state => state.product.ListProductsBySearch);
-    //rating
-    const [valueRating, setValueRating] = React.useState(2);
     //navigate
     const handleClick = (id) => {
         navigate(`/products/detail/${id}`);
@@ -26,15 +23,23 @@ const ListProducts = () => {
                         <Grid item xs={2} key={index}>
                             <Card className={classes.rootCard} onClick={() => { handleClick(product.id) }}>
                                 {/* sale */}
-                                <Typography className={classes.sale} color="text.secondary">
-                                    Sale: {product.promotion * 100}%
-                                </Typography>
-                                <CardMedia
+                                {Number(product.promotion) > 0 ?
+                                    (<Typography className={classes.sale} color="text.secondary">
+                                        Sale: {product.promotion * 100}%
+                                    </Typography>) : null}
+                                {product.image ? (<CardMedia className={classes.rootCardMedia}
                                     component="img"
-                                    height="250"
-                                    image="http://localhost/api/upload/products/product.png"
+                                    height="220"
+                                    image={JSON.parse(product.image)[0]}
                                     alt="green iguana"
-                                />
+                                />) : (
+                                    <CardMedia className={classes.rootCardMedia}
+                                        component="img"
+                                        height="220"
+                                        image='https://res.cloudinary.com/cosmeticv1/image/upload/v1653237466/cosmetic/products/Product17_2.webp'
+                                        alt="green iguana"
+                                    />
+                                )}
                                 <CardContent>
                                     <Typography gutterBottom noWrap sx={{ fontWeight: 650 }} component="div">
                                         {product.manufacturersName}
@@ -43,16 +48,21 @@ const ListProducts = () => {
                                         {product.productName}
                                     </Typography>
                                     <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                                        <Typography color="text.primary" sx={{ fontWeight: 650 }}>
-                                            ${product.price}.00
-                                        </Typography>
-                                        <Rating sx={{ positon: 'relative', top: '-2px' }}
-                                            name="simple-controlled"
-                                            value={valueRating}
-                                            onChange={(event, newValue) => {
-                                                setValueRating(newValue);
-                                            }}
-                                        />
+                                        {parseFloat(product.promotion) > 0 ?
+                                            (<>
+                                                <Typography variant="subtitle1" gutterBottom sx={{ fontSize: '1.5rem', fontWeight: '100', textDecoration: 'line-through' }}>
+                                                    ${product.price}.00
+                                                </Typography>
+                                                <Typography variant="subtitle1" gutterBottom sx={{ fontSize: '1.5rem', color: 'red' }}>
+                                                    ${parseFloat(product.price - (product.price * product.promotion), 2).toFixed(2)}
+                                                </Typography>
+                                            </>) : (
+                                                <>
+                                                    <Typography variant="subtitle1" gutterBottom sx={{ fontSize: '1.5rem', fontWeight: '600', }}>
+                                                        ${product.price}.00
+                                                    </Typography>
+                                                </>
+                                            )}
                                     </Box>
                                 </CardContent>
                             </Card>

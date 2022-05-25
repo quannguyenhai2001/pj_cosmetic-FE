@@ -17,7 +17,7 @@ const SearchScreen = () => {
         };
     }, [dispatch, paramValue]);
     return (
-        <Box sx={{ minHeight: '90vh' }}>
+        <Box sx={{ minHeight: 'fit-content', marginBottom: '3rem' }}>
             <Container maxWidth="xl">
                 <Typography variant="h5" sx={{ margin: "2rem 0" }}>Search results for '{paramValue}'</Typography>
                 <ListProducts />

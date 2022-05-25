@@ -1,5 +1,18 @@
+
 import { makeStyles } from '@mui/styles';
 export default makeStyles((theme) => ({
+
+    boxDetail: {
+        '& *': {
+            marginBottom: '1.3rem'
+        }
+    },
+    boxRating: {
+        '& *': {
+            marginBottom: '0',
+        }
+
+    },
     rootRating: {
         '&.MuiRating-root': {
             color: 'red',
@@ -12,6 +25,7 @@ export default makeStyles((theme) => ({
         marginRight: '2px',
         fontSize: '1.8rem',
     },
+
 
 
     //side right

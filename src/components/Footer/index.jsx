@@ -205,7 +205,7 @@ const Footer = () => {
           <Divider sx={{ borderColor: 'gray' }} />
           <Grid container sx={{ padding: '2rem 0 2rem 0' }}>
             <Grid item xs={9}>
-              <Typography sx={{ padding: '0rem 0 1.5rem 0' }}>© 2022 Sephora USA, Inc. All rights reserved.</Typography>
+              <Typography sx={{ padding: '0rem 0 1.5rem 0' }}>© 2022 ASP USA, Inc. All rights reserved.</Typography>
               <Box className={classes.boxFooterBottom}>
                 <Typography component="span">
                   Privacy Policy

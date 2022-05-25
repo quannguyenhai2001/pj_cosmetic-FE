@@ -43,9 +43,32 @@ export default makeStyles((theme) => ({
         right: 0,
         background: '#ff0000',
         color: '#fff',
-        padding: '5px 10px',
-        fontSize: '12px',
+        padding: '7px 10px',
+        display: 'grid',
+        textAlign: 'center',
+        fontSize: '11px',
         fontWeight: 'bold',
+        '& span': {
+            '&:first-child': {
+                transform: 'translateX(1px)',
+                marginBottom: '2px',
+            }
+        },
+        '&:after': {
+            content: '""',
+            position: 'absolute',
+            width: 0,
+            height: 0,
+            top: '100%',
+            borderTop: '9px solid transparent',
+            borderLeft: '22px solid red',
+
+            borderRight: '22px solid red',
+            transform: 'rotate(180deg)',
+
+
+
+        },
     },
 
     //pagination

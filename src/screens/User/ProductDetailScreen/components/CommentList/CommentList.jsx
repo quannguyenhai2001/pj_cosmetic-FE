@@ -1,6 +1,5 @@
 import React, { memo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { Avatar, Box, Button, Divider, Grid, List, ListItem, TextField, Typography } from '@mui/material';
 import useStyles from './styles';
@@ -8,12 +7,16 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import ElevatorIcon from '@mui/icons-material/Elevator';
 import StringAvatar from 'utils/StringAvatar';
-import ThumbDownOffAltOutlinedIcon from '@mui/icons-material/ThumbDownOffAltOutlined';
+import { deleteListComments, fetchAsyncDeleteComment, fetchAsyncGetListCommentByProduct, fetchAsyncUpdateComment } from 'slices/ProductSlice';
+import { useParams } from 'react-router-dom';
+import { Toast } from 'utils/Toast';
 const CommentList = (props) => {
   const listComment = useSelector(state => state.product.listComments)
   const user = useSelector(state => state.user.userDetail)
   const classes = useStyles();
   const dispatch = useDispatch()
+  const params = useParams();
+  const { id } = params;
 
 
   //tắt mở box edit or evaluate
@@ -29,9 +32,7 @@ const CommentList = (props) => {
 
   const clickIconHandle = () => {
     SetConditionIcon(!conditionIcon)
-
   }
-
 
   const handleIconEdit = (content, index) => {
     SetConditionInput(!conditionInput)
@@ -41,25 +42,48 @@ const CommentList = (props) => {
 
 
   }
-  const deleteCommentHandle = (e) => {
-    let index = listComment.indexOf(e)
-    // dispatch(DeleteComment(index))
-  }
-  const submitCommemtHandle = (e) => {
-    e.preventDefault()
-  }
-  const handleEdit = (e) => {
-    // dispatch(fetchAsyncEditComment({
-    //   idEvaluate: e,
-    //   valueEditComment: valueEdit
-    // }))
-    SetConditionInput(!conditionInput)
-  }
 
   const onChangeComment = (e) => {
     const target = e.target
     setValueEdit({ ...valueEdit, content: target.value })
   }
+
+  const submitCommemtHandle = (e) => {
+    e.preventDefault()
+  }
+  const handleEdit = (idCmt) => {
+    dispatch(fetchAsyncUpdateComment({
+      id: idCmt,
+      value: valueEdit.content
+    })).unwrap().then(() => {
+      dispatch(fetchAsyncGetListCommentByProduct({ id }))
+
+    }).catch(err => {
+      console.log(err)
+    })
+    SetConditionInput(!conditionInput)
+  }
+
+
+
+  const handleDeleteComment = (e) => {
+    dispatch(fetchAsyncDeleteComment({
+      id: e,
+    })).unwrap().then(() => {
+      dispatch(fetchAsyncGetListCommentByProduct({ id }))
+      Toast('success', 'Delete comment success!')
+    }).catch(err => {
+      console.log(err)
+    })
+
+    SetConditionIcon(!conditionIcon)
+  }
+
+  React.useEffect(() => {
+    return () => {
+      dispatch(deleteListComments())
+    }
+  }, [])
 
 
   const render = (listComment.length) === 0 ? (<div>No comment...</div>) :
@@ -80,7 +104,7 @@ const CommentList = (props) => {
               <Box className={classes.eachCommentContent}>
 
                 <Typography component="span" sx={{ fontWeight: "600", fontSize: "1.7rem", marginRight: '0.4rem' }}>{value.displayName}</Typography>
-                <Typography component="span">{value.cmtDate}</Typography>
+                <Typography component="span">{value.updateAt ? value.updateAt : value.cmtDate}</Typography>
 
                 <form onSubmit={submitCommemtHandle}>
                   <TextField autoFocus={conditionInput && idCommentEdit === value.id ? true : false} className={classes.rootTextField} fullWidth value={conditionInput && idCommentEdit === value.id ? (valueEdit.content) : (value.content || "")} onChange={onChangeComment} id="standard-basic" variant="standard" disabled={conditionInput && idCommentEdit === value.id ? false : true} />
@@ -109,7 +133,7 @@ const CommentList = (props) => {
                             </Typography>
                           </ListItem>
                           <Divider sx={{ margin: '0.5rem 0' }} />
-                          <ListItem onClick={() => deleteCommentHandle(value)} className={classes.rootListItem} disablePadding>
+                          <ListItem onClick={() => handleDeleteComment(value.id)} className={classes.rootListItem} disablePadding>
                             <Box sx={{ marginRight: 1 }}>
                               <DeleteIcon />
                             </Box>

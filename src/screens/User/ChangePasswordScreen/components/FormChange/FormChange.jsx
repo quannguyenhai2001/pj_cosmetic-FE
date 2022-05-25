@@ -1,7 +1,8 @@
-import { Avatar, Box, Button, Divider, FormControl, FormControlLabel, FormLabel, Grid, Radio, RadioGroup, TextField, Typography } from '@mui/material';
+import { Avatar, Box, Button, Grid, TextField, Typography } from '@mui/material';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAsyncGetUser, fetchAsyncUpdateUser } from 'slices/UserSlice';
+import { Toast } from 'utils/Toast';
 import useStyles from './styles';
 
 
@@ -28,6 +29,7 @@ const FormInfor = () => {
             dispatch(fetchAsyncUpdateUser(data)).unwrap().then(() => {
 
                 dispatch(fetchAsyncGetUser())
+                Toast('success', 'Update user success!');
 
             }).catch(err => {
                 console.log(err)

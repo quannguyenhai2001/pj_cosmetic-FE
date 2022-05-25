@@ -24,7 +24,7 @@ export default makeStyles((theme) => ({
         '&.MuiSvgIcon-root': {
             position: 'absolute',
             right: '0',
-            top: '-65px',
+            top: '-70px',
             fontSize: '2.3rem',
 
 

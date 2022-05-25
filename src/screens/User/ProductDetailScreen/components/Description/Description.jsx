@@ -27,7 +27,7 @@ const Description = () => {
                                 <Typography sx={{ fontWeight: 600 }} variant="h6">About the Product</Typography>
                             </AccordionSummary>
                             <AccordionDetails className={classes.rootAccordionDetails}>
-                                <Box dangerouslySetInnerHTML={{ __html: detailProduct.description }}></Box>
+                                <Box className={classes.boxDescription} dangerouslySetInnerHTML={{ __html: detailProduct.description }}></Box>
                             </AccordionDetails>
                         </Accordion>
                         <Accordion className={classes.rootPaper}>

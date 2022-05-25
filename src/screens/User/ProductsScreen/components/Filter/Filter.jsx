@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, Button, TextField } from '@mui/material';
 import React, { memo } from 'react';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -74,6 +74,7 @@ const Filter = (props) => {
                 newArray[key] = array1[key];
             }
         }
+
         if (props.page !== 0) {
             newArray.page = props.page;
         }
@@ -154,8 +155,8 @@ const Filter = (props) => {
                 </AccordionSummary>
                 <AccordionDetails className={classes.rootAccordionDetails}>
                     <Box sx={{ width: 'interhit' }}>
-                        <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-                            <Slider
+                        <Box sx={{ width: '100%', display: 'flex', gap: '1rem', justifyContent: 'center' }}>
+                            {/* <Slider
                                 sx={{ width: '80%' }}
                                 max={300}
                                 value={array1.price}
@@ -163,10 +164,25 @@ const Filter = (props) => {
                                 valueLabelDisplay="auto"
                                 getAriaValueText={valuetext}
                                 onClick={handleSetPage}
+                            /> */}
+                            <TextField
+                                id="outlined-helperText"
+                                size='small'
+                                sx={{ width: '85%' }}
+                                defaultValue={array1.price[0]}
+                                placeholder='From'
+
+                            />
+                            <TextField
+                                id="outlined-helperText"
+                                size='small'
+                                defaultValue={array1.price[1]}
+                                placeholder='To'
+
                             />
                         </Box>
 
-                        <Typography>Price ${array1.price[0]} to ${array1.price[1]}</Typography>
+                        <Button sx={{ margin: '2rem 0' }} fullWidth variant="contained" >Apply</Button>
                     </Box>
                 </AccordionDetails>
             </Accordion>

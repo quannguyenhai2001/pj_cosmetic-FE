@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { deleteListProducts, fetchAsyncGetManu } from 'slices/ProductSlice';
 import Filter from './components/Filter/Filter';
-import Products from './components/Products/Products';
+import ListProducts from './components/ListProducts/ListProducts';
 import SlideProductRelative from './components/SlideProductRelative/SlideProductRelative';
 import useStyles from './styles';
 
@@ -43,7 +43,7 @@ const ProductsScreen = () => {
     }
     return (
         <Container maxWidth="xl" className={classes.screen}>
-            <Grid container spacing={2}>
+            <Grid container spacing={4}>
                 <Grid item xs={2}>
                     <Typography sx={{ marginBottom: '1rem' }}>
                         {Object.keys(titleCategory).length > 0 ?
@@ -55,7 +55,7 @@ const ProductsScreen = () => {
                     <Filter page={page} handleSetPage={handleSetPage} />
                 </Grid>
                 <Grid item xs={10}>
-                    <Products setPage={setPage} page={page} />
+                    <ListProducts setPage={setPage} page={page} />
                 </Grid>
             </Grid>
             <Divider sx={{ margin: '2rem 0' }} />

@@ -80,17 +80,6 @@ export const fetchAsyncGetListCommentByProduct = createAsyncThunk(
     }
 );
 
-export const fetchAsyncUpdateComment = createAsyncThunk(
-    "product/fetchAsyncUpdateComment",
-    async (arg, { rejectWithValue }) => {
-        try {
-            const response = await CallApiByParams("comments/update-comment.php", "put", arg)
-            return response.data
-        } catch (error) {
-            return rejectWithValue(error.response.data)
-        }
-    }
-);
 
 
 //cart
@@ -128,7 +117,7 @@ export const fetchAsyncDecreaseQuantityProduct = createAsyncThunk(
     }
 );
 
-
+//comment
 export const fetchAsyncCreateComment = createAsyncThunk(
     "product/fetchAsyncCreateComment",
     async (arg, { rejectWithValue }) => {
@@ -140,7 +129,67 @@ export const fetchAsyncCreateComment = createAsyncThunk(
         }
     }
 );
+export const fetchAsyncUpdateComment = createAsyncThunk(
+    "product/fetchAsyncUpdateComment",
+    async (arg, { rejectWithValue }) => {
+        try {
+            const response = await CallApiByBody("comments/update-comment.php", "put", arg)
+            return response.data
+        } catch (error) {
+            return rejectWithValue(error.response.data)
+        }
+    }
+);
+export const fetchAsyncDeleteComment = createAsyncThunk(
+    "product/fetchAsyncDeleteComment",
+    async (arg, { rejectWithValue }) => {
+        try {
+            const response = await CallApiByBody("comments/delete-comment.php", "delete", arg)
+            return response.data
+        } catch (error) {
+            return rejectWithValue(error.response.data)
+        }
+    }
+);
 
+
+//bill
+export const fetchAsyncCreateBill = createAsyncThunk(
+    "product/fetchAsyncCreateBill",
+    async (arg, { rejectWithValue }) => {
+        try {
+            const response = await CallApiByBody("bills/create-bill.php", "post", arg)
+            return response.data
+        } catch (error) {
+            return rejectWithValue(error.response.data)
+        }
+    }
+);
+
+export const fetchAsyncGetListProductOfBill = createAsyncThunk(
+    "product/fetchAsyncGetListProductOfBill",
+    async (arg, { rejectWithValue }) => {
+        try {
+            const response = await CallApiByBody("bills/get-all-products-from-bill-details.php", "get", null)
+            return response.data
+        } catch (error) {
+            return rejectWithValue(error.response.data)
+        }
+    }
+);
+
+//rating
+export const fetchAsyncCreateRating = createAsyncThunk(
+    "product/fetchAsyncCreateRating",
+    async (arg, { rejectWithValue }) => {
+        try {
+            const response = await CallApiByBody("ratings/create-rating.php", "put", arg)
+            return response.data
+        } catch (error) {
+            return rejectWithValue(error.response.data)
+        }
+    }
+);
 //image
 export const fetchAsyncTestFile = createAsyncThunk(
     "product/fetchAsyncTestFile",
@@ -179,6 +228,9 @@ const productSlice = createSlice({
         detailProduct: [],
         listComments: [],
 
+        //order
+        listProductsInOrder: [],
+
 
 
     },
@@ -197,6 +249,13 @@ const productSlice = createSlice({
         },
         deleteDetailProduct: (state, action) => {
             state.detailProduct = []
+        },
+
+        deleteListComments: (state, action) => {
+            state.listComments = []
+        },
+        deleteListProductInCart: (state, action) => {
+            state.listProductInCart = []
         }
     },
     extraReducers: {
@@ -250,22 +309,7 @@ const productSlice = createSlice({
         },
 
 
-        //get comment by product
-        [fetchAsyncGetListCommentByProduct.fulfilled]: (state, action) => {
-            state.listComments = action.payload.data
-            // console.log(action.payload.data)
-        },
-        [fetchAsyncGetListCommentByProduct.rejected]: (state, action) => {
-            console.log(action.payload)
-        },
-        //update comment
-        [fetchAsyncUpdateComment.fulfilled]: (state, action) => {
-            state.listComments = action.payload.data
-            console.log(action.payload.data)
-        },
-        [fetchAsyncUpdateComment.rejected]: (state, action) => {
-            console.log(action.payload)
-        },
+
 
         //get list product in cart
         [fetchAsyncGetListProductInCart.fulfilled]: (state, action) => {
@@ -292,9 +336,14 @@ const productSlice = createSlice({
         },
 
 
-
-
-
+        //get comment by product
+        [fetchAsyncGetListCommentByProduct.fulfilled]: (state, action) => {
+            state.listComments = action.payload.data
+            console.log(action.payload.data)
+        },
+        [fetchAsyncGetListCommentByProduct.rejected]: (state, action) => {
+            console.log(action.payload)
+        },
         //create comment
         [fetchAsyncCreateComment.fulfilled]: (state, action) => {
 
@@ -302,6 +351,53 @@ const productSlice = createSlice({
         },
         [fetchAsyncCreateComment.rejected]: (state, action) => {
 
+            console.log(action.payload)
+        },
+
+        //update comment
+
+        [fetchAsyncUpdateComment.fulfilled]: (state, action) => {
+            console.log(action.payload)
+        },
+        [fetchAsyncCreateComment.rejected]: (state, action) => {
+
+            console.log(action.payload)
+        },
+
+        //delete comment
+        [fetchAsyncDeleteComment.fulfilled]: (state, action) => {
+
+            console.log(action.payload)
+        },
+        [fetchAsyncDeleteComment.rejected]: (state, action) => {
+
+            console.log(action.payload)
+        },
+
+
+
+
+        //create bill
+        [fetchAsyncCreateBill.fulfilled]: (state, action) => {
+            console.log(action.payload)
+        },
+        [fetchAsyncCreateBill.rejected]: (state, action) => {
+            console.log(action.payload)
+        },
+        [fetchAsyncGetListProductOfBill.fulfilled]: (state, action) => {
+            state.listProductsInOrder = action.payload.data
+            console.log(action.payload)
+        },
+        [fetchAsyncGetListProductOfBill.rejected]: (state, action) => {
+            console.log(action.payload)
+        },
+
+        //rating
+        [fetchAsyncCreateRating.fulfilled]: (state, action) => {
+            // state.listProductsInOrder = action.payload.data
+            console.log(action.payload)
+        },
+        [fetchAsyncCreateRating.rejected]: (state, action) => {
             console.log(action.payload)
         },
 
@@ -315,6 +411,6 @@ const productSlice = createSlice({
     }
 })
 const { reducer, actions } = productSlice
-export const { setListCategories, deleteListProducts, deleteLErrorListProducts, deleteSearchListProducts, deleteDetailProduct } = actions
+export const { setListCategories, deleteListProducts, deleteListProductInCart, deleteLErrorListProducts, deleteSearchListProducts, deleteListComments, deleteDetailProduct } = actions
 export default reducer
 

@@ -1,10 +1,12 @@
+import { Box } from '@mui/material';
 import React from 'react';
-
+import useStyles from './styles'
 const NotFound = () => {
+    const classes = useStyles()
     return (
-        <div>
-            Not Found
-        </div>
+        <Box className={classes.box}>
+
+        </Box>
     );
 };
 

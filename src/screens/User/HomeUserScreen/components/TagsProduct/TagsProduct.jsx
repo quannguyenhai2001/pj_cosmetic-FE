@@ -114,28 +114,28 @@ export default function TagsProduct() {
                         navigation={true}
                         modules={[Navigation]}
                     >
-                        {/*{listAllProducts.length > 0 ?
+                        {listAllProducts.length > 0 ?
                             (
-                                listAllProducts.slice(15, 30).map((item, index) => (
+                                listAllProducts.slice(15, 25).map((item, index) => (
                                     <SwiperSlide key={index}>
-                                        <Box className={classes.boxContent}>
+                                        <Box className={classes.boxContent} onClick={() => handleNavigate(item.id)}>
                                             <Box className={classes.boxContentNumber}>
                                                 #{index + 1}
                                             </Box>
-                                            <img className={classes.swiperSlideImg} src={productImages[0]} alt="Product" />
+                                            {item.image && (<img className={classes.swiperSlideImg} src={JSON.parse(item.image)[0]} alt="Product" />)}
                                             <Box sx={{ textAlign: 'center' }}>
-                                                <Typography component="div" sx={{ fontWeight: 'bold', margin: '1rem 0' }}>
-                                                    ten nha cung cap
+                                                <Typography component="div" noWrap sx={{ fontWeight: 'bold', margin: '1rem 0' }}>
+                                                    {item.manufacturersName}
                                                 </Typography>
-                                                <Typography component="div" noWrap sx={{ height: '2rem' }}>
-                                                    {item.name}
+                                                <Typography component="div" sx={{ height: '2rem' }}>
+                                                    {item.productsName}
                                                 </Typography>
                                             </Box>
                                         </Box>
                                     </SwiperSlide>
                                 ))
                             ) :
-                            null} */}
+                            null}
                     </Swiper>
                 </TabPanel>
                 <TabPanel value={value} index={2}>
@@ -146,28 +146,28 @@ export default function TagsProduct() {
                         navigation={true}
                         modules={[Navigation]}
                     >
-                        {/* {listAllProducts.length > 0 ?
+                        {listAllProducts.length > 0 ?
                             (
-                                listAllProducts.slice(30, 45).map((item, index) => (
+                                listAllProducts.slice(10, 20).map((item, index) => (
                                     <SwiperSlide key={index}>
-                                        <Box className={classes.boxContent}>
+                                        <Box className={classes.boxContent} onClick={() => handleNavigate(item.id)}>
                                             <Box className={classes.boxContentNumber}>
                                                 #{index + 1}
                                             </Box>
-                                            <img className={classes.swiperSlideImg} src={productImages[0]} alt="Product" />
+                                            {item.image && (<img className={classes.swiperSlideImg} src={JSON.parse(item.image)[0]} alt="Product" />)}
                                             <Box sx={{ textAlign: 'center' }}>
-                                                <Typography component="div" sx={{ fontWeight: 'bold', margin: '1rem 0' }}>
-                                                    ten nha cung cap
+                                                <Typography component="div" noWrap sx={{ fontWeight: 'bold', margin: '1rem 0' }}>
+                                                    {item.manufacturersName}
                                                 </Typography>
-                                                <Typography component="div" noWrap sx={{ height: '2rem' }}>
-                                                    {item.name}
+                                                <Typography component="div" sx={{ height: '2rem' }}>
+                                                    {item.productsName}
                                                 </Typography>
                                             </Box>
                                         </Box>
                                     </SwiperSlide>
                                 ))
                             ) :
-                            null} */}
+                            null}
                     </Swiper>
                 </TabPanel>
             </Box>

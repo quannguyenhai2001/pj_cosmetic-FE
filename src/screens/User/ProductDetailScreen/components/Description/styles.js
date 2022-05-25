@@ -63,5 +63,13 @@ export default makeStyles((theme) => ({
         '&.MuiAccordionDetails-root': {
             padding: '1rem 0'
         }
+    },
+
+    boxDescription: {
+        '& strong': {
+            fontWeight: 'bold',
+        }
     }
+
+
 }));

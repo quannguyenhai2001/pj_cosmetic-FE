@@ -1,4 +1,6 @@
 import React from 'react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import { Routers } from "routes/Routes"
 import { useEffect } from 'react';
@@ -22,6 +24,7 @@ function App() {
 
   React.useEffect(() => {
     dispatch(fetchAsyncGetAllProducts());
+
   }, [dispatch]);
   //reomove count loaded
   // useEffect(() => {
@@ -45,6 +48,7 @@ function App() {
   return (
     <div>
       <Routers />
+      <ToastContainer style={{ fontSize: '1.3rem' }} />
     </div >
   );
 }

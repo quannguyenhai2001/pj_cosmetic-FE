@@ -11,7 +11,7 @@ import Video from './components/Video/Video';
 const HomeUserScreen = () => {
     return (
         <Box sx={{ marginBottom: '5rem', position: 'relative' }}>
-            {/* <DialogBox /> */}
+            <DialogBox />
             {/* <SlideBanner /> */}
             <Video />
             <Container maxWidth="lg" sx={{ paddingTop: '55rem' }}>
