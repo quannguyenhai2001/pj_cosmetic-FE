@@ -39,8 +39,8 @@ const Products = (props) => {
                             {Number(product.promotion) > 0 ?
                                 (
                                     <Box className={classes.sale}>
-                                        <span class="home-product-item__sale-off-percent">{product.promotion * 100}%</span>
-                                        <span class="home-product-item__sale-off-sale">Sale</span>
+                                        <span className="home-product-item__sale-off-percent">{product.promotion * 100}%</span>
+                                        <span className="home-product-item__sale-off-sale">Sale</span>
                                     </Box>
 
                                 ) : null}
@@ -63,10 +63,10 @@ const Products = (props) => {
                             {/* content */}
                             <CardContent>
                                 <Typography gutterBottom noWrap sx={{ fontWeight: 650 }} component="div">
-                                    {product.manufacturersName}
+                                    {product.manufacturerName}
                                 </Typography>
                                 <Typography gutterBottom sx={{ height: 42 }} component="div">
-                                    {product.productsName}
+                                    {product.productName}
                                 </Typography>
 
                                 <Box sx={{ display: 'flex', justifyContent: 'space-between', }}>

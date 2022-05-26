@@ -185,15 +185,18 @@ const RouteConfigs = [
 ]
 function PrivateRouter() {
     const userType = useSelector(state => state.user.userDetail.role);
-    const [isRole, setIsRole] = React.useState(false);
-    React.useEffect(() => {
-        if (userType) {
-            setIsRole(true)
-        }
-    }, [userType])
+    // const [isRole, setIsRole] = React.useState(false);
+
+    // React.useEffect(() => {
+    //     if (userType) {
+    //         setIsRole(true)
+    //         console.log("4545")
+    //     }
+    // }, [userType])
     const jwtToken = localStorage.getItem("token");
     return RouteConfigs.map((route, index) => {
-        if ((!route.isPrivate || (route.isPrivate && jwtToken && route.isScreenAdmin === false && userType === "user")) || (route.isPrivate && jwtToken && route.isScreenAdmin === true && userType === "admin")) {
+
+        if ((!route.isPrivate || (route.isPrivate && jwtToken && route.isScreenAdmin === false)) || (route.isPrivate && jwtToken && route.isScreenAdmin === true)) {
             return <Route key={index} path={route.path} element={(() => {
                 return (
                     <route.layout>
@@ -203,16 +206,14 @@ function PrivateRouter() {
             })()}
             />
         }
-        //co role nhung k co token
-        else if (isRole) {
-            if (route.isPrivate && !jwtToken && route.isScreenAdmin === false) {
-                return <Route key={index} path={route.path} element={<Navigate to="/sign-in" />} />
-            } else if (route.isPrivate && !jwtToken && route.isScreenAdmin === true) {
-                return <Route key={index} path={route.path} element={<Navigate to="/admin" />} />
-            }
-            else {
-                return <Route key={index} path={route.path} element={<Navigate to="/" />} />
-            }
+
+        else if (route.isPrivate && !jwtToken && route.isScreenAdmin === false) {
+            return <Route key={index} path={route.path} element={<Navigate to="/sign-in" />} />
+        } else if (route.isPrivate && !jwtToken && route.isScreenAdmin === true) {
+            return <Route key={index} path={route.path} element={<Navigate to="/admin" />} />
+        }
+        else {
+            return <Route key={index} path={route.path} element={<Navigate to="/" />} />
         }
 
     })
@@ -220,10 +221,10 @@ function PrivateRouter() {
 
 export function Routers() {
     return (
-        <BrowserRouter>
-            <Routes>
+        (<BrowserRouter>
+            < Routes >
                 {PrivateRouter()}
             </Routes>
-        </BrowserRouter>
+        </BrowserRouter>)
     )
 }

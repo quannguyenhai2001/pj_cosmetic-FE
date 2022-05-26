@@ -54,7 +54,7 @@ const Cart = () => {
                                 {Number(item.product.promotion) > 0 ?
                                     (
                                         <Box className={classes.sale}>
-                                            <span class="home-product-item__sale-off-percent">{item.product.promotion * 100}%</span>
+                                            <span className="home-product-item__sale-off-percent">{item.product.promotion * 100}%</span>
 
                                         </Box>
 

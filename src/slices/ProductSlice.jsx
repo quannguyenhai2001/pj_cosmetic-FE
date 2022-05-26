@@ -271,7 +271,7 @@ const productSlice = createSlice({
         //get all products
         [fetchAsyncGetAllProducts.fulfilled]: (state, action) => {
             state.listAllProducts = action.payload.data
-            // console.log(action.payload)
+            console.log(action.payload)
         },
         [fetchAsyncGetAllProducts.rejected]: (state, action) => {
             console.log(action.payload)

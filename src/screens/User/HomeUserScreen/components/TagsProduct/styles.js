@@ -15,6 +15,9 @@ export default makeStyles((theme) => ({
                 fontSize: '3.5rem',
                 transform: 'translateY(-20px)',
             },
+        },
+        '& .swiper-slide': {
+            padding: '1rem'
         }
     },
     swiperSlideImg: {
@@ -31,6 +34,11 @@ export default makeStyles((theme) => ({
         width: '100%',
         height: '100%',
         cursor: 'pointer',
+        transition: 'all .2s',
+        '&:hover': {
+            transform: 'scale(1.05)',
+            textDecoration: 'underline',
+        },
     },
 
     boxContentNumber: {

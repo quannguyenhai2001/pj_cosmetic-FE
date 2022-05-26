@@ -3,27 +3,33 @@ function stringToColor(string) {
     let i;
 
     /* eslint-disable no-bitwise */
-    for (i = 0; i < string.length; i += 1) {
-        hash = string.charCodeAt(i) + ((hash << 5) - hash);
-    }
+    if (string) {
+        for (i = 0; i < string.length; i += 1) {
+            hash = string.charCodeAt(i) + ((hash << 5) - hash);
+        }
 
-    let color = '#';
+        let color = '#';
 
-    for (i = 0; i < 3; i += 1) {
-        const value = (hash >> (i * 8)) & 0xff;
-        color += `00${value.toString(16)}`.slice(-2);
+        for (i = 0; i < 3; i += 1) {
+            const value = (hash >> (i * 8)) & 0xff;
+            color += `00${value.toString(16)}`.slice(-2);
+        }
+        return color;
     }
     /* eslint-enable no-bitwise */
 
-    return color;
+
 }
 export default function StringAvatar(name) {
-    return {
-        sx: {
-            bgcolor: stringToColor(name),
-            width: '40px',
-            height: '40px',
-        },
-        children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
-    };
+    if (name) {
+        return {
+            sx: {
+                bgcolor: stringToColor(name),
+                width: '40px',
+                height: '40px',
+            },
+            children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+
+        };
+    }
 }

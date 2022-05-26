@@ -93,10 +93,10 @@ export default function TagsProduct() {
                                             {item.image && (<img className={classes.swiperSlideImg} src={JSON.parse(item.image)[0]} alt="Product" />)}
                                             <Box sx={{ textAlign: 'center' }}>
                                                 <Typography component="div" noWrap sx={{ fontWeight: 'bold', margin: '1rem 0' }}>
-                                                    {item.manufacturersName}
+                                                    {item.manufacturerName}
                                                 </Typography>
                                                 <Typography component="div" sx={{ height: '2rem' }}>
-                                                    {item.productsName}
+                                                    {item.productName}
                                                 </Typography>
                                             </Box>
                                         </Box>
@@ -125,10 +125,10 @@ export default function TagsProduct() {
                                             {item.image && (<img className={classes.swiperSlideImg} src={JSON.parse(item.image)[0]} alt="Product" />)}
                                             <Box sx={{ textAlign: 'center' }}>
                                                 <Typography component="div" noWrap sx={{ fontWeight: 'bold', margin: '1rem 0' }}>
-                                                    {item.manufacturersName}
+                                                    {item.manufacturerName}
                                                 </Typography>
                                                 <Typography component="div" sx={{ height: '2rem' }}>
-                                                    {item.productsName}
+                                                    {item.productName}
                                                 </Typography>
                                             </Box>
                                         </Box>
@@ -172,7 +172,7 @@ export default function TagsProduct() {
                 </TabPanel>
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'center', margin: '1rem 0 3rem 0' }}>
-                <Button variant="outlined" endIcon={<StartIcon />}>View More</Button>
+                <Button variant="outlined">View More</Button>
             </Box>
         </Box >
 
