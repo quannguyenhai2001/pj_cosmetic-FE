@@ -8,12 +8,14 @@ export default makeStyles((theme) => ({
             '&:after': {
                 fontSize: '3.5rem',
                 transform: 'translateY(-20px)',
+                color: 'black'
             },
         },
         '& .swiper-button-next': {
             '&:after': {
                 fontSize: '3.5rem',
                 transform: 'translateY(-20px)',
+                color: 'black'
             },
         },
         '& .swiper-slide': {

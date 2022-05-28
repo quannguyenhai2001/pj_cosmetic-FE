@@ -17,6 +17,9 @@ export default makeStyles((theme) => ({
                 transform: 'translateY(-20px)',
                 color: 'black'
             },
+        },
+        '& .swiper-slide': {
+            padding: '1rem'
         }
     },
     swiperSlideImg: {
@@ -27,12 +30,27 @@ export default makeStyles((theme) => ({
 
     },
 
+
+    //title
+    boxTitle: {
+        position: 'relative',
+    },
+    boxTitleButton: {
+        position: 'absolute',
+        right: '0',
+        top: '0',
+    },
     //number 
     boxContent: {
         position: 'relative',
         width: '100%',
         height: '100%',
         cursor: 'pointer',
+        transition: 'all .2s',
+        '&:hover': {
+            transform: 'scale(1.05)',
+            textDecoration: 'underline',
+        },
     },
 
     boxContentNumber: {

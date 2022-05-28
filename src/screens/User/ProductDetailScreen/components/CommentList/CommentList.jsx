@@ -83,7 +83,7 @@ const CommentList = (props) => {
     return () => {
       dispatch(deleteListComments())
     }
-  }, [])
+  }, [dispatch])
 
 
   const render = (listComment.length) === 0 ? (<div>No comment...</div>) :

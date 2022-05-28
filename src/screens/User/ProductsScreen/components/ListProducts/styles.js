@@ -2,7 +2,7 @@ import { makeStyles } from '@mui/styles';
 export default makeStyles((theme) => ({
     rootCard: {
         '&.MuiPaper-root': {
-            height: 340,
+            height: 320,
             position: 'relative',
             transition: '0.3s',
             cursor: 'pointer',
@@ -32,7 +32,7 @@ export default makeStyles((theme) => ({
     rootCardMedia: {
         '&.MuiCardMedia-root': {
             transition: '0.3s',
-
+            objectFit: 'unset'
 
 
         },
@@ -74,5 +74,11 @@ export default makeStyles((theme) => ({
     //pagination
     stackPagination: {
         alignItems: 'center',
+    },
+
+    rootRatting: {
+        '&.MuiRating-root': {
+            fontSize: '1.4rem'
+        }
     }
 }));

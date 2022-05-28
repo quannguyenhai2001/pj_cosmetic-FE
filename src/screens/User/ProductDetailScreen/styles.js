@@ -4,7 +4,7 @@ export default makeStyles((theme) => ({
 
     boxDetail: {
         '& *': {
-            marginBottom: '1.3rem'
+
         }
     },
 

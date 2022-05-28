@@ -49,7 +49,7 @@ const SlideProductRelative = () => {
                                             overflow: 'hidden',
                                             display: '-webkit-box',
                                         }}>
-                                            {item.productsName}
+                                            {item.productName}
                                         </Typography>
                                         <Box sx={{ display: 'flex', justifyContent: 'space-between', margin: '1rem 0.5rem' }}>
                                             <Typography variant="subtitle1" gutterBottom sx={{ fontWeight: '100', textDecoration: 'line-through' }}>

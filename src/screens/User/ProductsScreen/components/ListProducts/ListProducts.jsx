@@ -33,7 +33,7 @@ const Products = (props) => {
         (<Grid container spacing={4}>
             {listProducts.data.map((product, index) => {
                 return (
-                    <Grid item xs={3} key={index}>
+                    <Grid item xs={2.4} key={index}>
                         <Card className={classes.rootCard} onClick={() => { handleClick(product.id) }}>
                             {/* sale */}
                             {Number(product.promotion) > 0 ?
@@ -48,13 +48,13 @@ const Products = (props) => {
                             {/* image */}
                             {product.image ? (<CardMedia className={classes.rootCardMedia}
                                 component="img"
-                                height="220"
+                                height="180"
                                 image={JSON.parse(product.image)[0]}
                                 alt="green iguana"
                             />) : (
                                 <CardMedia className={classes.rootCardMedia}
                                     component="img"
-                                    height="220"
+                                    height="180"
                                     image='https://res.cloudinary.com/cosmeticv1/image/upload/v1653237466/cosmetic/products/Product17_2.webp'
                                     alt="green iguana"
                                 />
@@ -69,10 +69,10 @@ const Products = (props) => {
                                     {product.productName}
                                 </Typography>
 
-                                <Box sx={{ display: 'flex', justifyContent: 'space-between', }}>
+                                <Box sx={{ display: 'flex', gap: '1rem', alignItems: 'baseline' }}>
                                     {parseFloat(product.promotion) > 0 ?
                                         (<>
-                                            <Typography variant="subtitle1" gutterBottom sx={{ fontSize: '1.5rem', fontWeight: '100', textDecoration: 'line-through' }}>
+                                            <Typography gutterBottom sx={{ fontSize: '1.4rem', fontWeight: '100', opacity: '70%', textDecoration: 'line-through' }}>
                                                 ${product.price}
                                             </Typography>
                                             <Typography variant="subtitle1" gutterBottom sx={{ fontSize: '1.5rem', color: 'red' }}>
@@ -86,6 +86,9 @@ const Products = (props) => {
                                             </>
                                         )}
 
+                                </Box>
+                                <Box sx={{ transform: 'translateY(-2px)' }}>
+                                    <Rating className={classes.rootRatting} name="half-rating-read" defaultValue={parseFloat(product.rating.average)} precision={0.5} readOnly />
                                 </Box>
                             </CardContent>
                         </Card>

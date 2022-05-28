@@ -117,6 +117,18 @@ export const fetchAsyncDecreaseQuantityProduct = createAsyncThunk(
     }
 );
 
+export const fetchAsyncDeleteProductInCart = createAsyncThunk(
+    "product/fetchAsyncDeleteProductInCart",
+    async (arg, { rejectWithValue }) => {
+        try {
+            const response = await CallApiByBody("cart/delete-product.php", "delete", arg)
+            return response.data
+        } catch (error) {
+            return rejectWithValue(error.response.data)
+        }
+    }
+);
+
 //comment
 export const fetchAsyncCreateComment = createAsyncThunk(
     "product/fetchAsyncCreateComment",
@@ -178,12 +190,13 @@ export const fetchAsyncGetListProductOfBill = createAsyncThunk(
     }
 );
 
+
 //rating
 export const fetchAsyncCreateRating = createAsyncThunk(
     "product/fetchAsyncCreateRating",
     async (arg, { rejectWithValue }) => {
         try {
-            const response = await CallApiByBody("ratings/create-rating.php", "put", arg)
+            const response = await CallApiByBody("ratings/create-rating.php", "POST", arg)
             return response.data
         } catch (error) {
             return rejectWithValue(error.response.data)
@@ -271,7 +284,7 @@ const productSlice = createSlice({
         //get all products
         [fetchAsyncGetAllProducts.fulfilled]: (state, action) => {
             state.listAllProducts = action.payload.data
-            console.log(action.payload)
+            // console.log(action.payload)
         },
         [fetchAsyncGetAllProducts.rejected]: (state, action) => {
             console.log(action.payload)
@@ -301,23 +314,24 @@ const productSlice = createSlice({
         //get detail product
         [fetchAsyncGetDetailProduct.fulfilled]: (state, action) => {
             state.detailProduct = action.payload.data
-            console.log(action.payload)
+            // console.log(action.payload)
         },
         [fetchAsyncGetDetailProduct.rejected]: (state, action) => {
             console.log(action.payload)
         },
 
 
+
+
+        //cart
         //get list product in cart
         [fetchAsyncGetListProductInCart.fulfilled]: (state, action) => {
             state.listProductInCart = action.payload.data
-            console.log(action.payload)
+            // console.log(action.payload)
         },
         [fetchAsyncGetListProductInCart.rejected]: (state, action) => {
             console.log(action.payload)
         },
-
-
         //decrease quantity product
         [fetchAsyncDecreaseQuantityProduct.fulfilled]: (state, action) => {
             // state.listProductInCart = JSON.parse(action.payload)
@@ -333,12 +347,22 @@ const productSlice = createSlice({
         [fetchAsyncAddProductToCart.rejected]: (state, action) => {
             console.log(action.payload)
         },
+        //fetchAsyncDeleteProductInCart
+        [fetchAsyncDeleteProductInCart.fulfilled]: (state, action) => {
+            console.log(action.payload)
+        },
+        [fetchAsyncDeleteProductInCart.rejected]: (state, action) => {
+            console.log(action.payload)
+        },
+
+
+
 
 
         //get comment by product
         [fetchAsyncGetListCommentByProduct.fulfilled]: (state, action) => {
             state.listComments = action.payload.data
-            console.log(action.payload.data)
+            // console.log(action.payload.data)
         },
         [fetchAsyncGetListCommentByProduct.rejected]: (state, action) => {
             console.log(action.payload)
@@ -375,7 +399,6 @@ const productSlice = createSlice({
 
 
 
-
         //create bill
         [fetchAsyncCreateBill.fulfilled]: (state, action) => {
             console.log(action.payload)
@@ -394,7 +417,9 @@ const productSlice = createSlice({
         //rating
         [fetchAsyncCreateRating.fulfilled]: (state, action) => {
             // state.listProductsInOrder = action.payload.data
-            console.log(action.payload)
+            console.log({
+                rating: action.payload
+            })
         },
         [fetchAsyncCreateRating.rejected]: (state, action) => {
             console.log(action.payload)

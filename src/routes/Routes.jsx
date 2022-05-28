@@ -23,11 +23,12 @@ import ChangePasswordScreen from "screens/User/ChangePasswordScreen/ChangePasswo
 import OrderUserScreen from "screens/User/OrderUserScreen/OrderDetailScreen/OrderDetailUserScreen";
 import DeleteAccountUserScreen from "screens/User/DeleteAccountUserScreen/DeleteAccountUserScreen";
 import TestScreen1 from "screens/User/TestScreen1/TestScreen1";
-import Test2 from "screens/User/test2/Test2";
+import TestDialog from "screens/User/TestDialog/TestDialog";
 import NotFound from "screens/NotFound/NotFound";
 import OrderLayout from "layouts/OrderLayout/OrderLayout";
 import AllOrderScreen from "screens/User/OrderUserScreen/AllOrderScreen/AllOrderScreen";
 import DeliveryScreen from "screens/User/OrderUserScreen/DeliveryScreen/DeliveryScreen";
+import DeliveredOrderScreen from "screens/User/OrderUserScreen/DeliveredOrderScreen/DeliveredOrderScreen";
 
 
 
@@ -41,8 +42,8 @@ const RouteConfigs = [
 
     },
     {
-        path: "/test2",
-        element: Test2,
+        path: "/test",
+        element: TestDialog,
         isPrivate: false,
         layout: React.Fragment,
         isScreenAdmin: false,
@@ -93,8 +94,15 @@ const RouteConfigs = [
         isScreenAdmin: false,
     },
     {
-        path: "/user/:id/order/delivery",
+        path: "/user/:id/order/delivering",
         element: DeliveryScreen,
+        isPrivate: true,
+        layout: OrderLayout,
+        isScreenAdmin: false,
+    },
+    {
+        path: "/user/:id/order/delivered",
+        element: DeliveredOrderScreen,
         isPrivate: true,
         layout: OrderLayout,
         isScreenAdmin: false,
