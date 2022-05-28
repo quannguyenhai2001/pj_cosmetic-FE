@@ -18,6 +18,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import AddIcon from '@mui/icons-material/Add';
 import { blue } from '@mui/material/colors';
 import { Toast } from 'utils/Toast';
+import { useNavigate } from 'react-router-dom';
 
 function SimpleDialog(props) {
     const classes = useStyles();
@@ -60,10 +61,19 @@ const DeliveredOrderScreen = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const listProductsInOrder = useSelector(state => state.product.listProductsInOrder);
-    console.log(listProductsInOrder);
+    const navigate = useNavigate();
     React.useEffect(() => {
         dispatch(fetchAsyncGetListProductOfBill())
     }, [dispatch]);
+
+
+
+
+    const handleNavigate = (id) => {
+        navigate(`/products/detail/${id}`);
+    }
+
+
 
     //dialog
     const [valueArray, setValueArray] = React.useState(
@@ -82,122 +92,141 @@ const DeliveredOrderScreen = () => {
     };
     const handleClose = (value) => {
         setOpen(false);
-
     };
+
+    //find order status in list
+    const [listDeliveredOrder, setListDeliveredOrder] = React.useState([]);
+    React.useEffect(() => {
+        if (listProductsInOrder.length > 0) {
+            let a = []
+            listProductsInOrder.forEach(element => {
+                if (element.status === 'Success') {
+                    a.push(element)
+                }
+            })
+            setListDeliveredOrder(a)
+        }
+
+    }, [listProductsInOrder]);
+
     return (
         <Box sx={{ padding: '2rem 0' }}>
-            {listProductsInOrder.length > 0 ?
-                (listProductsInOrder.map((item, index) => {
-                    if (item.status === 'Success') {
-                        return (
-                            <Box sx={{ marginBottom: '3rem' }} key={index}>
-                                <Card sx={{ minWidth: 275, padding: '2rem 2rem' }} elevation={4}>
-                                    <Box sx={{ marginBottom: '1rem' }}>
-                                        <Grid container spacing={1}>
-                                            <Grid item xs={1}>
-                                                {item.image ? (<CardMedia
-                                                    component="img"
-                                                    height="80"
-                                                    image={JSON.parse(item.image)[0]}
-                                                    alt="green iguana"
-                                                />) : (
-                                                    <CardMedia className={classes.rootCardMedia}
-                                                        component="img"
-                                                        height="80"
-                                                        image='https://res.cloudinary.com/cosmeticv1/image/upload/v1653237466/cosmetic/products/Product17_2.webp'
-                                                        alt="green iguana"
-                                                    />
-                                                )}
-                                            </Grid>
-                                            <Grid item xs={11}>
-                                                <Typography sx={{
-                                                    fontSize: '1.5rem',
-                                                    marginBottom: '1rem'
-                                                }}>
-                                                    {item.name}
-                                                </Typography>
-                                                <Typography
-                                                    sx={{
+            {listDeliveredOrder.length > 0 ?
+                (listDeliveredOrder.map((item, index) => {
 
-                                                        marginBottom: '1rem'
-                                                    }}
-                                                >
-                                                    Manufacture: {item.ManufacturerName}
+                    return (<Box sx={{ marginBottom: '3rem' }} key={index}>
+                        <Card sx={{ minWidth: 275, padding: '2rem 2rem' }} elevation={4}>
+                            <Box sx={{ marginBottom: '1rem' }}>
+                                <Grid container spacing={1}>
+                                    <Grid item xs={1}>
+                                        {item.image ? (<CardMedia
+                                            component="img"
+                                            height="80"
+                                            image={JSON.parse(item.image)[0]}
+                                            alt="green iguana"
+                                        />) : (
+                                            <CardMedia className={classes.rootCardMedia}
+                                                component="img"
+                                                height="80"
+                                                image='https://res.cloudinary.com/cosmeticv1/image/upload/v1653237466/cosmetic/products/Product17_2.webp'
+                                                alt="green iguana"
+                                            />
+                                        )}
+                                    </Grid>
+                                    <Grid item xs={11}>
+                                        <Typography sx={{
+                                            fontSize: '1.5rem',
+                                            marginBottom: '1rem'
+                                        }}>
+                                            {item.name}
+                                        </Typography>
+                                        <Typography
+                                            sx={{
+
+                                                marginBottom: '1rem'
+                                            }}
+                                        >
+                                            Manufacture: {item.ManufacturerName}
+                                        </Typography>
+                                        <Box
+                                            sx={{
+                                                display: 'flex',
+                                                justifyContent: 'space-between',
+                                            }}
+                                        >
+                                            <Typography>
+                                                Quantity: {item.amount}
+                                            </Typography>
+                                            <Box>
+                                                <Typography variant="subtitle1" component="span" gutterBottom sx={{ fontSize: '1.5rem', fontWeight: '100', marginRight: '1rem', textDecoration: 'line-through', opacity: '70%' }}>
+                                                    ${item.price}
                                                 </Typography>
-                                                <Box
-                                                    sx={{
-                                                        display: 'flex',
-                                                        justifyContent: 'space-between',
-                                                    }}
-                                                >
-                                                    <Typography>
-                                                        Quantity: {item.amount}
-                                                    </Typography>
-                                                    <Box>
-                                                        <Typography variant="subtitle1" component="span" gutterBottom sx={{ fontSize: '1.5rem', fontWeight: '100', marginRight: '1rem', textDecoration: 'line-through', opacity: '70%' }}>
-                                                            ${item.price}
-                                                        </Typography>
-                                                        <Typography variant="subtitle1" component="span" gutterBottom sx={{ fontSize: '1.5rem', color: 'red' }}>
-                                                            ${parseFloat(item.price - (item.price * item.promotion), 2).toFixed(2)}
-                                                        </Typography>
-                                                        {/* <Typography variant="subtitle1" gutterBottom sx={{ fontSize: '1.5rem', fontWeight: '100', textDecoration: 'line-through' }}>
+                                                <Typography variant="subtitle1" component="span" gutterBottom sx={{ fontSize: '1.5rem', color: 'red' }}>
+                                                    ${parseFloat(item.price - (item.price * item.promotion), 2).toFixed(2)}
+                                                </Typography>
+                                                {/* <Typography variant="subtitle1" gutterBottom sx={{ fontSize: '1.5rem', fontWeight: '100', textDecoration: 'line-through' }}>
                                             ${product.price}
                                         </Typography>
                                         <Typography variant="subtitle1" gutterBottom sx={{ fontSize: '1.5rem', color: 'red' }}>
                                             ${parseFloat(product.price - (product.price * product.promotion), 2).toFixed(2)}
                                         </Typography> */}
-                                                    </Box>
-                                                </Box>
+                                            </Box>
+                                        </Box>
 
-                                            </Grid>
-                                        </Grid>
-                                    </Box>
-                                    <Divider />
-                                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: '1rem', margin: '1.5rem 0' }}>
-                                        <Box sx={{ display: 'flex', gap: '1rem', color: 'blue', alignItems: 'baseline' }}>
-                                            <LocalShippingIcon sx={{ transform: 'translateY(4px)' }} />
-                                            <Typography >Product has been delivered</Typography>
-                                        </Box>
-                                        <Box>
-                                            Total:
-                                            <Typography variant="subtitle1" component="span" gutterBottom sx={{ fontSize: '1.8rem', fontWeight: '600', textAlign: 'right', color: 'red' }}>
-                                                ${((parseFloat(item.price - (item.price * item.promotion), 2).toFixed(2)) * item.amount).toFixed(2)}
-                                            </Typography>
-                                        </Box>
-                                    </Box>
-
-                                    <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: '1rem' }}>
-                                        <Box>
-                                            {item.rated ? (
-                                                <Typography>Received rating</Typography>
-                                            )
-                                                : (<Typography>No rating received </Typography>)}
-                                        </Box>
-                                        <Box sx={{ display: 'flex', gap: '2rem' }}>
-                                            {!item.rated ? (
-                                                <>
-                                                    <Button variant="contained" sx={{ width: '8rem' }} onClick={() => handleClickOpen(item.id, item.pro_Id)}>RATING</Button>
-                                                    {valueArray.bill_details_Id === item.id ?
-                                                        (<SimpleDialog
-                                                            open={open}
-                                                            arrayId={valueArray}
-                                                            onClose={handleClose}
-                                                        />) :
-                                                        null}
-                                                </>
-                                            ) :
-                                                (<Button variant="contained" sx={{ width: '12rem' }}>BUY AGAIN</Button>)}
-                                            <Button variant="outlined">CONTACT SELLER</Button>
-                                        </Box>
-                                    </Box>
-                                </Card>
+                                    </Grid>
+                                </Grid>
                             </Box>
-                        )
-                    }
-                })) :
-                null}
+                            <Divider />
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: '1rem', margin: '1.5rem 0' }}>
+                                <Box sx={{ display: 'flex', gap: '1rem', color: 'blue', alignItems: 'baseline' }}>
+                                    <LocalShippingIcon sx={{ transform: 'translateY(4px)' }} />
+                                    <Typography >Product has been delivered</Typography>
+                                </Box>
+                                <Box>
+                                    Total:
+                                    <Typography variant="subtitle1" component="span" gutterBottom sx={{ fontSize: '1.8rem', fontWeight: '600', textAlign: 'right', color: 'red' }}>
+                                        ${((parseFloat(item.price - (item.price * item.promotion), 2).toFixed(2)) * item.amount).toFixed(2)}
+                                    </Typography>
+                                </Box>
+                            </Box>
 
-        </Box>
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: '1rem' }}>
+                                <Box>
+                                    {item.rated ? (
+                                        <Typography>Received rating</Typography>
+                                    )
+                                        : (<Typography>No rating received </Typography>)}
+                                </Box>
+                                <Box sx={{ display: 'flex', gap: '2rem' }}>
+                                    {!item.rated ? (
+                                        <>
+                                            <Button variant="contained" sx={{ width: '8rem' }} onClick={() => handleClickOpen(item.id, item.pro_Id)}>RATING</Button>
+                                            {valueArray.bill_details_Id === item.id ?
+                                                (<SimpleDialog
+                                                    open={open}
+                                                    arrayId={valueArray}
+                                                    onClose={handleClose}
+                                                />) :
+                                                null}
+                                        </>
+                                    ) :
+                                        (<Button onClick={() => handleNavigate(item.pro_Id)} variant="contained" sx={{ width: '12rem' }}>BUY AGAIN</Button>)}
+                                    <Button variant="outlined">CONTACT SELLER</Button>
+                                </Box>
+                            </Box>
+                        </Card>
+                    </Box>)
+                })) : (
+                    <Box sx={{ height: '60vh', display: 'grid', placeItems: 'center' }}>
+                        <img style={{ width: '16rem' }} src={require('assets/img/order/img1.png')} alt='img' />
+                        <Typography sx={{ fontSize: '2rem', fontWeight: '600', color: '#828282' }}>
+                            You don't have any delivered order yet
+                        </Typography>
+                    </Box>
+                )
+            }
+
+        </Box >
     );
 };
 

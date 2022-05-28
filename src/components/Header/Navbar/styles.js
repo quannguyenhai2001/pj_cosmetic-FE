@@ -17,16 +17,62 @@ export default makeStyles((theme) => ({
             height: '60px',
         }
     },
+
+
+    //list item
     rootListItem: {
         '&.MuiListItem-root': {
             padding: '0px',
-            margin: '0px',
+            margin: '0px 0 6px 0',
+            '& a': {
+                color: 'black',
+                '&:hover': {
+                    color: "blue",
+                }
+            },
             '&:hover': {
                 color: "blue",
                 cursor: "pointer"
             }
-        }
+        },
     },
+
+    rootListItem1: {
+        '&.MuiListItem-root': {
+            padding: '0px',
+            margin: '6px 0',
+            '& a': {
+                color: 'black',
+                '&:hover': {
+                    color: "blue",
+                }
+            },
+            '&:hover': {
+                color: "blue",
+                cursor: "pointer"
+            }
+        },
+    },
+
+
+    rootListItem2: {
+        '&.MuiListItem-root': {
+            padding: '0px',
+            margin: '0px 0 0px 0',
+            '& a': {
+                color: 'black',
+                '&:hover': {
+                    color: "blue",
+                }
+            },
+            '&:hover': {
+                color: "blue",
+                cursor: "pointer"
+            }
+        },
+    },
+
+
     searchInput: {
         [`& fieldset`]: {
             borderRadius: '50px',

@@ -23,6 +23,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { deleteUserDetail } from 'slices/UserSlice';
 import Cart from './components/Cart/Cart';
 import logo from 'assets/img/logo/logo_web.png';
+import ReceiptIcon from '@mui/icons-material/Receipt';
 //hide and show navbar
 function HideOnScroll(props) {
     const { children, window } = props;
@@ -193,9 +194,20 @@ export default function NavBar(props) {
                                                     <Typography component={Link} to={`/user/${user.id}`} sx={{ transform: 'translateY(-1px)' }}>
                                                         Profile
                                                     </Typography>
+
                                                 </ListItem>
+                                                <ListItem className={classes.rootListItem1} disablePadding>
+                                                    <Box sx={{ marginRight: 1 }}>
+                                                        <ReceiptIcon />
+                                                    </Box>
+                                                    <Typography component={Link} to={`/user/${user.id}/order/all`} sx={{ transform: 'translateY(-1px)' }}>
+                                                        Purchase Order
+                                                    </Typography>
+
+                                                </ListItem>
+
                                                 <Divider sx={{ margin: '0.5rem 0' }} />
-                                                <ListItem className={classes.rootListItem} onClick={logOutHandle} disablePadding>
+                                                <ListItem className={classes.rootListItem2} onClick={logOutHandle} disablePadding>
                                                     <Box sx={{ marginRight: 1 }}>
                                                         <LogoutIcon />
                                                     </Box>

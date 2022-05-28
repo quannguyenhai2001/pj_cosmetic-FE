@@ -46,7 +46,7 @@ const TabContent = (props) => {
     };
 
     return (
-        <Box sx={{ width: '100%' }}>
+        <Box sx={{ width: '100%', marginBottom: '2rem' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" className={classes.rootTab}>
                     <Tab label="All" {...a11yProps(0)} onClick={() => navigate(`/user/${params.id}/order/all`)} />

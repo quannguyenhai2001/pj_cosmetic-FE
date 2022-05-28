@@ -330,7 +330,7 @@ const productSlice = createSlice({
             // console.log(action.payload)
         },
         [fetchAsyncGetListProductInCart.rejected]: (state, action) => {
-            console.log(action.payload)
+            state.listProductInCart = []
         },
         //decrease quantity product
         [fetchAsyncDecreaseQuantityProduct.fulfilled]: (state, action) => {

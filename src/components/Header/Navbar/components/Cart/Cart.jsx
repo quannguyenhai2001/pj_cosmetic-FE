@@ -121,8 +121,8 @@ const Cart = () => {
                     </Card>
                 )))
                 : (
-                    <Typography sx={{ display: 'grid', placeItems: 'center', height: 'inherit' }}>
-                        Cart is empty
+                    <Typography sx={{ display: 'grid', placeItems: 'center', height: '70vh' }}>
+                        Cart is empty!
                     </Typography>
                 )
             }

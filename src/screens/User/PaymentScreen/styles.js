@@ -14,7 +14,10 @@ export default makeStyles((theme) => ({
     },
     rootTypo: {
         '&.MuiTypography-root': {
-            margin: '3rem 0',
+            marginBottom: '4rem',
+        },
+        '&.MuiTypography-root:first-child': {
+            marginTop: '1rem'
         }
     },
 
@@ -26,10 +29,10 @@ export default makeStyles((theme) => ({
     },
     rootTextField: {
         '&.MuiFormControl-root': {
-            margin: '2rem 0',
+            marginBottom: '2.5rem',
             display: 'block',
             '& input': {
-                width: '15rem',
+                width: '37rem',
 
             }
         }
@@ -39,7 +42,7 @@ export default makeStyles((theme) => ({
             margin: '1.8rem 0',
             display: 'block',
             '& input': {
-                width: '37rem',
+                width: '20rem',
 
             }
         }

@@ -22,6 +22,7 @@ import AddIcon from '@mui/icons-material/Add';
 
 import { blue } from '@mui/material/colors';
 import { Toast } from 'utils/Toast';
+import { useNavigate } from 'react-router-dom';
 
 
 function SimpleDialog(props) {
@@ -74,10 +75,18 @@ const AllOrderScreen = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const listProductsInOrder = useSelector(state => state.product.listProductsInOrder);
-    console.log(listProductsInOrder);
+    const navigate = useNavigate();
     React.useEffect(() => {
         dispatch(fetchAsyncGetListProductOfBill())
     }, [dispatch]);
+
+
+
+
+    const handleNavigate = (id) => {
+        navigate(`/products/detail/${id}`);
+    }
+
 
 
     //dialog
@@ -205,7 +214,7 @@ const AllOrderScreen = () => {
                                                                     null}
                                                             </>
                                                         ) :
-                                                            (<Button variant="contained" sx={{ width: '12rem' }}>BUY AGAIN</Button>)}
+                                                            (<Button variant="contained" onClick={() => handleNavigate(item.pro_Id)} sx={{ width: '12rem' }}>BUY AGAIN</Button>)}
                                                         <Button variant="outlined">CONTACT SELLER</Button>
                                                     </Box>
                                                 </Box>
@@ -215,7 +224,7 @@ const AllOrderScreen = () => {
                                     </Box>)
                                     : (<Box>
                                         <Box sx={{ marginBottom: '3rem' }}>
-                                            <Card sx={{ minWidth: 275, padding: '2rem 2rem' }}>
+                                            <Card sx={{ minWidth: 275, padding: '2rem 2rem' }} elevation={4}>
                                                 <Box sx={{ marginBottom: '1rem' }}>
                                                     <Grid container spacing={1}>
                                                         <Grid item xs={1}>
