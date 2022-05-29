@@ -11,6 +11,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 import { fetchAsyncAddProductToCart, fetchAsyncDecreaseQuantityProduct, fetchAsyncDeleteProductInCart, fetchAsyncGetListProductInCart } from 'slices/ProductSlice';
+import { Toast } from 'utils/Toast';
 
 const Cart = () => {
     const dispatch = useDispatch();
@@ -47,6 +48,7 @@ const Cart = () => {
     const handleClickDelete = (id) => {
         dispatch(fetchAsyncDeleteProductInCart({ id })).unwrap().then(() => {
             dispatch(fetchAsyncGetListProductInCart());
+            Toast('success', 'Delete product success!');
         }).catch(err => {
             console.log(err);
         })

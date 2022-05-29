@@ -81,7 +81,7 @@ const Products = (props) => {
                                         </>) : (
                                             <>
                                                 <Typography variant="subtitle1" gutterBottom sx={{ fontSize: '1.5rem', fontWeight: '600', }}>
-                                                    ${product.price}.00
+                                                    ${product.price}
                                                 </Typography>
                                             </>
                                         )}

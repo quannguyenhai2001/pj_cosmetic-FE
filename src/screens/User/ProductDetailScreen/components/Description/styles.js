@@ -66,8 +66,9 @@ export default makeStyles((theme) => ({
     },
 
     boxDescription: {
-        '& strong': {
-            fontWeight: 'bold',
+        '& p': {
+
+            margin: '1.4rem 0'
         }
     }
 

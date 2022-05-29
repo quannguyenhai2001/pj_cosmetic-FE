@@ -59,12 +59,73 @@ const ProductDetailScreen = () => {
                                 <Divider orientation="vertical" flexItem />
                                 <Typography className={classes.typoRating2}>{parseFloat(detailProduct.rating.userNumber, 10)} Rating</Typography>
                             </Box>
-                            <Typography><Box component="span" sx={{ fontWeight: 650, fontSize: '2rem' }}>${detailProduct.price}</Box> or <span >$9.00 off your ASP order when you open and use a Sephora Credit Card today.</span></Typography>
-                            <Typography>Size: {detailProduct.size}</Typography>
-                            <Typography>Standard size</Typography>
-                            <Button variant="outlined">8.5 oz/250 mL</Button><br />
-                            <Divider />
-                            <Button variant="contained" onClick={handleAddProduct}>Add to cart</Button>
+
+                            {parseFloat(detailProduct.promotion) > 0 ?
+                                (<Box className={classes.boxPrice}>
+                                    <Typography gutterBottom sx={{ fontSize: '1.4rem', fontWeight: '100', opacity: '70%', textDecoration: 'line-through' }}>
+                                        ${detailProduct.price}
+                                    </Typography>
+                                    <Typography variant="subtitle1" gutterBottom sx={{ fontSize: '1.5rem', color: 'red' }}>
+                                        ${parseFloat(detailProduct.price - (detailProduct.price * detailProduct.promotion), 2).toFixed(2)}
+                                    </Typography>
+                                    <Typography>
+                                        {detailProduct.promotion * 100}% sale off
+                                    </Typography>
+                                </Box>) : (
+                                    <Box className={classes.boxPrice}>
+                                        <Typography variant="subtitle1" gutterBottom sx={{ fontSize: '1.5rem', fontWeight: '600', }}>
+                                            ${detailProduct.price}
+                                        </Typography>
+                                    </Box>
+                                )}
+
+                            {/* code */}
+                            <Box className={classes.boxMargin}>
+                                <Box className={classes.boxSale}>
+                                    <Typography>
+                                        Shop Discount Code
+                                    </Typography>
+                                    <Box>
+                                        <Button variant="contained">5% off</Button>
+                                        <Button variant="contained">10% off</Button>
+                                        <Button variant="contained">15% off</Button>
+                                    </Box>
+                                </Box>
+                            </Box>
+                            <Box className={classes.boxMargin}>
+                                <Box className={classes.boxSize}>
+                                    <Typography>Size</Typography>
+                                    <Box>
+                                        {detailProduct.size === "Small" ?
+                                            (<>
+                                                <Button variant="outlined" color="primary">Small</Button>
+                                                <Button variant="outlined" color="primary" disabled>Medium</Button>
+                                            </>) :
+                                            (<>
+                                                <Button variant="outlined" color="primary" disabled>Small</Button>
+                                                <Button variant="outlined" color="primary" >Medium</Button>
+                                            </>)}
+                                    </Box>
+                                </Box>
+                            </Box>
+                            <Box className={classes.boxMargin}>
+                                <Box className={classes.boxSize}>
+                                    <Typography>Standard size</Typography>
+                                    <Box>
+                                        {detailProduct.size === "Small" ?
+                                            (<>
+                                                <Button variant="outlined" color="primary">8.5 oz/250 mL</Button>
+                                                <Button variant="outlined" color="primary" disabled>3.04 oz/90 mL</Button>
+                                            </>) :
+                                            (<>
+                                                <Button variant="outlined" color="primary" disabled>8.5 oz/250 mL</Button>
+                                                <Button variant="outlined" color="primary" >3.04 oz/90 mL</Button>
+                                            </>)}
+                                    </Box>
+                                </Box>
+                            </Box>
+
+                            <Button variant="contained" className={classes.buttonCart} onClick={handleAddProduct}>Add to cart</Button>
                         </Grid>
                     </Grid>
                 )}
