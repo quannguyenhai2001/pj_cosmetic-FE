@@ -48,7 +48,7 @@ const Cart = () => {
     const handleClickDelete = (id) => {
         dispatch(fetchAsyncDeleteProductInCart({ id })).unwrap().then(() => {
             dispatch(fetchAsyncGetListProductInCart());
-            Toast('success', 'Delete product success!');
+            Toast('success', 'Xóa sản phẩm thành công!');
         }).catch(err => {
             console.log(err);
         })
@@ -92,10 +92,10 @@ const Cart = () => {
                                     </Typography>
                                     <Box sx={{ display: 'flex', margin: '1rem 0' }}>
                                         <Typography variant="body2" color="textSecondary" sx={{ marginRight: '2rem' }}>
-                                            Price:  ${parseFloat(item.price - (item.price * item.promotion), 2).toFixed(2)}
+                                            Giá:  ${parseFloat(item.price - (item.price * item.promotion), 2).toFixed(2)}
                                         </Typography>
                                         <Typography variant="body2" color="textSecondary" >
-                                            Total: ${((parseFloat(item.price - (item.price * item.promotion), 2).toFixed(2)) * item.quantity).toFixed(2)}
+                                            Tổng: ${((parseFloat(item.price - (item.price * item.promotion), 2).toFixed(2)) * item.quantity).toFixed(2)}
                                         </Typography>
                                     </Box>
                                     <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
@@ -124,7 +124,7 @@ const Cart = () => {
                 )))
                 : (
                     <Typography sx={{ display: 'grid', placeItems: 'center', height: '70vh' }}>
-                        Cart is empty!
+                        Giỏ hàng trống!
                     </Typography>
                 )
             }
@@ -149,7 +149,7 @@ const Cart = () => {
                     <Box className={classes.cartBoxTotal} onClick={toggleDrawer(false)}>
                         <Paper className={classes.cartBoxTotalPaper} elevation={3}>
                             <Typography>
-                                Total payment ({listProductInCart.length} products): ${listProductInCart.reduce((total, item) => {
+                                Tổng thanh toán ({listProductInCart.length} products): ${listProductInCart.reduce((total, item) => {
                                     return total + (item.price - (item.price * item.promotion)) * item.quantity
                                 }, 0).toFixed(2)}
                             </Typography>
@@ -159,7 +159,7 @@ const Cart = () => {
 
                     {/* button order */}
                     <Box className={classes.cartDivButton} onClick={toggleDrawer(false)}>
-                        <Button component={Link} to={`/user/${user.id}/payment`} className={classes.cartButtonOrder} disabled={listProductInCart.length > 0 ? false : true} fullWidth variant="contained">ORDER</Button>
+                        <Button component={Link} to={`/user/${user.id}/payment`} className={classes.cartButtonOrder} disabled={listProductInCart.length > 0 ? false : true} fullWidth variant="contained">ĐẶT HÀNG</Button>
                     </Box>
                 </Drawer>
             </Badge>

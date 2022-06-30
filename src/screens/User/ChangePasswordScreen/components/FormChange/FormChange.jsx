@@ -8,7 +8,7 @@ import useStyles from './styles';
 
 const FormInfor = () => {
     const classes = useStyles();
-    const userDetail = useSelector(state => state.user.userDetail);
+    // const userDetail = useSelector(state => state.user.userDetail);
     const dispatch = useDispatch();
     const [valueArray, setValueArray] = React.useState({
         password: '',
@@ -41,14 +41,14 @@ const FormInfor = () => {
             <Grid container spacing={2}>
                 <Grid item xs={2}>
                     <Box className={classes.Typo}>
-                        <Typography className={classes.rootTypo}>New password:</Typography>
-                        <Typography className={classes.rootTypo}>Confirm password:</Typography>
+                        <Typography className={classes.rootTypo}>Mật khẩu mới:</Typography>
+                        <Typography className={classes.rootTypo}>Xác nhận mật khẩu:</Typography>
                     </Box>
                 </Grid>
                 <Grid item xs={10}>
                     <TextField onChange={handleChange} type="password" className={classes.rootTextField} name="password" variant="outlined" size="small" value={valueArray.password} />
                     <TextField onChange={handleChange} type="password" className={classes.rootTextField} name="confirmPassword" variant="outlined" size="small" value={valueArray.confirmPassword} />
-                    <Button onClick={handleConfirm} variant="contained">Confirm</Button>
+                    <Button onClick={handleConfirm} variant="contained">Lưu</Button>
                 </Grid>
             </Grid>
         </Box>

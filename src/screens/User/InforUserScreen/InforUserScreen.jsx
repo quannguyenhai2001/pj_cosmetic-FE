@@ -7,9 +7,9 @@ const InforUserScreen = () => {
         <Box sx={{ bgcolor: 'white', width: '100%', padding: '0 2rem' }}>
             <Box>
                 <Typography variant="h6">
-                    My profile
+                    Hồ Sơ của tôi
                 </Typography>
-                <Typography>Manage profile information for account security</Typography>
+                <Typography>Quản lý thông tin hồ sơ để bảo mật tài khoản</Typography>
             </Box>
             <Divider />
             <FormInfor />

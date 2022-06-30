@@ -39,7 +39,7 @@ const InpuntComment = () => {
     return (
         <Box className={classes.box}>
             <Typography variant="h5" gutterBottom sx={{ textAlign: 'Left', fontWeight: 'bold', marginBottom: '4rem' }}>
-                Review Product
+                Bình Luận
             </Typography>
             <Grid container>
                 <Grid item>
@@ -64,15 +64,15 @@ const InpuntComment = () => {
                         }}
                         value={comment}
                         variant="standard"
-                        placeholder='Write a comment...'
+                        placeholder='Viết bình luận...'
                         fullWidth
                         onClick={() => setIsCheckComment(true)}
                     />
                 </Grid>
             </Grid>
             <Box className={isCheckComment ? classes.boxButtonComment : classes.displayNone}>
-                <Button sx={{ marginRight: 2 }} onClick={() => setIsCheckComment(false)} variant="outlined">Cancel</Button>
-                <Button disabled={isDisable} onClick={handleComment} variant="contained">Comment</Button>
+                <Button sx={{ marginRight: 2 }} onClick={() => setIsCheckComment(false)} variant="outlined">HỦY</Button>
+                <Button disabled={isDisable} onClick={handleComment} variant="contained">ĐĂNG</Button>
             </Box>
         </Box>
     );

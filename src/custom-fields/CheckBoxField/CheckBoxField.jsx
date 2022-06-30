@@ -17,8 +17,8 @@ const CheckBoxField = (props) => {
                     value={value}
                     onChange={onChange}
                 >
-                    <FormControlLabel component="span" value="female" control={<Radio />} label="Female" />
-                    <FormControlLabel value="male" control={<Radio />} label="Male" />
+                    <FormControlLabel component="span" value="nam" control={<Radio />} label="nam" />
+                    <FormControlLabel value="nữ" control={<Radio />} label="nữ" />
                 </RadioGroup>
             </FormControl>
             <Box sx={{ color: 'red', fontSize: '1.3rem', margin: '1rem 0 0 0' }}>

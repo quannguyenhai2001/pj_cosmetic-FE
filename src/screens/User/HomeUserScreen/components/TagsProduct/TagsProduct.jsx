@@ -63,14 +63,14 @@ export default function TagsProduct() {
         <Box sx={{ width: '100%', margin: '5rem 0' }}>
             <Box>
                 <Typography variant="h4" gutterBottom sx={{ textAlign: 'center' }}>
-                    Just Dropped
+                    SẢN PHẨM NỔI BẬT
                 </Typography>
             </Box>
             <Box sx={{ margin: "2rem 0" }}>
                 <Tabs sx={{ justifyContent: 'center', display: 'grid' }} value={value} onChange={handleChange} aria-label="basic tabs example">
-                    <Tab label="Selling Fast" {...a11yProps(0)} />
-                    <Tab label="Value Sets" {...a11yProps(1)} />
-                    <Tab label="Chosen For You" {...a11yProps(2)} />
+                    <Tab label="Bán Chạy" {...a11yProps(0)} />
+                    <Tab label="Bộ Sưu Tập" {...a11yProps(1)} />
+                    <Tab label="Dành Cho Bạn" {...a11yProps(2)} />
                 </Tabs>
             </Box>
             <Box>
@@ -172,7 +172,7 @@ export default function TagsProduct() {
                 </TabPanel>
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'center', margin: '1rem 0 3rem 0' }}>
-                <Button variant="outlined">View More</Button>
+                <Button variant="outlined">XEM THÊM</Button>
             </Box>
         </Box >
 

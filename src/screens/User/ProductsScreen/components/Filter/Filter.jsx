@@ -122,7 +122,7 @@ const Filter = (props) => {
 
     return (
         <Box>
-            <Typography variant="h6">Filter</Typography>
+            <Typography variant="h6">Lọc sản phẩm</Typography>
 
             {/* filter manu */}
             <Accordion className={classes.rootPaper}>
@@ -131,7 +131,7 @@ const Filter = (props) => {
                     aria-controls="panel1a-content"
                     id="panel1a-header"
                 >
-                    <Typography>Manufacturers</Typography>
+                    <Typography>Nhà cung cấp</Typography>
                 </AccordionSummary>
                 <AccordionDetails className={classes.rootAccordionDetails}>
                     <FormGroup>
@@ -154,7 +154,7 @@ const Filter = (props) => {
                     aria-controls="panel2a-content"
                     id="panel2a-header"
                 >
-                    <Typography>Price</Typography>
+                    <Typography>Giá</Typography>
                 </AccordionSummary>
                 <AccordionDetails className={classes.rootAccordionDetails}>
                     <Box sx={{ width: 'interhit' }}>
@@ -170,7 +170,7 @@ const Filter = (props) => {
                             />
 
                         </Box>
-                        <Typography sx={{ padding: '0 1.8rem' }}>Price from ${array1.price[0]} to ${array1.price[1]}</Typography>
+                        <Typography sx={{ padding: '0 1.8rem' }}>Giá từ ${array1.price[0]} tới ${array1.price[1]}</Typography>
                         {/* <Button sx={{ margin: '2rem 0' }} fullWidth variant="contained" >Apply</Button> */}
                     </Box>
                 </AccordionDetails>
@@ -183,7 +183,7 @@ const Filter = (props) => {
                     aria-controls="panel2a-content"
                     id="panel2a-header"
                 >
-                    <Typography>Sale</Typography>
+                    <Typography>Khuyến mại</Typography>
                 </AccordionSummary>
                 <AccordionDetails className={classes.rootAccordionDetails}>
                     <FormGroup>

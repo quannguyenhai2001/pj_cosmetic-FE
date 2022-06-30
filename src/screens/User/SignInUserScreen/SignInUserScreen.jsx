@@ -65,7 +65,7 @@ const SignInUserScreen = () => {
                                 <Form className={classes.formSignIn}>
                                     <Container sx={{ width: '35rem' }}>
                                         <Typography variant="h4" className={classes.typoTitleRight}>
-                                            SIGN IN
+                                            ĐĂNG NHẬP
                                         </Typography>
                                         <Grid container spacing={2}>
 
@@ -81,7 +81,7 @@ const SignInUserScreen = () => {
                                             <Field
                                                 name="password"
                                                 component={InputField}
-                                                label="Password"
+                                                label="Mật khẩu"
                                                 type={showPassword ? "text" : "password"} handleShowPassword={handleShowPassword}
                                                 error={error}
                                                 changeError={changeError}
@@ -108,17 +108,17 @@ const SignInUserScreen = () => {
                 </Grid>
                 <Grid item xs={6} className={classes.sideRight}>
                     <Typography>
-                        Supplier of high quality beauty products
+                        Nhà cung cấp các sản phẩm làm đẹp chất lượng cao
                     </Typography>
                     <Typography variant='h6' sx={{ fontWeight: 600 }}>
-                        Please come with us
+                        Hãy đến với chúng tôi
                     </Typography>
                     <Avatar className={classes.avatar} src={Logo} alt="logo" />
                     <Typography sx={{ display: 'inline-block' }}>
-                        Do not have an account?
+                        Bạn không có tài khoản?
                     </Typography>
                     <Typography component={Link} to='/sign-up' sx={{ display: 'inline-block' }}>
-                        Sign Up
+                        Đăng ký
                     </Typography>
                 </Grid>
             </Grid>

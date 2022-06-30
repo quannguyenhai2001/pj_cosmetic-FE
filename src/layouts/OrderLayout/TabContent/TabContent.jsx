@@ -49,9 +49,9 @@ const TabContent = (props) => {
         <Box sx={{ width: '100%', marginBottom: '2rem' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" className={classes.rootTab}>
-                    <Tab label="All" {...a11yProps(0)} onClick={() => navigate(`/user/${params.id}/order/all`)} />
-                    <Tab label="Delivering" {...a11yProps(1)} onClick={() => navigate(`/user/${params.id}/order/delivering`)} />
-                    <Tab label="Delivered" {...a11yProps(2)} onClick={() => navigate(`/user/${params.id}/order/delivered`)} />
+                    <Tab label="Tất cả" {...a11yProps(0)} onClick={() => navigate(`/user/${params.id}/order/all`)} />
+                    <Tab label="Đang giao" {...a11yProps(1)} onClick={() => navigate(`/user/${params.id}/order/delivering`)} />
+                    <Tab label="Đã giao" {...a11yProps(2)} onClick={() => navigate(`/user/${params.id}/order/delivered`)} />
                 </Tabs>
             </Box>
             <TabPanel sx={{ height: 'fit-content' }} value={value} index={0}>

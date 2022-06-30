@@ -29,7 +29,7 @@ const ProductDetailScreen = () => {
 
     const handleAddProduct = () => {
         dispatch(fetchAsyncAddProductToCart({ id })).unwrap().then(() => {
-            Toast('success', 'Add to cart success!');
+            Toast('success', 'Thêm vào giỏ hàng thành công!');
             dispatch(fetchAsyncGetListProductInCart());
         }).catch(err => {
             console.log(err);
@@ -83,7 +83,7 @@ const ProductDetailScreen = () => {
                             <Box className={classes.boxMargin}>
                                 <Box className={classes.boxSale}>
                                     <Typography>
-                                        Shop Discount Code
+                                        Mã Giảm Giá
                                     </Typography>
                                     <Box>
                                         <Button variant="contained">5% off</Button>
@@ -94,23 +94,23 @@ const ProductDetailScreen = () => {
                             </Box>
                             <Box className={classes.boxMargin}>
                                 <Box className={classes.boxSize}>
-                                    <Typography>Size</Typography>
+                                    <Typography>Kích Thước</Typography>
                                     <Box>
                                         {detailProduct.size === "Small" ?
                                             (<>
-                                                <Button variant="outlined" color="primary">Small</Button>
-                                                <Button variant="outlined" color="primary" disabled>Medium</Button>
+                                                <Button variant="outlined" color="primary">Nhỏ</Button>
+                                                <Button variant="outlined" color="primary" disabled>To</Button>
                                             </>) :
                                             (<>
-                                                <Button variant="outlined" color="primary" disabled>Small</Button>
-                                                <Button variant="outlined" color="primary" >Medium</Button>
+                                                <Button variant="outlined" color="primary" disabled>Nhỏ</Button>
+                                                <Button variant="outlined" color="primary" >To</Button>
                                             </>)}
                                     </Box>
                                 </Box>
                             </Box>
                             <Box className={classes.boxMargin}>
                                 <Box className={classes.boxSize}>
-                                    <Typography>Standard size</Typography>
+                                    <Typography>Dung Tích</Typography>
                                     <Box>
                                         {detailProduct.size === "Small" ?
                                             (<>
@@ -124,8 +124,8 @@ const ProductDetailScreen = () => {
                                     </Box>
                                 </Box>
                             </Box>
-
-                            <Button variant="contained" className={classes.buttonCart} onClick={handleAddProduct}>Add to cart</Button>
+                            <Divider />
+                            <Button variant="contained" className={classes.buttonCart} onClick={handleAddProduct}>Thêm vào giỏ hàng</Button>
                         </Grid>
                     </Grid>
                 )}

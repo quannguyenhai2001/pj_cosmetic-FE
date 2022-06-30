@@ -84,7 +84,8 @@ const userSlice = createSlice({
             // console.log(action.payload)
         },
         [fetchAsyncGetUser.rejected]: (state, action) => {
-            console.log("error login")
+            state.userDetail = ''
+            localStorage.clear()
         },
         [fetchAsyncUpdateUser.fulfilled]: (state, action) => {
 

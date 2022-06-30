@@ -120,11 +120,11 @@ const Products = (props) => {
                 {Object.keys(listProducts).length > 0 ?
                     (
                         <>
-                            {listProducts.total} Results
+                            {listProducts.total} kết quả
                         </>
                     ) : (
                         <>
-                            0 Results
+                            0 kết quả
                         </>
                     )}
             </Typography>
@@ -142,7 +142,7 @@ const Products = (props) => {
                             </>
                         ) :
                         (<Grid item xs={12}>
-                            Sold Out!
+                            Hết hàng!
                         </Grid>)
                 }
             </Box>

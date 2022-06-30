@@ -146,7 +146,7 @@ const DeliveredOrderScreen = () => {
                                                 marginBottom: '1rem'
                                             }}
                                         >
-                                            Manufacture: {item.ManufacturerName}
+                                            Nhà cung cấp: {item.ManufacturerName}
                                         </Typography>
                                         <Box
                                             sx={{
@@ -155,7 +155,7 @@ const DeliveredOrderScreen = () => {
                                             }}
                                         >
                                             <Typography>
-                                                Quantity: {item.amount}
+                                                Số lượng: {item.amount}
                                             </Typography>
                                             <Box>
                                                 <Typography variant="subtitle1" component="span" gutterBottom sx={{ fontSize: '1.5rem', fontWeight: '100', marginRight: '1rem', textDecoration: 'line-through', opacity: '70%' }}>
@@ -180,10 +180,10 @@ const DeliveredOrderScreen = () => {
                             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: '1rem', margin: '1.5rem 0' }}>
                                 <Box sx={{ display: 'flex', gap: '1rem', color: 'blue', alignItems: 'baseline' }}>
                                     <LocalShippingIcon sx={{ transform: 'translateY(4px)' }} />
-                                    <Typography >Product has been delivered</Typography>
+                                    <Typography >Sản phẩm đã được giao</Typography>
                                 </Box>
                                 <Box>
-                                    Total:
+                                    Tổng:
                                     <Typography variant="subtitle1" component="span" gutterBottom sx={{ fontSize: '1.8rem', fontWeight: '600', textAlign: 'right', color: 'red' }}>
                                         ${((parseFloat(item.price - (item.price * item.promotion), 2).toFixed(2)) * item.amount).toFixed(2)}
                                     </Typography>
@@ -193,14 +193,14 @@ const DeliveredOrderScreen = () => {
                             <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: '1rem' }}>
                                 <Box>
                                     {item.rated ? (
-                                        <Typography>Received rating</Typography>
+                                        <Typography>Đã nhận đánh giá</Typography>
                                     )
-                                        : (<Typography>No rating received </Typography>)}
+                                        : (<Typography>Chưa được đánh giá </Typography>)}
                                 </Box>
                                 <Box sx={{ display: 'flex', gap: '2rem' }}>
                                     {!item.rated ? (
                                         <>
-                                            <Button variant="contained" sx={{ width: '8rem' }} onClick={() => handleClickOpen(item.id, item.pro_Id)}>RATING</Button>
+                                            <Button variant="contained" sx={{ width: '10rem' }} onClick={() => handleClickOpen(item.id, item.pro_Id)}>ĐÁNH GIÁ</Button>
                                             {valueArray.bill_details_Id === item.id ?
                                                 (<SimpleDialog
                                                     open={open}
@@ -210,8 +210,8 @@ const DeliveredOrderScreen = () => {
                                                 null}
                                         </>
                                     ) :
-                                        (<Button onClick={() => handleNavigate(item.pro_Id)} variant="contained" sx={{ width: '12rem' }}>BUY AGAIN</Button>)}
-                                    <Button variant="outlined">CONTACT SELLER</Button>
+                                        (<Button onClick={() => handleNavigate(item.pro_Id)} variant="contained" sx={{ width: '10rem' }}>MUA LẠI</Button>)}
+                                    <Button variant="outlined">LIÊN HỆ NGƯỜI BÁN</Button>
                                 </Box>
                             </Box>
                         </Card>
@@ -220,7 +220,7 @@ const DeliveredOrderScreen = () => {
                     <Box sx={{ height: '60vh', display: 'grid', placeItems: 'center' }}>
                         <img style={{ width: '16rem' }} src={require('assets/img/order/img1.png')} alt='img' />
                         <Typography sx={{ fontSize: '2rem', fontWeight: '600', color: '#828282' }}>
-                            You don't have any delivered order yet
+                            Bạn chưa có bất kỳ đơn hàng nào được giao
                         </Typography>
                     </Box>
                 )

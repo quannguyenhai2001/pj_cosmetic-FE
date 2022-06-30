@@ -77,13 +77,13 @@ const FormInfor = () => {
                         <Grid container spacing={2}>
                             <Grid item xs={2}>
                                 <Box className={classes.Typo}>
-                                    <Typography className={classes.rootTypo}>User name:</Typography>
-                                    <Typography className={classes.rootTypo} >Display name:</Typography>
+                                    <Typography className={classes.rootTypo}>Tên người dùng:</Typography>
+                                    <Typography className={classes.rootTypo} >Tên hiển thị:</Typography>
                                     <Typography className={classes.rootTypo}>Email:</Typography>
-                                    <Typography className={classes.rootTypo}>Phone:</Typography>
-                                    <Typography className={classes.rootTypo}>Sex:</Typography>
-                                    <Typography className={classes.rootTypo}>Age:</Typography>
-                                    <Typography className={classes.rootTypo}>Address:</Typography>
+                                    <Typography className={classes.rootTypo}>Điện thoại:</Typography>
+                                    <Typography className={classes.rootTypo}>Giới tính:</Typography>
+                                    <Typography className={classes.rootTypo}>Tuổi:</Typography>
+                                    <Typography className={classes.rootTypo}>Địa chỉ:</Typography>
                                 </Box>
                             </Grid>
                             <Grid item xs={6}>
@@ -98,8 +98,8 @@ const FormInfor = () => {
                                         onChange={handleChange}
                                         name="sex"
                                     >
-                                        <FormControlLabel value="female" control={<Radio />} label="female" />
-                                        <FormControlLabel value="male" control={<Radio />} label="male" />
+                                        <FormControlLabel value="nam" control={<Radio />} label="nam" />
+                                        <FormControlLabel value="nữ" control={<Radio />} label="nữ" />
                                     </RadioGroup>
                                 </FormControl>
 
@@ -118,7 +118,7 @@ const FormInfor = () => {
                                 <TextField onChange={handleChange} value={valueArray.address} name="address" className={classes.rootTextField} id="outlined-basic" variant="outlined" size="small" />
 
                                 {/* button */}
-                                <Button variant="contained" onClick={handleSubmit}>Save</Button>
+                                <Button variant="contained" onClick={handleSubmit}>Lưu</Button>
                             </Grid>
 
                             {/* divide */}
@@ -137,7 +137,7 @@ const FormInfor = () => {
                                         {image}
                                     </>
                                 )}
-                                <label className={classes.labelFile} htmlFor="upload-photo">Select file</label>
+                                <label className={classes.labelFile} htmlFor="upload-photo">Chọn ảnh</label>
                                 <input type="file" className={classes.customFileInput} onChange={changeHandle} name="avatar" id="upload-photo" />
                             </Grid>
                         </Grid>

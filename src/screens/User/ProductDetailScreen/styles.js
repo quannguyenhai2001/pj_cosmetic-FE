@@ -89,9 +89,9 @@ export default makeStyles((theme) => ({
 
     buttonCart: {
         '&.MuiButton-root': {
-            margin: '1rem 0 0 13rem',
+            margin: '5rem 0 0 0rem',
             padding: '1rem 2rem',
-            borderRadius: '30rem',
+
         },
     },
 

@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { fetchAsyncCreateBill, deleteListProductInCart } from 'slices/ProductSlice';
 import { Toast } from 'utils/Toast';
-const steps = ['Shipment Details', 'Payment Method'];
+const steps = ['Thông Tin Giao Hàng', 'Phương Thức Thanh Toán'];
 
 export default function PaymentScreen() {
     const classes = useStyles();
@@ -58,7 +58,7 @@ export default function PaymentScreen() {
     const handlePayment = () => {
         dispatch(fetchAsyncCreateBill(state)).unwrap().then(() => {
             dispatch(deleteListProductInCart())
-            Toast('success', 'Payment success!')
+            Toast('success', 'Thanh toán thành công!')
             navigate('/')
 
         }).catch(err => {
@@ -72,9 +72,9 @@ export default function PaymentScreen() {
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={3}>
                         <Box className={classes.Typo}>
-                            <Typography className={classes.rootTypo}>Recipient's name:</Typography>
-                            <Typography className={classes.rootTypo}>phone:</Typography>
-                            <Typography className={classes.rootTypo} >Delivery Address:</Typography>
+                            <Typography className={classes.rootTypo}>Người nhận:</Typography>
+                            <Typography className={classes.rootTypo}>Số điện thoại:</Typography>
+                            <Typography className={classes.rootTypo} >Địa chỉ giao hàng:</Typography>
 
                         </Box>
                     </Grid>
@@ -95,12 +95,12 @@ export default function PaymentScreen() {
                     onClick={handleBack}
                     sx={{ mr: 1 }}
                 >
-                    Back
+                    LÙI
                 </Button>
                 <Box sx={{ flex: '1 1 auto' }} />
 
                 <Button onClick={handleNext}>
-                    Next
+                    TIẾP
                 </Button>
 
             </Box>
@@ -111,7 +111,7 @@ export default function PaymentScreen() {
                 <Grid container spacing={1} sx={{ marginBottom: '2rem' }}>
                     <Grid item xs={12} sm={3}>
                         <Box className={classes.Typo}>
-                            <Typography sx={{ marginTop: '1rem' }}>Payment Method:</Typography>
+                            <Typography sx={{ marginTop: '1rem' }}>Phương thức thanh toán:</Typography>
                         </Box>
                     </Grid>
                     <Grid item xs={12} sm={9}>
@@ -122,8 +122,8 @@ export default function PaymentScreen() {
                                 name="paymentMethod"
                                 onChange={handleChange}
                             >
-                                <FormControlLabel value="Payment on delivery" control={<Radio />} label="Payment on delivery" />
-                                <FormControlLabel value="Payment by card" control={<Radio />} label="Payment by card" />
+                                <FormControlLabel value="Thanh toán khi nhận hàng" control={<Radio />} label="Thanh toán khi nhận hàng" />
+                                <FormControlLabel value="Thanh toán bằng thẻ" control={<Radio />} label="Thanh toán bằng thẻ" />
                             </RadioGroup>
                         </FormControl>
                     </Grid>
@@ -131,7 +131,7 @@ export default function PaymentScreen() {
                 <Grid container spacing={1} sx={{ marginBottom: '2rem' }}>
                     <Grid item xs={12} sm={3}>
                         <Box className={classes.Typo}>
-                            <Typography >Note:</Typography>
+                            <Typography >lưu ý:</Typography>
                         </Box>
                     </Grid>
                     <Grid item xs={12} sm={9}>
@@ -148,7 +148,7 @@ export default function PaymentScreen() {
                 <Grid container spacing={1} sx={{ marginBottom: '4rem' }}>
                     <Grid item xs={12} sm={3}>
                         <Box className={classes.Typo} sx={{ marginTop: '1.3rem' }}>
-                            <Typography >Total bill:</Typography>
+                            <Typography >Tổng hóa đơn:</Typography>
                         </Box>
                     </Grid>
                     <Grid item xs={12} sm={9}>
@@ -167,11 +167,11 @@ export default function PaymentScreen() {
                     onClick={handleBack}
                     sx={{ mr: 1 }}
                 >
-                    Back
+                    LÙI
                 </Button>
                 <Box sx={{ flex: '1 1 auto' }} />
                 <Button onClick={handlePayment}>
-                    Payment
+                    THANH TOÁN
                 </Button>
 
             </Box>

@@ -71,7 +71,7 @@ const CommentList = (props) => {
       id: e,
     })).unwrap().then(() => {
       dispatch(fetchAsyncGetListCommentByProduct({ id }))
-      Toast('success', 'Delete comment success!')
+      Toast('success', 'Xóa bình luận thành công!')
     }).catch(err => {
       console.log(err)
     })
@@ -129,7 +129,7 @@ const CommentList = (props) => {
                               <EditIcon />
                             </Box>
                             <Typography to={`/user/${user.id}`} sx={{ transform: 'translateY(-1px)' }}>
-                              Edit
+                              Chỉnh sửa
                             </Typography>
                           </ListItem>
                           <Divider sx={{ margin: '0.5rem 0' }} />
@@ -138,7 +138,7 @@ const CommentList = (props) => {
                               <DeleteIcon />
                             </Box>
                             <Typography>
-                              delete
+                              Xóa
                             </Typography>
                           </ListItem>
                         </List>
@@ -150,7 +150,7 @@ const CommentList = (props) => {
                               <ElevatorIcon />
                             </Box>
                             <Typography to={`/user/${user.id}`}>
-                              Evaluate
+                              Đánh giá
                             </Typography>
                           </ListItem>
                         </List>

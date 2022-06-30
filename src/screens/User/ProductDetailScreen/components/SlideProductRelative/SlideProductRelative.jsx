@@ -26,7 +26,7 @@ const SlideProductRelative = () => {
     return (
         <Box sx={{ marginBottom: '5rem' }}>
             <Typography variant="h5" gutterBottom sx={{ textAlign: 'Left', fontWeight: 'bold', marginBottom: '4rem' }}>
-                You May Also Like
+                Bạn Có Thể Thích
             </Typography>
             <Swiper
                 className={classes.swiper}

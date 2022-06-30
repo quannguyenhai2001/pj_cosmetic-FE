@@ -149,7 +149,7 @@ export default function NavBar(props) {
                                                 <ContactMailOutlinedIcon />
                                             </Badge>
                                         </IconButton>
-                                        <Typography>Store & Services</Typography>
+                                        <Typography>Cửa Hàng & Dịch Vụ</Typography>
                                     </Box>
                                 </CustomTooltip>
 
@@ -171,7 +171,7 @@ export default function NavBar(props) {
                                                 <ContactMailOutlinedIcon />
                                             </Badge>
                                         </IconButton>
-                                        <Typography>Community</Typography>
+                                        <Typography>Cộng Đồng</Typography>
                                     </Box>
                                 </CustomTooltip>
 
@@ -192,7 +192,7 @@ export default function NavBar(props) {
                                                         <AccountCircleIcon />
                                                     </Box>
                                                     <Typography component={Link} to={`/user/${user.id}`} sx={{ transform: 'translateY(-1px)' }}>
-                                                        Profile
+                                                        Hồ Sơ
                                                     </Typography>
 
                                                 </ListItem>
@@ -201,7 +201,7 @@ export default function NavBar(props) {
                                                         <ReceiptIcon />
                                                     </Box>
                                                     <Typography component={Link} to={`/user/${user.id}/order/all`} sx={{ transform: 'translateY(-1px)' }}>
-                                                        Purchase Order
+                                                        Đơn Đặt Hàng
                                                     </Typography>
 
                                                 </ListItem>
@@ -212,7 +212,7 @@ export default function NavBar(props) {
                                                         <LogoutIcon />
                                                     </Box>
                                                     <Typography>
-                                                        Log out
+                                                        Đăng Xuất
                                                     </Typography>
                                                 </ListItem>
 
@@ -249,7 +249,7 @@ export default function NavBar(props) {
                                         title={
                                             <>
                                                 <Typography color="inherit">
-                                                    You are not logged in!
+                                                    Bạn chưa đăng nhập!
                                                 </Typography>
                                             </>
                                         }
@@ -261,7 +261,7 @@ export default function NavBar(props) {
                                             >
                                                 <StoreIcon />
                                             </IconButton>
-                                            <Typography>Store & Services</Typography>
+                                            <Typography>Cửa Hàng & Dịch Vụ</Typography>
                                         </Box>
                                     </CustomTooltip>
 
@@ -269,7 +269,7 @@ export default function NavBar(props) {
                                         title={
                                             <>
                                                 <Typography color="inherit">
-                                                    You are not logged in!
+                                                    Bạn chưa đăng nhập!
                                                 </Typography>
                                             </>
                                         }
@@ -282,7 +282,7 @@ export default function NavBar(props) {
                                             >
                                                 <PeopleIcon />
                                             </IconButton>
-                                            <Typography>Community</Typography>
+                                            <Typography>Cộng Đồng</Typography>
                                         </Box>
                                     </CustomTooltip>
 
@@ -293,7 +293,7 @@ export default function NavBar(props) {
                                     }} orientation="vertical" variant="middle" flexItem />
 
                                     <Box sx={{ display: "flex", alignItems: "center", margin: "0 2rem 0 2rem", "&:hover": { color: "blue", cursor: "pointer" } }}>
-                                        <Typography component={Link} to="/sign-in">Sign In</Typography>
+                                        <Typography component={Link} to="/sign-in">Đăng Nhập</Typography>
                                     </Box>
 
                                     <IconButton component={Link} to="/sign-in"

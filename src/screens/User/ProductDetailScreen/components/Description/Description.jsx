@@ -24,7 +24,7 @@ const Description = () => {
                                 aria-controls="panel1a-content"
                                 id="panel1a-header"
                             >
-                                <Typography sx={{ fontWeight: 600 }} variant="h6">About the Product</Typography>
+                                <Typography sx={{ fontWeight: 600 }} variant="h6">Chi Tiết Sản Phẩm</Typography>
                             </AccordionSummary>
                             <AccordionDetails className={classes.rootAccordionDetails}>
                                 <Box className={classes.boxDescription} dangerouslySetInnerHTML={{ __html: detailProduct.description }}></Box>
@@ -36,7 +36,7 @@ const Description = () => {
                                 aria-controls="panel1a-content"
                                 id="panel1a-header"
                             >
-                                <Typography sx={{ fontWeight: 600 }} variant="h6">Ingredients</Typography>
+                                <Typography sx={{ fontWeight: 600 }} variant="h6">Thành Phần</Typography>
                             </AccordionSummary>
                             <AccordionDetails className={classes.rootAccordionDetails}>
                                 <Typography>
@@ -50,7 +50,7 @@ const Description = () => {
                                 aria-controls="panel1a-content"
                                 id="panel1a-header"
                             >
-                                <Typography sx={{ fontWeight: 600 }} variant="h6">How to Use</Typography>
+                                <Typography sx={{ fontWeight: 600 }} variant="h6">Cách Sử Dụng</Typography>
                             </AccordionSummary>
                             <AccordionDetails className={classes.rootAccordionDetails}>
                                 <Typography>

@@ -24,53 +24,53 @@ function SimpleDialog(props) {
                 </Box>
                 <Box>
                     <Typography variant="h5" gutterBottom>
-                        WELCOME TO <br />
-                        ASAP COSMETICS
+                        CHÀO MỪNG ĐẾN VỚI <br />
+                        CỬA HÀNG MỸ PHẨM ASP
                     </Typography>
                     <Typography variant="h6" >
-                        The most popular beauty community is coming to VIETNAM
+                        Cộng đồng làm đẹp được yêu thích nhất sắp đến VIỆT NAM
                     </Typography>
                 </Box>
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm={6}>
                         <Box className={classes.boxTypo}>
                             <Typography>
-                                1. Fast and simple local shipping
+                                1. Vận chuyển về địa phương nhanh chóng đơn giản
                             </Typography>
                             <Typography>
-                                2. Exclusive Brands
+                                2. Thương hiệu độc quyền
                             </Typography>
                             <Typography>
-                                3. Member benefits from Loyalty
+                                3. Thành viên hưởng lợi từ khách hàng
                             </Typography>
                             <Typography>
-                                4. Tier match service for international
+                                4. Dịch vụ đối sánh cấp độ cho quốc tế
                             </Typography>
                         </Box>
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <Box className={classes.boxTypo}>
                             <Typography>
-                                1. Fast and simple domestic shipping
+                                1. Vận chuyển nội địa cực nhanh chóng và đơn giản
                             </Typography>
                             <Typography>
-                                2. Exclusive Brands
+                                2. Thương hiệu độc quyền
                             </Typography>
                             <Typography>
-                                3. Attractive offers for members
+                                3. Ưu đãi hấp dẫn dành cho thành viên
                             </Typography>
                             <Typography>
-                                4. Rating service for members
+                                4. Dịch vụ đánh giá cho các thành viên
                             </Typography>
                         </Box>
                     </Grid>
                 </Grid>
                 <Box >
-                    <Button className={classes.rootButton} variant="contained">SHOP NOW</Button>
+                    <Button className={classes.rootButton} variant="contained">MUA SẮM NGAY</Button>
                 </Box>
                 <Box className={classes.boxTypoBottom} >
                     <Typography>
-                        Not shipping to Vietnam? Click here to go to ASP.com.
+                        Không chuyển hàng ra nước ngoài? Nhấp vào đây để truy cập ASP.com.
                     </Typography>
                 </Box>
             </Box>

@@ -112,27 +112,27 @@ const SignUpUserScreen = () => {
                                 <Avatar className={classes.avatar}>
                                 </Avatar>
                                 <Typography variant="h4" sx={{ marginBottom: '1rem' }}>
-                                    SIGN UP
+                                    ĐĂNG KÝ
                                 </Typography>
                                 <Grid container spacing={2}>
                                     <FastField
                                         name="firstName"
                                         component={InputField}
-                                        label="First Name"
+                                        label="Họ"
                                         half
                                         type="text"
                                     />
                                     <FastField
                                         name="lastName"
                                         component={InputField}
-                                        label="Last Name"
+                                        label="Tên"
                                         half
                                         type="text"
                                     />
                                     <FastField
                                         name="userName"
                                         component={InputField}
-                                        label="User Name"
+                                        label="Tên người dùng"
                                         type="text"
                                     />
                                     <Field
@@ -147,13 +147,13 @@ const SignUpUserScreen = () => {
                                     <Field
                                         name="password"
                                         component={InputField}
-                                        label="Password"
+                                        label="Mật khẩu"
                                         type={showPassword ? "text" : "password"} handleShowPassword={handleShowPassword}
                                     />
                                     <Field
                                         name="confirmPassword"
                                         component={InputField}
-                                        label="Comfirm Password"
+                                        label="Xác nhận mật khẩu"
                                         type={showPassword ? "text" : "password"} handleShowPassword={handleShowPassword}
                                     />
 
@@ -162,13 +162,13 @@ const SignUpUserScreen = () => {
                                             <FastField
                                                 name="age"
                                                 component={SelectField}
-                                                label="Age"
+                                                label="Tuổi"
                                                 half
                                             />
                                             <FastField
                                                 name="sex"
                                                 component={CheckBoxField}
-                                                label="Sex"
+                                                label="Giới tính"
                                                 type="checkbox"
                                                 half
                                             />
@@ -178,19 +178,19 @@ const SignUpUserScreen = () => {
                                     <FastField
                                         name="phoneNumber"
                                         component={InputField}
-                                        label="Phone Number"
+                                        label="Số điện thoại"
                                         type="number"
                                     />
 
                                     <FastField
                                         name="address"
                                         component={InputField}
-                                        label="Address"
+                                        label="Địa chỉ"
                                         type="text"
                                     />
                                 </Grid>
                                 <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
-                                    SUBMIT
+                                    XÁC NHẬN
                                 </Button>
                                 <GoogleLogin
                                     clientId="281478762560-jvo7peupvgiodf8ld4osn5vj316cje94.apps.googleusercontent.com"

@@ -28,7 +28,7 @@ const Footer = () => {
               <Box sx={{ display: 'flex', gap: '1rem', alignItems: 'center' }} >
                 <AddBusinessIcon fontSize='large' />
                 <Typography component='span'>
-                  Find a Store
+                  Tìm Cửa Hàng
                 </Typography>
               </Box>
 
@@ -37,7 +37,7 @@ const Footer = () => {
               <Box sx={{ display: 'flex', gap: '1rem', alignItems: 'center' }} >
                 <ChatBubbleOutlineIcon fontSize='large' />
                 <Typography component='span'>
-                  Live Beauty Help
+                  Trợ Giúp Trực Tiếp
                 </Typography>
               </Box>
             </Grid>
@@ -53,7 +53,7 @@ const Footer = () => {
               <Box sx={{ display: 'flex', gap: '1rem', alignItems: 'center' }} >
                 <ApprovalIcon fontSize='large' />
                 <Typography component='span'>
-                  Get the App
+                  Tải Ứng Dụng
                 </Typography>
               </Box>
             </Grid>
@@ -62,7 +62,7 @@ const Footer = () => {
               <Box sx={{ display: 'flex', gap: '1rem', alignItems: 'center' }} >
                 <AddCardIcon fontSize='large' />
                 <Typography component='span'>
-                  Want 25% off your ASP purchase1? DETAILS
+                  Muốn giảm giá 25% khi mua sản phẩm ASP? CHI TIẾT
                 </Typography>
               </Box>
             </Grid>
@@ -72,88 +72,88 @@ const Footer = () => {
             <Grid item xs={2}>
               <Box className={classes.boxThreeSide}>
                 <Typography sx={{ fontWeight: 'bold' }}>
-                  About ASP
+                  Về ASP
                 </Typography>
                 <Typography>
-                  Newsroom
+                  Tòa Soạn
                 </Typography>
                 <Typography>
-                  Careers
+                  Nghề Nghiệp
                 </Typography>
                 <Typography>
-                  ASP Social Impact
+                  Tác Động Xã Hội
                 </Typography>
                 <Typography>
-                  ASP Global Sites
+                  Trang Toàn Cầu
                 </Typography>
                 <Typography>
-                  Affiliates
+                  Chi Nhánh
                 </Typography>
                 <Typography>
-                  ASP Events
+                  ASP Sự Kiện
                 </Typography>
                 <Typography>
-                  Gift Cards
+                  Thẻ Quà Tặng
                 </Typography>
               </Box>
             </Grid>
             <Grid item xs={2}>
               <Box className={classes.boxThreeSide}>
                 <Typography sx={{ fontWeight: 'bold' }}>
-                  My ASP
+                  Trang ASP
                 </Typography>
                 <Typography>
-                  Beauty Insider
+                  Vẻ Đẹp Bên Trong
                 </Typography>
                 <Typography>
-                  Community Profile
+                  Hồ sơ Cộng Đồng
                 </Typography>
                 <Typography>
-                  Order Status
+                  Tình Trạng Đơn
                 </Typography>
                 <Typography>
-                  Purchase History
+                  Lịch Sử Đặt Hàng
                 </Typography>
                 <Typography>
-                  Account Settings
+                  Cài Đặt Tài Khoản
                 </Typography>
                 <Typography>
-                  Rewards Bazaar
+                  Phần Thưởng Bazzar
                 </Typography>
               </Box>
             </Grid>
             <Grid item xs={2}>
               <Box className={classes.boxThreeSide}>
                 <Typography sx={{ fontWeight: 'bold' }}>
-                  Help
+                  Trợ Giúp
                 </Typography>
                 <Typography>
-                  Customer Service
+                  Dịch Vụ Khách Hàng
                 </Typography>
                 <Typography>
-                  Returns & Exchanges
+                  Sở Giao Dịch
                 </Typography>
                 <Typography>
-                  Delivery and Pickup Options
+                  Tùy chọn Giao hàng
                 </Typography>
                 <Typography>
-                  Shipping
+                  Vận Chuyển
                 </Typography>
                 <Typography>
-                  Store Locations
+                  Địa Điểm Cửa Hàng
                 </Typography>
                 <Typography>
-                  Online Ordering
+                  Đặt Hàng Trực Tuyến
                 </Typography>
                 <Typography>
-                  Accessibility
+                  Khả Năng Tiếp Cận
                 </Typography>
               </Box>
             </Grid>
             <Grid item xs={2}>
               <Box className={classes.boxThreeSide}>
                 <Typography sx={{ fontWeight: 'bold' }}>
-                  Region & Language
+                  Ngôn Ngữ & Vùng
                 </Typography>
                 <Box sx={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
                   <img src={USIcon} alt="US" style={{ width: '2.5rem', height: '2.5rem' }} />
@@ -180,22 +180,21 @@ const Footer = () => {
             <Grid item xs={4}>
               <Box className={classes.boxRightSide}>
                 <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold' }}>
-                  We Belong to
-                  Something Beautiful
+                  Chúng Tôi Luôn Mang Đến Cho Bạn Trải Nghiệm Tuyệt Vời Nhất
                 </Typography>
                 <Typography>
-                  At ASP, our diversity and inclusion mission is simple: To never stop championing all beauty
-                  fearlessly and building inclusive environments for our employees, consumers, and communities.The goal of the research is to call attention to the inequities of retail shopping
-                  experiences for consumers and, more importantly, identify actionable solutions to galvanize change.
+                  Tại ASP, sứ mệnh đa dạng và hòa nhập của chúng tôi rất đơn giản: Không ngừng tôn vinh vẻ đẹp
+                  không sợ hãi và xây dựng môi trường hòa nhập cho nhân viên, người tiêu dùng và cộng đồng của chúng tôi. Mục tiêu của nghiên cứu là kêu gọi sự chú ý đến sự bất bình đẳng trong mua sắm bán lẻ
+                  trải nghiệm cho người tiêu dùng và quan trọng hơn là xác định các giải pháp có thể hành động để thúc đẩy sự thay đổi.
                 </Typography>
 
                 <Box sx={{ marginTop: '3rem' }}>
                   <Typography sx={{ fontWeight: 'bold', marginBottom: '2rem' }}>
-                    Sign up for ASP Emails
+                    Đăng ký email ASP
                   </Typography>
                   <Box>
-                    <input className={classes.input} type="text" placeholder="Enter your email" />
-                    <Button variant="contained" className={classes.buttonSignUp}>SIGN UP</Button>
+                    <input className={classes.input} type="text" placeholder="Nhập email của bạn..." />
+                    <Button variant="contained" className={classes.buttonSignUp}>ĐĂNG KÝ</Button>
                   </Box>
                 </Box>
 
@@ -205,7 +204,7 @@ const Footer = () => {
           <Divider sx={{ borderColor: 'gray' }} />
           <Grid container sx={{ padding: '2rem 0 2rem 0' }}>
             <Grid item xs={9}>
-              <Typography sx={{ padding: '0rem 0 1.5rem 0' }}>© 2022 ASP USA, Inc. All rights reserved.</Typography>
+              <Typography sx={{ padding: '0rem 0 1.5rem 0' }}>© 2022 ASP VIETNAM, Inc. All rights reserved.</Typography>
               <Box className={classes.boxFooterBottom}>
                 <Typography component="span">
                   Privacy Policy

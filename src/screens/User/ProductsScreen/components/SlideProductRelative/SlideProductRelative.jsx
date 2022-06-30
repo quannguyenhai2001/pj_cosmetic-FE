@@ -26,7 +26,7 @@ const SlideRewards = () => {
     return (
         <Box sx={{ marginBottom: '5rem' }}>
             <Typography variant="h5" gutterBottom sx={{ textAlign: 'Left', fontWeight: 'bold', marginBottom: '4rem' }}>
-                Product Relative
+                Các sản phẩm liên quan
             </Typography>
             <Swiper
                 className={classes.swiper}

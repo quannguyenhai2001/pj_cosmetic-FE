@@ -61,7 +61,7 @@ const ProfileLayout = (props) => {
                         <Typography variant="h7" sx={{ marginBottom: '2px' }} component="div">{displayName}</Typography>
                         <Box sx={{ display: 'flex' }}>
                             <BuildIcon fontSize='5px' />
-                            <Typography color="text.secondary" >Edit Profile</Typography>
+                            <Typography color="text.secondary" >Chỉnh Sửa Hồ Sơ</Typography>
                         </Box>
                     </Box>
                 </Box>
@@ -78,7 +78,7 @@ const ProfileLayout = (props) => {
                                             <ListItemIcon className={classes.rootListIcon}>
                                                 <AccountCircleIcon />
                                             </ListItemIcon>
-                                            <ListItemText primary="User Information" />
+                                            <ListItemText primary="Thông tin người dùng" />
                                         </ListItemButton>
                                     </ListItem>
                                     <ListItem disablePadding component={Link} to={`/user/${id}/change-password`}>
@@ -89,7 +89,7 @@ const ProfileLayout = (props) => {
                                             <ListItemIcon className={classes.rootListIcon}>
                                                 <LockResetIcon />
                                             </ListItemIcon>
-                                            <ListItemText primary="Change password" />
+                                            <ListItemText primary="Thay đổi mật khẩu" />
                                         </ListItemButton>
                                     </ListItem>
                                 </List>
@@ -103,7 +103,7 @@ const ProfileLayout = (props) => {
                                             <ListItemIcon className={classes.rootListIcon}>
                                                 <InventoryIcon />
                                             </ListItemIcon>
-                                            <ListItemText primary="Order" />
+                                            <ListItemText primary="Đơn hàng" />
                                         </ListItemButton>
                                     </ListItem >
                                     <ListItem disablePadding component={Link} to={`/user/${id}/delete-account`}>
@@ -114,7 +114,7 @@ const ProfileLayout = (props) => {
                                             <ListItemIcon className={classes.rootListIcon}>
                                                 <DeleteForeverIcon />
                                             </ListItemIcon>
-                                            <ListItemText primary="Setting" />
+                                            <ListItemText primary="Cài đặt" />
                                         </ListItemButton>
                                     </ListItem>
                                 </List>

@@ -6,9 +6,9 @@ const ChangePasswordScreen = () => {
         <Box sx={{ bgcolor: 'white', width: '100%', padding: '0 2rem' }}>
             <Box>
                 <Typography variant="h6">
-                    Change password
+                    Tạo mật khẩu mới
                 </Typography>
-                <Typography>For account security, please do not share your password with others</Typography>
+                <Typography>Để bảo mật tài khoản, vui lòng không chia sẻ mật khẩu của bạn với người khác</Typography>
             </Box>
             <Divider />
             <FormChange />

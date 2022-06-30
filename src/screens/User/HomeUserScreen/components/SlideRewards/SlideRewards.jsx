@@ -27,9 +27,9 @@ const SlideRewards = () => {
         <Box sx={{ marginBottom: '5rem' }}>
             <Box className={classes.boxTitle}>
                 <Typography variant="h4" gutterBottom sx={{ textAlign: 'center', marginBottom: '4rem' }}>
-                    Beauty Insider Rewards
+                    SẢN PHẨM SẮP RA MẮT
                 </Typography>
-                <Button className={classes.boxTitleButton} endIcon={<ArrowForwardIcon />} variant="text">MORE</Button>
+                <Button className={classes.boxTitleButton} endIcon={<ArrowForwardIcon />} variant="text">THÊM</Button>
             </Box>
 
             <Swiper
